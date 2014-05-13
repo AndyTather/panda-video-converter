@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UpdateInfo xmlns="urn:Ionic.Apps.Updates">
+  <LatestAvailableVersion>0.90.200.0</LatestAvailableVersion>
+  <DownloadLocation>http://andytather.co.uk/Panda/Files/PVC/PVCSetup.msi</DownloadLocation>
+  <ImageName>PVCSetup.msi</ImageName>
+  <AssemblyFullName>PandaVideo, Version=0.90.200.0, Culture=neutral, PublicKeyToken=null</AssemblyFullName>
+  <TimeStamp>2011-02-09T17:32:43.914912-04:00</TimeStamp>
+  <Hash>B9C925A3C8F48311C8655D209E8A2B559163E6496B81C7FAC803BC961528A19F</Hash>
+  <HashType>System.Security.Cryptography.SHA256CryptoServiceProvider</HashType>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>auZe7L7TaJ0SKIJT7HR+a/WI314=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>beTTYbGdimxx8obBIdzfOkOFbISSi61o0sqNN6kUypiy+ylMWMM9Rv0EHEilEHI8x2U6ykrjTcwvIUBSlD5eduu9dhycoErXva5yGDaCEHaRr9PASUTNaWATdS/RfF1TSFB2M3OcJMGKxjaHGtQysvDJmh12udZnprxAJQW+qXE=</SignatureValue>
+  </Signature>
+</UpdateInfo>
