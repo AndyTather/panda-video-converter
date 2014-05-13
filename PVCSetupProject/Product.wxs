@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?include WixVer.wxi ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Product Id="*" Name="Pandasoft Video Converter" Language="1033" Version="$(var.PandaVideoVersion)" Manufacturer="Pandasoft" UpgradeCode="E4DCB95E-B90C-436F-9E17-314E303B0285">
+    
+    <Package InstallerVersion="200" Compressed="yes" Comments="Video converter" Languages="1033" Manufacturer="Pandasoft" />
+    
+    <!-- Major upgrade -->
+    <Upgrade Id="E4DCB95E-B90C-436F-9E17-314E303B0285">
+      <UpgradeVersion Minimum="$(var.PandaVideoVersion)" OnlyDetect="yes" Property="NEWERVERSIONDETECTED" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="$(var.PandaVideoVersion)" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+
+    <Condition Message="A later version of [ProductName] is already installed.">
+      NOT NEWERVERSIONDETECTED
+    </Condition>
+    <Condition Message="This application requires .NET Framework 4.0 Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK40FULL]]></Condition>
+    <!--<Condition Message='You need to be an administrator to install this product.'>
+      Privileged
+    </Condition>-->
+    
+    <!-- Media -->
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <!-- Icons -->
+    <Icon Id="PandaVideo.ico" SourceFile="PandaVideo.ico" />
+
+    <!-- Properties -->
+    <PropertyRef Id="NETFRAMEWORK40FULL" />
+    <PropertyRef Id="NETFRAMEWORK40FULL_SERVICING_LEVEL" />
+
+    <!-- Directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Pandasoft">
+          <Directory Id="INSTALLDIR" Name="Pandasoft Video Converter">
+            <Directory Id="_Mencoder" Name="Mencoder" />
+            <Directory Id="_Mencoder2" Name="Mencoder2" />
+            <Directory Id="_MediaInfo" Name="MediaInfo" />
+            <Directory Id="_FFMpeg" Name="FFMpeg">
+              <Directory Id="presets" Name="presets">
+                
+              </Directory>
+            </Directory>
+            <Directory Id="Eac3to" Name="Eac3to" />
+            <Directory Id="Ts" Name="Ts">
+            </Directory>
+            <Directory Id="BeSweet" Name="BeSweet">
+            </Directory>
+            <Directory Id="MKVToolnix" Name="MKVToolnix">
+              <Directory Id="doc" Name="doc">
+                <Directory Id="en" Name="en" />
+                <Directory Id="images" Name="images">
+                </Directory>
+              </Directory>
+              <Directory Id="examples" Name="examples">
+              </Directory>
+              <Directory Id="locale" Name="locale">
+                <Directory Id="de" Name="de">
+                  <Directory Id="LC_MESSAGES" Name="LC_MESSAGES">
+                  </Directory>
+                </Directory>
+                <Directory Id="ja" Name="ja">
+                  <Directory Id="LC_MESSAGES_1" Name="LC_MESSAGES">
+                  </Directory>
+                </Directory>
+                <Directory Id="zh_CN" Name="zh_CN">
+                  <Directory Id="LC_MESSAGES_2" Name="LC_MESSAGES">
+                  </Directory>
+                </Directory>
+                <Directory Id="zh_TW" Name="zh_TW">
+                  <Directory Id="LC_MESSAGES_3" Name="LC_MESSAGES">
+                  </Directory>
+                </Directory>
+              </Directory>
+            </Directory>
+            <Directory Id="Tranzcode" Name="Tranzcode">
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuDir" Name="Pandasoft">
+          <Component Id="ProgramMenuDir" Guid="7E15B499-0F8F-462a-A691-F2B4043512D7">
+            <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" KeyPath="yes" />
+            <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <!-- Step 2: Add files to your installer package -->
+    <DirectoryRef Id="INSTALLDIR">
+      <Component Id="PandaVideo.exe" Guid="DF7BF03A-55DA-4104-AF21-0A8564266CDA">
+        <File Id="PandaVideo.exe" Source="$(var.MySourcePath)\PandaVideo.exe" KeyPath="yes" Checksum="yes" Vital="yes">
+          <Shortcut Id="startmenuPandaVideo" Directory="ProgramMenuDir" Name="Pandasoft Video Converter" WorkingDirectory="INSTALLDIR" Icon="PandaVideo.ico" IconIndex="0" Advertise="yes" />
+        </File>
+      </Component>
+      <Component Id="PandaVideoMixer.dll" Guid="8B89F932-2071-40c2-808B-7C16F01FC839">
+        <File Id="PandaVideoMixer.dll" Source="$(var.MySourcePath)\PandaVideoMixer.dll" KeyPath="yes" Checksum="yes" Vital="yes" />
+      </Component>
+      <Component Id="MahApps.Metro.dll" Guid="56F78A76-850D-45A5-A569-EF84D2D370CA">
+        <File Id="MahApps.Metro.dll" Source="$(var.MySourcePath)\MahApps.Metro.dll" KeyPath="yes" Checksum="yes" Vital="yes" />
+      </Component>
+      <Component Id="System.Windows.Interactivity.dll" Guid="7D4EE766-9CAF-4A7A-BA20-975D2821FDBA">
+        <File Id="System.Windows.Interactivity.dll" Source="$(var.MySourcePath)\System.Windows.Interactivity.dll" KeyPath="yes" Checksum="yes" Vital="yes" />
+      </Component>
+    </DirectoryRef>
+    
+    <!-- Step 3: Add components to features -->
+    <Feature Id="ProductFeature" Title="MainApplication" Level="1">
+      <ComponentRef Id="PandaVideo.exe" />
+      <ComponentRef Id="PandaVideoMixer.dll" />
+      <ComponentRef Id="MahApps.Metro.dll"  />
+      <ComponentRef Id="System.Windows.Interactivity.dll" />
+      <ComponentRef Id="C__LICENSE.txt" />
+      <ComponentRef Id="C__Copyright.txt" />
+      <ComponentRef Id="C__Changelog.txt" />
+      <ComponentRef Id="C__mencoder.exe" />
+      <ComponentRef Id="C__AUTHORS.txt" />
+      <ComponentRef Id="C__Font.ttf" />
+      <ComponentRef Id="C__MediaInfo.exe" />
+      <ComponentRef Id="C__MediaInfo.dll" />
+      <ComponentRef Id="C__FFMpeg.exe" />
+      <ComponentRef Id="C__FFMpeg_x64.exe" />
+      <ComponentRef Id="Ts" />
+      <ComponentRef Id="MKVToolnix" />
+      <ComponentRef Id="doc" />
+      <ComponentRef Id="en" />
+      <ComponentRef Id="images" />
+      <ComponentRef Id="examples" />
+      <ComponentRef Id="LC_MESSAGES" />
+      <ComponentRef Id="LC_MESSAGES_1" />
+      <ComponentRef Id="LC_MESSAGES_2" />
+      <ComponentRef Id="LC_MESSAGES_3" />
+      <ComponentRef Id="ProgramMenuDir" />
+      <ComponentRef Id="eac3to.exe" />
+      <ComponentRef Id="eac3to" />
+      <ComponentRef Id="C__mencoder2.exe" />
+      <ComponentRef Id="C__dsnative.dll" />
+      <ComponentRef Id="presets" />
+    </Feature>
+    
+    <!-- Set System Properties -->
+    <Property Id="ALLUSERS" Value="1" />
+    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+    <Property Id="NEWERPRODUCTFOUND" Secure="yes" />
+    <Property Id="ARPPRODUCTICON">PandaVideo.ico</Property>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Pandasoft Video Converter" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1"/>
+    <WixVariable Id="WixUIBannerBmp" Value="Bitmaps\bannrbmp.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Bitmaps\dlgbmp.bmp" />
+    
+    <UI>
+      <UIRef Id="WixUI_InstallDir" />
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication" >WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    
+    <!-- Install Sequences -->
+    <InstallExecuteSequence>
+      <FindRelatedProducts Before="LaunchConditions" />
+      <RemoveExistingProducts After="InstallValidate" />
+    </InstallExecuteSequence>
+   
+    <InstallUISequence>
+      <FindRelatedProducts Before="LaunchConditions" />
+    </InstallUISequence>
+    
+    <!-- Include the custom actions -->
+    <Property Id="WixShellExecTarget" Value="[#PandaVideo.exe]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+    
+ 
+  </Product>
+
+ 
+</Wix>

@@ -1,0 +1,4 @@
+MUXOPT --no-pcr-on-video-pid --new-audio-pes --vbr  --vbv-len=500
+V_MPEG4/ISO/AVC, "video.h264", level=4.1, insertSEI, contSPS
+A_AC3, "audio.ac3"
+

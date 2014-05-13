@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="PVC" default="All" basedir=".">
+  
+	<property name="current.dir" value="${directory::get-current-directory()}" />
+	<property name="current.dir.parent" value="${directory::get-parent-directory(current.dir)}" />
+
+	<if test="${not property::exists('teamcity.build.workingDir')}">
+		<echo message="Using current directory as working folder" />
+		<property name="teamcity.build.workingDir" value="${current.dir}" />
+	</if>
+
+	<property name="path-solution" value="${teamcity.build.workingDir}" />
+	<property name="path-msbuild" value="C:\Windows\Microsoft.NET\Framework\v4.0.30319" />
+	<property name="project.config" value="Release" unless="${property::exists('project.config')}" overwrite="true"/>
+  <property name="build.number" value="0.5.0.2" unless="${property::exists('build.number')}" overwrite="true" />
+  <property name="path-disk-images" value="C:\Release Area51\PandaVideo" />
+
+  <!-- WiX 3 folder 
+<property name="wix.dir" value="${path::combine(environment::get-variable('WIX'), 'bin')}" readonly="true" />
+-->
+<!-- Load the WiX3 tasks 
+<loadtasks assembly="${wix.dir}\Microsoft.Tools.WindowsInstallerXml.NAntTasks.dll" />
+-->
+
+	<target name="All">
+    <call target="UpdateVersionInfo" />
+    <call target="UpdateWiXVersionInfo" />
+  <property name="nant.settings.currentframework" value="net-4.0" />
+
+    <call target="PackageSrc" />
+    <call target="BuildSolution" />
+    <!--<call target="UnitTests" /> -->
+    <call target="Package" />
+    <call target="BuildDiskImage" />
+  </target>
+
+
+	<!-- Use MSBuild to build VS2010 solution -->
+	<target name="BuildSolution">
+		<echo message="Using MSBuild to build VS2013 solution" />
+		<msbuild project="${path-solution}\PandaVideo.sln"
+			target="Rebuild">
+			<property name="Configuration" value="${project.config}"/>
+			<!--property name="teamcity_dotnet_use_msbuild_v35" value="true"/-->
+		</msbuild>
+
+	</target>
+
+  <target name="UnitTests">
+    <nunit2 verbose="true">
+      <formatter type="Plain" />
+      <test assemblyname="${path-solution}\bin\Release\PandaVideo.Testing.dll"> 			 
+          <categories>
+            <exclude name="NotAuto" />
+          </categories>
+      </test>
+
+    </nunit2>
+  </target>
+  
+  
+	<target name="Package">
+    <move
+      file="${path-solution}\PVCSetupProject\bin\Release\PVCSetup.msi"
+      tofile="${path-solution}\PVCSetupProject\bin\Release\PVCSetup${build.number}.msi"/>
+    
+    <zip zipfile="${path-solution}\PVCSetupProject\bin\Release\PVCSetupWeb${build.number}.zip">
+      <fileset basedir="${path-solution}\PVCSetupProject\bin\Release">
+			<include name="PVCSetup${build.number}.msi" />
+			<!-- --><include name="setup.exe" /> -->
+    </fileset>
+	</zip>
+
+  </target>
+
+  <target name="PackageSrc">
+    <mkdir dir="${path-solution}\PVCSetupProject\bin\Release" />
+    <!-- zip source before other package-->
+    <zip zipfile="${path-solution}\PVCSetupProject\bin\Release\PandaVideoSrc${build.number}.zip" verbose="true">
+      <fileset basedir="${path-solution}">
+        <include name="P**\*" />
+        <exclude name="PandaVideoSamples**\*" />
+      </fileset>
+    </zip>
+  </target>
+
+  <!-- Copy Setups and Auxillary files to disk image folder -->
+  <target name="BuildDiskImage">
+
+    <!-- If we have been run from Cruise Control use the build version number to make a publish folder from  -->
+    <if test="${property::exists('build.number')}">
+      <property name="publish.dir" value="${path-disk-images}\PandaVideo${build.number}" />
+    </if>
+
+    <!-- make our disk image folder using the build number -->
+    <mkdir dir="${publish.dir}" />
+
+    <!-- copy our Wix results -->
+    <copy todir="${publish.dir}" overwrite="true">
+      <fileset basedir="${path-solution}\PVCSetupProject\bin\Release">
+        <include name="**/*"/>
+      </fileset>
+    </copy>
+
+
+    <copy file=" ${path-solution}\Manifest.xml" tofile="${publish.dir}\Manifest.xml" />
+    <tstamp property="build.date" pattern="yyyy-MM-ddTHH:mm:ss" verbose="true" />
+
+    <xmlpoke
+      file="${publish.dir}\Manifest.xml"
+      xpath="/upd:UpdateInfo/upd:LatestAvailableVersion"
+      value="${build.number}" >
+      <namespaces>
+        <namespace prefix="upd" uri="urn:Ionic.Apps.Updates" />
+      </namespaces>
+    </xmlpoke>
+    <xmlpoke
+      file="${publish.dir}\Manifest.xml"
+      xpath="/upd:UpdateInfo/upd:DownloadLocation"
+      value="http://andytather.co.uk/Panda/Files/PVC/PVCSetup${build.number}.msi" >
+      <namespaces>
+        <namespace prefix="upd" uri="urn:Ionic.Apps.Updates" />
+      </namespaces>
+    </xmlpoke>
+    <xmlpoke
+      file="${publish.dir}\Manifest.xml"
+      xpath="/upd:UpdateInfo/upd:ImageName"
+      value="PVCSetup${build.number}.msi" >
+      <namespaces>
+        <namespace prefix="upd" uri="urn:Ionic.Apps.Updates" />
+      </namespaces>
+    </xmlpoke>
+    <xmlpoke
+      file="${publish.dir}\Manifest.xml"
+      xpath="/upd:UpdateInfo/upd:AssemblyFullName"
+      value="PandaVideo, Version=${build.number}, Culture=neutral, PublicKeyToken=null" >
+      <namespaces>
+        <namespace prefix="upd" uri="urn:Ionic.Apps.Updates" />
+      </namespaces>
+    </xmlpoke>
+    <xmlpoke
+       file="${publish.dir}\Manifest.xml"
+       xpath="/upd:UpdateInfo/upd:TimeStamp"
+       value="${build.date}" >
+      <namespaces>
+        <namespace prefix="upd" uri="urn:Ionic.Apps.Updates" />
+      </namespaces>
+    </xmlpoke>
+
+  </target>
+
+  
+  
+  <target name="UpdateVersionInfo">
+
+    <foreach item="File" property="filename">
+      <in>
+        <items>
+          <include name="${path-solution}/**/AssemblyInfo.cs"/>
+        </items>
+      </in>
+
+      <do>
+        <echo message="${filename}"/>
+        <attrib file="${filename}" readonly="false"/>
+        <property name="verFileName" value="${filename}"/>
+
+        <if test="${property::exists('build.number')}">
+          <property name="verstring" value="${build.number}" />
+          <property name="majorminorverstring" value="${build.number}" />
+        </if>
+
+
+        <script language="C#">
+<references> 
+  <include name="System.dll" /> 
+  </references> 
+
+          <imports>
+            <import namespace="System.Text.RegularExpressions"/>
+          </imports>
+          <code>
+            <![CDATA[
+                public static void ScriptMain(Project project) {
+
+                      string file = String.Empty;
+                      try 
+                      {
+			                file = File.ReadAllText(project.Properties["verFileName"]);
+                            Regex expression1 = new Regex("\\[assembly: AssemblyFileVersion\\(\\\"\\b(?:\\d{1,3}\\.){3}\\d{1,6}\\b\\\"\\)]");
+                            file = expression1.Replace(file, "[assembly: AssemblyFileVersion(\""+project.Properties["verstring"]+"\")]");
+                            
+                            Regex expression2 = new Regex("\\[assembly: AssemblyVersion\\(\\\"\\b(?:\\d{1,3}\\.){3}\\d{1,6}\\b\\\"\\)]");
+                            file = expression2.Replace(file, "[assembly: AssemblyVersion(\""+project.Properties["majorminorverstring"]+"\")]");
+
+                      } 
+		                  finally {
+
+                           // must remember to close the file or the compile may not work
+                            //reader.Close();
+                      }
+
+                      // create a writer and open the file
+                      try
+                      {
+                          // write a line of text to the file
+				                  File.WriteAllText(project.Properties["verFileName"], file);
+                      }
+                      finally
+                      {
+
+                      }
+
+                 }
+
+                              ]]>
+          </code>
+
+        </script>
+        <attrib file="${filename}" readonly="true"/>
+      </do>
+    </foreach>
+
+  </target>
+  
+  <target name="UpdateWiXVersionInfo">
+
+ 
+        <property name="verFileName" value="${path-solution}\PVCSetupProject\wixver.wxi"/>
+
+        <if test="${property::exists('build.number')}">
+          <property name="verstring" value="${build.number}" />
+        </if>
+
+
+        <script language="C#">
+ <references> 
+  <include name="System.dll" /> 
+  </references> 
+
+          <imports>
+            <import namespace="System.Text.RegularExpressions"/>
+          </imports>
+          <code>
+            <![CDATA[
+                public static void ScriptMain(Project project) {
+
+                      string file = String.Empty;
+                      try 
+                      {
+			                      file = File.ReadAllText(project.Properties["verFileName"]);
+                            Regex expression1 = new Regex("\\<?define PandaVideoVersion = \"\\b(?:\\d{1,3}\\.){3}\\d{1,6}\\b\\\"");
+                            Console.WriteLine(expression1.ToString());
+                            file = expression1.Replace(file, "define PandaVideoVersion = \""+project.Properties["verstring"]+"\"");
+                            
+                      } 
+		                  finally {
+
+                           // must remember to close the file or the compile may not work
+                            //reader.Close();
+                      }
+
+                      // create a writer and open the file
+                      try
+                      {
+                          // write a line of text to the file
+				                  File.WriteAllText(project.Properties["verFileName"], file);
+                      }
+                      finally
+                      {
+
+                      }
+
+                 }
+
+                              ]]>
+          </code>
+
+        </script>
+
+  </target>
+
+</project>

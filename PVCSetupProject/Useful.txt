@@ -1,0 +1,12 @@
+﻿
+
+http://blogs.msdn.com/astebner/archive/2007/06/07/3151752.aspx
+
+You can use the following steps to unregister them from HKEY_CURRENT_USER:
+
+Click on the Start menu, choose Run, type cmd and click OK 
+To unregister the VBScript engine, run this command:  reg delete "HKCU\SOFTWARE\Classes\CLSID\{B54F3741-5B07-11CF-A4B0-00AA004A55E8}" /f 
+To unregister the VBScript engine on a 64-bit OS, run this command:  reg delete "HKCU\SOFTWARE\Classes\Wow6432Node\CLSID\{B54F3741-5B07-11CF-A4B0-00AA004A55E8}" /f 
+To unregister the JScript engine, run this command: reg delete "HKCU\SOFTWARE\Classes\CLSID\{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}" /f 
+To unregister the JScript engine on a 64-bit OS, run this command: reg delete "HKCU\SOFTWARE\Classes\Wow6432Node\CLSID\{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}" /f
+One last note - if you are a setup developer reading 

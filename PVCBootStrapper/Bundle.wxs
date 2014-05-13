@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define TestDataDirectory="$(env.WIX)\test\data\Integration\BuildingPackages\Bundle\BundleTests\Files"?>
+
+  <Bundle>
+
+    <UX Name="Setup.exe" SourceFile="$(var.TestDataDirectory)\Bootstrapper.exe">
+    </UX>
+    <Container Name="Container1">
+
+    </Container>
+
+    <LayoutDirectory Id="Root" Name="\">
+      <LayoutFile SourceFile="$(var.TestDataDirectory)\LayoutDirectory\InSubdirectory.txt" />
+    </LayoutDirectory>
+    <Chain>
+      <MsiPackage SourceFile="..\PVCSetupProject\bin\Release\PVCSetup.msi" InstallCondition="1"></MsiPackage>
+    </Chain>
+  </Bundle>
+</Wix>

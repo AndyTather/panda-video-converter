@@ -1,0 +1,8 @@
+﻿<Window x:Class="PandaVideo.ShowOutput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Show Media Info" Height="300" Width="595" Loaded="Window_Loaded" ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <TextBox Name="textBox1" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+    </Grid>
+</Window>

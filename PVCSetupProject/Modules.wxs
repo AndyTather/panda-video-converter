@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?include WixVer.wxi ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="Ts">
+            <Component Id="Ts" DiskId="1" Guid="D12753E9-F401-4EC0-AA6F-641707130B02">
+                <File Id="tsMuxeR.exe" Name="tsMuxeR.exe" Source="$(var.MySourcePath)\Ts\tsMuxeR.exe" />
+                <File Id="tsMuxerGUI.exe" Name="tsMuxerGUI.exe" Source="$(var.MySourcePath)\Ts\tsMuxerGUI.exe" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="MKVToolnix">
+            <Component Id="MKVToolnix" DiskId="1" Guid="3957221A-2676-4C4A-A0D3-3C88ADDD8459">
+              <File Id="mkvextract.exe" Name="mkvextract.exe" Source="$(var.MySourcePath)\MKVToolnix\mkvextract.exe" />
+              <File Id="mkvextract.ico" Name="mkvextract.ico" Source="$(var.MySourcePath)\MKVToolnix\mkvextract.ico" />
+              <File Id="mkvinfo.exe" Name="mkvinfo.exe" Source="$(var.MySourcePath)\MKVToolnix\mkvinfo.exe" />
+              <File Id="mkvmerge.exe" Name="mkvmerge.exe" Source="$(var.MySourcePath)\MKVToolnix\mkvmerge.exe" />
+              <File Id="mkvmerge.ico" Name="mkvmerge.ico" Source="$(var.MySourcePath)\MKVToolnix\mkvmerge.ico" />
+              <File Id="mkvpropedit.exe" Name="mkvpropedit.exe" Source="$(var.MySourcePath)\MKVToolnix\mkvpropedit.exe" />
+              <File Id="mkvpropedit.ico" Name="mkvpropedit.ico" Source="$(var.MySourcePath)\MKVToolnix\mkvpropedit.ico" />
+              <File Id="mmg.exe" Name="mmg.exe" Source="$(var.MySourcePath)\MKVToolnix\mmg.exe" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="doc">
+            <Component Id="doc" DiskId="1" Guid="F972DB37-397F-4DF6-BE22-0F3C15CD3478">
+                <File Id="ChangeLog.txt.1" Name="ChangeLog.txt" Source="$(var.MySourcePath)\MKVToolnix\doc\ChangeLog.txt" />
+                <File Id="COPYING.txt" Name="COPYING.txt" Source="$(var.MySourcePath)\MKVToolnix\doc\COPYING.txt" />
+                <File Id="README.txt" Name="README.txt" Source="$(var.MySourcePath)\MKVToolnix\doc\README.txt" />
+                <File Id="README.Windows.txt" Name="README.Windows.txt" Source="$(var.MySourcePath)\MKVToolnix\doc\README.Windows.txt" />
+            </Component>
+        </DirectoryRef>
+      <DirectoryRef Id="en">
+        <Component Id="en" DiskId="1" Guid="4C1AE1A0-C88E-48A0-A272-06C3F331A853">
+          <File Id="mkvextract.html" Name="mkvextract.html" Source="$(var.MySourcePath)\MKVToolnix\doc\en\mkvextract.html" />
+          <File Id="mkvinfo.html" Name="mkvinfo.html" Source="$(var.MySourcePath)\MKVToolnix\doc\en\mkvinfo.html" />
+          <File Id="mkvmerge_gui.html" Name="mkvmerge-gui.html" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\mkvmerge-gui.html" />
+          <File Id="mkvmerge.html" Name="mkvmerge.html" Source="$(var.MySourcePath)\MKVToolnix\doc\en\mkvmerge.html" />
+          <File Id="mmg.html" Name="mmg.html" Source="$(var.MySourcePath)\MKVToolnix\doc\en\mmg.html" />
+        </Component>
+      </DirectoryRef>
+      <DirectoryRef Id="images">
+            <Component Id="images" DiskId="1" Guid="E5AF4CED-4465-44FC-AEDA-0330BFA9BF94">
+                <File Id="addingremovingattachments.gif" Name="addingremovingattachments.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\addingremovingattachments.gif" />
+                <File Id="addremovefiles.gif" Name="addremovefiles.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\addremovefiles.gif" />
+                <File Id="attachmentoptions.gif" Name="attachmentoptions.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\attachmentoptions.gif" />
+                <File Id="audiotrackoptions.gif" Name="audiotrackoptions.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\audiotrackoptions.gif" />
+                <File Id="chaptereditor.gif" Name="chaptereditor.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\chaptereditor.gif" />
+                <File Id="generaltrackoptions.gif" Name="generaltrackoptions.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\generaltrackoptions.gif" />
+                <File Id="jobmanager.gif" Name="jobmanager.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\jobmanager.gif" />
+                <File Id="movietitle.gif" Name="movietitle.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\movietitle.gif" />
+                <File Id="muxingwindow.gif" Name="muxingwindow.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\muxingwindow.gif" />
+                <File Id="selectmkvmergeexecutable.gif" Name="selectmkvmergeexecutable.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\selectmkvmergeexecutable.gif" />
+                <File Id="splitting.gif" Name="splitting.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\splitting.gif" />
+                <File Id="textsubtitlestrackoptions.gif" Name="textsubtitlestrackoptions.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\textsubtitlestrackoptions.gif" />
+                <File Id="trackselection.gif" Name="trackselection.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\trackselection.gif" />
+                <File Id="videotrackoptions.gif" Name="videotrackoptions.gif" Source="$(var.MySourcePath)\MKVToolnix\doc\guide\en\images\videotrackoptions.gif" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="examples">
+            <Component Id="examples" DiskId="1" Guid="C9A9453D-4BAD-4445-B252-CD0A198B275C">
+                <File Id="example_chapters_1.xml" Name="example-chapters-1.xml" Source="$(var.MySourcePath)\MKVToolnix\examples\example-chapters-1.xml" />
+                <File Id="example_chapters_2.xml" Name="example-chapters-2.xml" Source="$(var.MySourcePath)\MKVToolnix\examples\example-chapters-2.xml" />
+                <File Id="example_cue_sheet_1.cue" Name="example-cue-sheet-1.cue" Source="$(var.MySourcePath)\MKVToolnix\examples\example-cue-sheet-1.cue" />
+                <File Id="example_segmentinfo_1.xml" Name="example-segmentinfo-1.xml" Source="$(var.MySourcePath)\MKVToolnix\examples\example-segmentinfo-1.xml" />
+                <File Id="example_tags_2.xml" Name="example-tags-2.xml" Source="$(var.MySourcePath)\MKVToolnix\examples\example-tags-2.xml" />
+                <File Id="example_timecodes_v1.txt" Name="example-timecodes-v1.txt" Source="$(var.MySourcePath)\MKVToolnix\examples\example-timecodes-v1.txt" />
+                <File Id="example_timecodes_v2.txt" Name="example-timecodes-v2.txt" Source="$(var.MySourcePath)\MKVToolnix\examples\example-timecodes-v2.txt" />
+                <File Id="matroskachapters.dtd" Name="matroskachapters.dtd" Source="$(var.MySourcePath)\MKVToolnix\examples\matroskachapters.dtd" />
+                <File Id="matroskasegmentinfo.dtd" Name="matroskasegmentinfo.dtd" Source="$(var.MySourcePath)\MKVToolnix\examples\matroskasegmentinfo.dtd" />
+                <File Id="matroskatags.dtd" Name="matroskatags.dtd" Source="$(var.MySourcePath)\MKVToolnix\examples\matroskatags.dtd" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="LC_MESSAGES">
+            <Component Id="LC_MESSAGES" DiskId="1" Guid="B71EEB25-01D3-48DD-9668-F35196D6B392">
+                <File Id="mkvtoolnix.mo" Name="mkvtoolnix.mo" Source="$(var.MySourcePath)\MKVToolnix\locale\de\LC_MESSAGES\mkvtoolnix.mo" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="LC_MESSAGES_1">
+            <Component Id="LC_MESSAGES_1" DiskId="1" Guid="004FDF8D-66C4-44E5-89D9-1248D958CCA2">
+                <File Id="mkvtoolnix.mo_1" Name="mkvtoolnix.mo" Source="$(var.MySourcePath)\MKVToolnix\locale\ja\LC_MESSAGES\mkvtoolnix.mo" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="LC_MESSAGES_2">
+            <Component Id="LC_MESSAGES_2" DiskId="1" Guid="B9EB51FF-BA89-4172-8971-A793F61B80D7">
+                <File Id="mkvtoolnix.mo_2" Name="mkvtoolnix.mo" Source="$(var.MySourcePath)\MKVToolnix\locale\zh_CN\LC_MESSAGES\mkvtoolnix.mo" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="LC_MESSAGES_3">
+            <Component Id="LC_MESSAGES_3" DiskId="1" Guid="19CDF7D0-64E8-4D7B-946C-8EEAFEAF5EA2">
+                <File Id="mkvtoolnix.mo_3" Name="mkvtoolnix.mo" Source="$(var.MySourcePath)\MKVToolnix\locale\zh_TW\LC_MESSAGES\mkvtoolnix.mo" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="_Mencoder">
+            <Component Id="C__LICENSE.txt" Guid="B3F5A2DF-CF41-4a20-BD76-CC8F59CD19AF">
+                <File Id="LICENSE.txt" Name="LICENSE.txt" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\Mencoder\LICENSE.txt" />
+            </Component>
+            <Component Id="C__Copyright.txt" Guid="60AE123B-ABBB-E2A7-EC57-769D2A9089EE">
+                <File Id="Copyright.txt" Name="Copyright.txt" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\Mencoder\Copyright.txt" />
+            </Component>
+            <Component Id="C__Changelog.txt" Guid="{BC2B46E6-5C87-7A8E-D48A-3972AD37E606}">
+                <File Id="Changelog.txt" Name="Changelog.txt" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\Mencoder\Changelog.txt" />
+            </Component>
+            <Component Id="C__mencoder.exe" Guid="{E8AA9143-531F-F0D2-DBEC-1D3894DDA524}">
+                <File Id="mencoder.exe" Name="mencoder.exe" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\Mencoder\mencoder.exe" Checksum="yes" />
+            </Component>
+            <Component Id="C__AUTHORS.txt" Guid="{DD210C5D-3C2D-493E-E26C-1C17865956C3}">
+                <File Id="AUTHORS.txt" Name="AUTHORS.txt" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\Mencoder\AUTHORS.txt" />
+            </Component>
+            <Component Id="C__Font.ttf" Guid="{29B8892E-ECD7-4c71-BF25-11F43660636E}">
+                <File Id="Font.ttf" Name="Font.ttf" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\Mencoder\Font.ttf" />
+            </Component>
+        </DirectoryRef>
+
+      <DirectoryRef Id="_Mencoder2">
+        <Component Id="C__mencoder2.exe" Guid="{D3B9D562-F5DF-4bc1-8ABD-43B4D7BF152F}">
+          <File Id="mencoder2.exe" Name="mencoder.exe" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\Mencoder2\mencoder.exe" Checksum="yes" />
+        </Component>
+        <Component Id="C__dsnative.dll" Guid="{940D4196-8553-4437-92BB-A56D2783E2E3}">
+          <File Id="dsnative.dll" Name="dsnative.dll" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\Mencoder2\dsnative.dll" Checksum="yes"/>
+        </Component>
+      </DirectoryRef>
+
+      <DirectoryRef Id="_MediaInfo">
+            <Component Id="C__MediaInfo.exe" Guid="{8E3B0990-3A25-407c-9BD2-318B0D7E1B89}">
+                <File Id="MediaInfo.exe" Name="MediaInfo.exe" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\MediaInfo\MediaInfo.exe" Checksum="yes" />
+            </Component>
+            <Component Id="C__MediaInfo.dll" Guid="{81386B2F-EE96-4b77-B029-1B4E5C46BC84}">
+                <File Id="MediaInfo.dll" Name="MediaInfo.dll" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\MediaInfo\MediaInfo.dll" Checksum="yes" />
+            </Component>
+         </DirectoryRef>
+        <DirectoryRef Id="_FFMpeg">
+            <Component Id="C__FFMpeg.exe" Guid="{4C120FB5-5F93-4af4-B790-CEAB0496C9B9}">
+                <File Id="FFMpeg.exe" Name="FFMpeg.exe" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\FFMpeg\FFMpeg.exe" Checksum="yes" />
+            </Component>
+          <Component Id="C__FFMpeg_x64.exe" Guid="{4C120FB5-5F93-4af4-B790-CEAB0496C9BA}">
+            <File Id="FFMpeg_x64.exe" Name="FFMpeg_x64.exe" KeyPath="yes" DiskId="1" Source="$(var.MySourcePath)\FFMpeg\FFMpeg_x64.exe" Checksum="yes" />
+          </Component>
+        </DirectoryRef>
+      <DirectoryRef Id="presets">
+        <Component Id="presets" DiskId="1" Guid="{A765E463-3F3C-45A4-A9EC-062D9B85C8F5}">
+          <File Id="libx264baseline.ffpreset" Name="libx264-baseline.ffpreset" Source="$(var.MySourcePath)\FFMpeg\presets\libx264-baseline.ffpreset" />
+          <File Id="libvpx720p.ffpreset" Name="libvpx-720p.ffpreset" Source="$(var.MySourcePath)\FFMpeg\presets\libvpx-720p.ffpreset" />
+        </Component>
+      </DirectoryRef>
+        <DirectoryRef Id="Eac3to">
+            <Component Id="eac3to.exe" Guid="AECC8F45-CD18-4e3d-B088-B0012C59B64A">
+                <File Id="eac3to.exe" Name="eac3to.exe" Source="$(var.MySourcePath)\Eac3to\Eac3to.exe" />
+            </Component>
+            <Component Id="eac3to" Guid="BC7ACD62-8025-4F8B-87F8-86B6BE3B9AD0">
+                <File Id="avcodec54.dll" Name="avcodec-54.dll" Source="$(var.MySourcePath)\eac3to\avcodec-54.dll" />
+                <File Id="avutil52.dll" Name="avutil-52.dll" Source="$(var.MySourcePath)\eac3to\avutil-52.dll" />
+                <File Id="eac3to_changelog.txt" Name="changelog.txt" Source="$(var.MySourcePath)\eac3to\changelog.txt" />
+                <File Id="hdcd.dll" Name="hdcd.dll" Source="$(var.MySourcePath)\eac3to\hdcd.dll" />
+                <File Id="HookSurcode.dll" Name="HookSurcode.dll" Source="$(var.MySourcePath)\eac3to\HookSurcode.dll" />
+                <File Id="libAften.dll" Name="libAften.dll" Source="$(var.MySourcePath)\eac3to\libAften.dll" />
+                <File Id="libFLAC.dll" Name="libFLAC.dll" Source="$(var.MySourcePath)\eac3to\libFLAC.dll" />
+                <File Id="libMatrix.dll" Name="libMatrix.dll" Source="$(var.MySourcePath)\eac3to\libMatrix.dll" />
+                <File Id="libSsrc.dll" Name="libSsrc.dll" Source="$(var.MySourcePath)\eac3to\libSsrc.dll" />
+                <File Id="eac3to_license.txt" Name="license.txt" Source="$(var.MySourcePath)\eac3to\license.txt" />
+                <File Id="r8b.dll" Name="r8b.dll" Source="$(var.MySourcePath)\eac3to\r8b.dll" />
+            </Component>
+        </DirectoryRef>
+        <!-- TODO: Put your code here. -->
+    </Fragment>
+</Wix>
