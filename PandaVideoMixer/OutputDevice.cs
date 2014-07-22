@@ -15,6 +15,7 @@ namespace PandaVideoMixer
         SamsungS4 = 10,
         Sonos = 11,
         SamsungS5 = 12,
+        SamsungUHDTV = 13,
         RawFiles = 99
     };
 }

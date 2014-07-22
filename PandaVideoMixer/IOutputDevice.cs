@@ -12,7 +12,7 @@ namespace PandaVideoMixer
         int VideoMaxWidth { get; }
         int VideoMaxHeight { get; }
 
-        //int VideoMaxBitRate { get; }
+        int VideoMaxBitRate { get; }
 
         int MaxAudioChannels { get; }
 
@@ -79,6 +79,8 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+
+        public int VideoMaxBitRate { get { return -1; } }
         #endregion
     }
 
@@ -138,6 +140,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
 
+        public int VideoMaxBitRate { get { return -1; } }
+
         #endregion
     }
 
@@ -195,6 +199,8 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
@@ -257,6 +263,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
 
+        public int VideoMaxBitRate { get { return -1; } }
+
         #endregion
     }
 
@@ -315,6 +323,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
@@ -374,6 +383,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
@@ -433,6 +443,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
@@ -492,6 +503,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
@@ -551,6 +563,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
@@ -610,6 +623,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
@@ -669,6 +683,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return 2500; } }
 
         #endregion
     }
@@ -728,6 +743,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return 2500; } }
 
         #endregion
     }
@@ -787,6 +803,7 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return false; } }
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
@@ -846,10 +863,70 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return true; } }
+        public int VideoMaxBitRate { get { return -1; } }
 
         #endregion
     }
 
+    public class DeviceSamsungUHDTV : IOutputDevice
+    {
+        private readonly BitmapImage _bi = new BitmapImage();
+
+        public DeviceSamsungUHDTV()
+        {
+            // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+            _bi.BeginInit();
+            _bi.UriSource = new Uri(@"/PandaVideoMixer;component/Images/SamsungUHDTV.bmp", UriKind.RelativeOrAbsolute);
+            _bi.EndInit();
+        }
+
+        #region IOutputDevice Members
+
+        public OutputDevice Type
+        {
+            get { return OutputDevice.SamsungUHDTV; }
+        }
+
+        public string Name
+        {
+            get { return "Samsung UHD TV"; }
+        }
+
+        public int VideoMaxWidth
+        {
+            get { return 3840; }
+        }
+
+        public int VideoMaxHeight
+        {
+            get { return 2160; }
+        }
+
+        public int MaxAudioChannels
+        {
+            get { return 6; }
+        }
+
+        public BitmapImage GetImage
+        {
+            get { return _bi; }
+        }
+
+        public bool Ringtone
+        {
+            get { return false; }
+        }
+
+        public bool AudioOnly
+        {
+            get { return false; }
+        }
+
+        public bool HEVC { get { return true; } }
+        public int VideoMaxBitRate { get { return -1; } }
+
+        #endregion
+    }
 
 
 }

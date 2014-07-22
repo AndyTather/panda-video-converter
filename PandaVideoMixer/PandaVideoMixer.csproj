@@ -243,6 +243,7 @@
     <Content Include="Images\l_03972850.jpg" />
     <Resource Include="Images\SamsungS4.bmp" />
     <Resource Include="Images\SamsungS5.bmp" />
+    <Resource Include="Images\SamsungUHDTV.bmp" />
     <Content Include="MediaInfo\License.html" />
     <Content Include="MediaInfo\MediaInfo.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

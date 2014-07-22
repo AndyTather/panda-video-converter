@@ -41,6 +41,7 @@ namespace PandaVideoMixer
                 new DeviceSamsungS3(),
                 new DeviceSamsungS4(),
                 new DeviceSamsungS5(),
+                new DeviceSamsungUHDTV(),
                 /*    new DeviceSonos(), */
                 new DeviceWDLiveTV(),
                 new DeviceXBox360(),
@@ -440,11 +441,29 @@ namespace PandaVideoMixer
                     // no video - means audio convert
                     if (vt != null)
                     {
-                        result = FFmpeg_x264_process(_sourceFile, vt);
+                        result = FFmpeg_x26x_process(_sourceFile, vt, false);
                     }
                     else
                         result = iPhone_audio_preprocess(_sourceFile, _selectedAudioTrack);
 
+                    break;
+                case OutputDevice.SamsungS5:
+                    // no video - means audio convert
+                    if (vt != null)
+                    {
+                        result = FFmpeg_x26x_process(_sourceFile, vt, true);
+                    }
+                    else
+                        result = iPhone_audio_preprocess(_sourceFile, _selectedAudioTrack);
+
+                    break;
+
+                case OutputDevice.SamsungUHDTV:
+                    // no video - means audio convert
+                    if (vt != null)
+                    {
+                        result = FFmpeg_x26x_process(_sourceFile, vt, false);
+                    }
                     break;
 
                 case OutputDevice.iPhone3GS:
@@ -1845,7 +1864,7 @@ namespace PandaVideoMixer
             return result;
         }
 
-        private bool FFmpeg_x264_process(string sourceFile, VideoTrack vt)
+        private bool FFmpeg_x26x_process(string sourceFile, VideoTrack vt, bool useHevc)
         {
             string videofile = Path.GetFileNameWithoutExtension(sourceFile);
             string videofilePath = Path.Combine(OutputFolder, videofile);
@@ -1855,18 +1874,24 @@ namespace PandaVideoMixer
             var sb = new StringBuilder();
             sb.AppendFormat(" -i \"{0}\" ", sourceFile);
             sb.Append(" -pass 1 ");
-            sb.Append(" -vcodec libx264");
-            sb.Append(" -vprofile high ");
+            if (useHevc)
+                sb.Append(" -vcodec libx265");
+            else
+            {
+                sb.Append(" -vcodec libx264");
+                sb.Append(" -vprofile high "); //-vlevel 5.1 -pix_fmt yuv420p");
+            }
             sb.AppendFormat(" -r {0} ", vt.FPS);
 
             int bitRate = 2000;
+            
             // Work out max bitrate
-            if (vt.BitRate > 25000)
-                bitRate = 2500;
-            else if (vt.BitRate < 640)
+            if (vt.BitRate < 640)
                 bitRate = 640;
-            else
-                bitRate = vt.BitRate;
+            else if (vt.BitRate > SelectedDevice.VideoMaxBitRate)
+                bitRate = SelectedDevice.VideoMaxBitRate == -1 ? vt.BitRate : SelectedDevice.VideoMaxBitRate;
+            //else
+            //    bitRate = vt.BitRate;
             sb.AppendFormat(" -b:v {0}k ", bitRate);
 
             // if height isn't division by 2 make it so
@@ -1879,6 +1904,11 @@ namespace PandaVideoMixer
             }
             if (height > SelectedDevice.VideoMaxHeight)
                 height = SelectedDevice.VideoMaxHeight;
+
+//            if (width > SelectedDevice.VideoMaxWidth)
+//                width = SelectedDevice.VideoMaxWidth;
+
+
             if (width != vt.Width || height != vt.Height)
                 sb.AppendFormat(" -vf scale=-1:{1} ", width, height);
 
