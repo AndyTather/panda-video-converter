@@ -3,57 +3,56 @@
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>mkvextract -- haalt sporen uit Matroska bestanden en plaatst die in andere bestanden</title>
+      <title>mkvextract -- extract tracks from Matroska files into other files</title>
       <link rel="stylesheet" type="text/css" href="mkvtoolnix-doc.css">
    </head>
    <body>
-      <div class="heading">mkvextract -- haalt sporen uit <span class="productname">Matroska</span><sup>(tm)</sup> bestanden en plaatst die in andere bestanden
+      <div class="heading">mkvextract -- extract tracks from <span class="productname">Matroska</span><sup>(tm)</sup> files into other files
       </div>
       <hr>
       <div id="toc" class="toc">
          <h1>Table of contents</h1>
          <ul>
-            <li><a href="#mkvextract.synopsis">1. Beknopte inhoudsbeschrijving</a></li>
-            <li><a href="#mkvextract.description">2. Beschrijving</a></li>
-            <li><a href="#mkvextract.output_redirection">3. Uitvoer omleiden</a></li>
-            <li><a href="#mkvextract.output_file_formats">4. Uitvoer bestandsformaten</a></li>
-            <li><a href="#d4e1454">5. Verlaat codes</a></li>
-            <li><a href="#mkvextract.escaping">6. Overslaan van speciale karakter(s) in tekst</a></li>
-            <li><a href="#mkvextract.environment_variables">7. Omgevingsvariabelen</a></li>
-            <li><a href="#mkvextract.seealso">8. Zie ook</a></li>
-            <li><a href="#mkvextract.www">9. WWW</a></li>
+            <li><a href="#mkvextract.synopsis">1. Synopsis</a></li>
+            <li><a href="#mkvextract.description">2. Description</a></li>
+            <li><a href="#mkvextract.output_redirection">3. Output redirection</a></li>
+            <li><a href="#mkvextract.text_files_and_charsets">4. Text files and character set conversions</a></li>
+            <li><a href="#mkvextract.output_file_formats">5. Output file formats</a></li>
+            <li><a href="#d4e1469">6. Exit codes</a></li>
+            <li><a href="#mkvextract.escaping">7. Escaping special chars in text</a></li>
+            <li><a href="#mkvextract.environment_variables">8. Environment variables</a></li>
+            <li><a href="#mkvextract.seealso">9. See also</a></li>
+            <li><a href="#mkvextract.www">10. WWW</a></li>
          </ul>
       </div>
       <div class="content">
-         <h1><a name="mkvextract.synopsis">1. Beknopte inhoudsbeschrijving</a></h1>
+         <h1><a name="mkvextract.synopsis">1. Synopsis</a></h1>
          
          
          <div class="cmdsynopsis"><span class="commandname">mkvextract</span> {mode} {source-filename} options extraction-spec
          </div>
          
-         <h1><a name="mkvextract.description">2. Beschrijving</a></h1>
+         <h1><a name="mkvextract.description">2. Description</a></h1>
          
          
          <p>
-            Dit programma haalt specifieke delen uit <span class="productname">Matroska</span><sup>(tm)</sup> bestanden naar andere
-            zeer bruikbare formaten. Het eerste argument, <span class="option">mode</span>, vertelt
-            <span class="productname">mkvextract</span>(1) wat eruit te halen. Momenteel wordt het uithalen ondersteund
-            van <a href="#mkvextract.description.tracks">sporen</a>, <a href="#mkvextract.description.tags">Markeringen</a>, <a href="#mkvextract.description.attachments">Bijlagen</a>, <a href="#mkvextract.description.chapters">Hoofdstukken</a>, <a href="#mkvextract.description.cuesheets">volg document(en) (cue)</a> en
-            <a href="#mkvextract.description.timecodes_v2">tijd
-               coderingen</a>. De tweede argument is de bron bestandsnaam. Het moet zijn
-            een <span class="productname">Matroska</span><sup>(tm)</sup> bestand. Alle volgende argumenten zijn opties en de 'uit te
-            halen' specificaties; Die beiden van de geselecteerde wijze afhangen.
+            This program extracts specific parts from a <span class="productname">Matroska</span><sup>(tm)</sup> file to other useful
+            formats. The first argument, <span class="option">mode</span>, tells <span class="productname">mkvextract</span>(1) what
+            to extract. Currently supported is the extraction of <a href="#mkvextract.description.tracks">tracks</a>, <a href="#mkvextract.description.tags">tags</a>, <a href="#mkvextract.description.attachments">attachments</a>, <a href="#mkvextract.description.chapters">chapters</a>, <a href="#mkvextract.description.cuesheets">CUE sheets</a> and <a href="#mkvextract.description.timecodes_v2">timecodes</a>.  The second
+            argument is the name of the source file. It must be a <span class="productname">Matroska</span><sup>(tm)</sup> file. All
+            following arguments are options and extraction specifications; both of which
+            depend on the selected mode.
             
          </p>
          
          
-         <h2><a name="mkvextract.description.common">2.1. Algemene opties</a></h2>
+         <h2><a name="mkvextract.description.common">2.1. Common options</a></h2>
          
          
          
          <p>
-            De volgende opties zijn beschikbaar in alle modes en worden slechts één maal
-            beschreven in deze sectie.
+            The following options are available in all modes and only described once in
+            this section.
             
          </p>
          
@@ -71,41 +70,36 @@
                   <td>
                      
                      <p>
-                        Stelt de ontleedt mode in op 'volledig'. De standaard waarde ontleedt niet
-                        het gehele bestand maar gebruikt het 'meta zoek' element(en) voor het
-                        lokaliseren van de vereiste elementen van een bronbestand. In 99% van alle
-                        gevallen is dit genoeg. Maar voor bestanden die het 'meta zoek' element niet
-                        bevatten of voor bestanden die zijn beschadigd kan deze gebruiker mode erg
-                        handig zijn. Een volledige scan kan een aantal minuten in beslag nemen
-                        terwijl een 'snelle' scan slechts enkele seconden duren.
+                        Sets the parse mode to 'full'. The default mode does not parse the whole
+                        file but uses the meta seek elements for locating the required elements of a
+                        source file. In 99% of all cases this is enough. But for files that do not
+                        contain meta seek elements or which are damaged the user might have to use
+                        this mode. A full scan of a file can take a couple of minutes while a fast
+                        scan only takes seconds.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvextract.description.common.command_line_charset"><span class="option">--command-line-charset</span> <span class="parameter">(karakterset)</span></a></td>
+                  <td class="varlistoption"><a name="mkvextract.description.common.command_line_charset"><span class="option">--command-line-charset</span> <span class="parameter">character-set</span></a></td>
                   <td>
                      
                      <p>
-                        Plaatst het karakter set om de reeksen om te zetten die vanaf de
-                        commandoregel worden opgegeven. Standaard wordt gebruikt het karakter set
-                        die afhankelijk is van wat er in uw besturingssysteem staat aangegeven
-                        (locatie).
+                        Sets the character set to convert strings given on the command line from. It
+                        defaults to the character set given by system's current locale.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvextract.description.common.output_charset"><span class="option">--output-charset</span> <span class="parameter">(karakterset)</span></a></td>
+                  <td class="varlistoption"><a name="mkvextract.description.common.output_charset"><span class="option">--output-charset</span> <span class="parameter">character-set</span></a></td>
                   <td>
                      
                      <p>
-                        Stelt het karakter set in, waarnaar de reeksen naar de uitvoer dienen te
-                        worden geconverteerd. Standaard wordt gebruikt het karakter set die
-                        afhankelijk is van wat er in uw besturingssysteem staat aangegeven
-                        (locatie).
+                        Sets the character set to which strings are converted that are to be
+                        output.  It defaults to the character set given by system's current locale.
                         
                      </p>
                      
@@ -113,16 +107,15 @@
                </tr>
                <tr>
                   <td class="varlistoption"><a name="mkvextract.description.common.redirect_output"><span class="option">-r</span>, <span class="option">--redirect-output</span>
-                        <span class="parameter">(bestandsnaam)</span></a></td>
+                        <span class="parameter">file-name</span></a></td>
                   <td>
                      
                      <p>
-                        Schrijft alle berichten naar een bestand <span class="parameter">file-name</span>
-                        i.p.v. naar de 'apparaat/houder'. Terwijl dit gemakkelijk met uitvoer
-                        omleiden kan worden gedaan, er zijn gevallen waarin deze optie nodig is:
-                        wanneer de verwerker e.e.a. herinterpreteert, voordat het geschreven wordt
-                        naar de uitvoer bestand. Het karakter set met <a href="#mkvextract.description.common.output_charset">--output-charset</a>
-                        is toegewezen.
+                        Writes all messages to the file <span class="parameter">file-name</span> instead of
+                        to the console.  While this can be done easily with output redirection there
+                        are cases in which this option is needed: when the terminal reinterprets the
+                        output before writing it to a file.  The character set set with <a href="#mkvextract.description.common.output_charset">--output-charset</a>
+                        is honored.
                         
                      </p>
                      
@@ -133,38 +126,38 @@
                   <td>
                      
                      <p>
-                        Forceert de vertaling voor de te gebruiken taal <span class="parameter">code</span>
-                        (b.v. '<span class="literal">de_DE</span>' voor de Duitse taal). Hoewel het de
-                        voorkeur heeft de 'omgevingsvariabelen' te gebruiken
-                        <span class="varname">LANG</span>, <span class="varname">LC_MESSAGES</span> en
-                        <span class="varname">LC_ALL</span>. Opvragen van een '<span class="literal">list</span>' als
-                        een <span class="parameter">code</span> zal voor zorgen dat <span class="productname">mkvextract</span>(1) een lijst
-                        zal uitvoeren van alle beschikbare vertalingen.
+                        Forces the translations for the language <span class="parameter">code</span> to be
+                        used (e.g.  '<span class="literal">de_DE</span>' for the German translations). It is
+                        preferable to use the environment variables <span class="varname">LANG</span>,
+                        <span class="varname">LC_MESSAGES</span> and <span class="varname">LC_ALL</span>
+                        though. Entering '<span class="literal">list</span>' as the
+                        <span class="parameter">code</span> will cause <span class="productname">mkvextract</span>(1) to output a list of
+                        available translations.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvextract.description.debug"><span class="option">--title</span> <span class="parameter">onderwerp</span></a></td>
+                  <td class="varlistoption"><a name="mkvextract.description.debug"><span class="option">--debug</span> <span class="parameter">topic</span></a></td>
                   <td>
                      
                      <p>
-                        Zet debuggen aan voor een specifieke mogelijkheid. Dit is alleen zinvol voor
-                        ontwikkelaars.
+                        Turn on debugging for a specific feature. This option is only useful for
+                        developers.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvextract.description.engage"><span class="option">--tags</span> <span class="parameter">feature</span></a></td>
+                  <td class="varlistoption"><a name="mkvextract.description.engage"><span class="option">--engage</span> <span class="parameter">feature</span></a></td>
                   <td>
                      
                      <p>
-                        Zet experimentele mogelijkheden aan. Een lijst van beschikbare mogelijkheden
-                        kan worden opgevraagd met <span class="command">mkvextract --engage list</span>. Deze
-                        mogelijkheden zijn niet bedoeld in normale situaties.
+                        Turn on experimental features. A list of available features can be requested
+                        with <span class="command">mkvextract --engage list</span>. These features are not
+                        meant to be used in normal situations.
                         
                      </p>
                      
@@ -191,8 +184,7 @@
                   <td>
                      
                      <p>
-                        Wees uitgebreid en toon alle belangrijke <span class="productname">Matroska</span><sup>(tm)</sup> elementen zoals ze zijn
-                        gelezen.
+                        Be verbose and show all the important <span class="productname">Matroska</span><sup>(tm)</sup> elements as they're read.
                         
                      </p>
                      
@@ -203,7 +195,7 @@
                   <td>
                      
                      <p>
-                        Toon gebruik informatie en sluit af.
+                        Show usage information and exit.
                         
                      </p>
                      
@@ -214,7 +206,7 @@
                   <td>
                      
                      <p>
-                        Toon versie informatie en sluit af.
+                        Show version information and exit.
                         
                      </p>
                      
@@ -225,29 +217,28 @@
                   <td>
                      
                      <p>
-                        Controleert online op nieuwere versies via ophalen op adres <a href="http://mkvtoolnix-releases.bunkus.org/latest-release.xml">http://mkvtoolnix-releases.bunkus.org/latest-release.xml</a>.
-                        Vier regels worden uitgevoerd  in <span class="literal">key=value</span> stijl: het
-                        adres van waar de informatie wordt verkregen (key
-                        <span class="literal">version_check_url</span>), de huidig uitgevoerde versie (key
-                        <span class="literal">running_version</span>), laatst uitgebrachte versie (key
-                        <span class="literal">available_version</span> en het ophaal adres (key
+                        Checks online for new releases by downloading the URL <a href="http://mkvtoolnix-releases.bunkus.org/latest-release.xml">http://mkvtoolnix-releases.bunkus.org/latest-release.xml</a>.
+                        Four lines will be output in <span class="literal">key=value</span> style: the URL
+                        from where the information was retrieved (key
+                        <span class="literal">version_check_url</span>), the currently running version (key
+                        <span class="literal">running_version</span>), the latest release's version (key
+                        <span class="literal">available_version</span>) and the download URL (key
                         <span class="literal">download_url</span>).
                         
                      </p>
                      
                      
                      <p>
-                        Nadien sluit het programma af met een afsluitwaarde van 0 als er geen
-                        nieuwere versie beschikbaar is, met een 1 als er een nieuwere beschikbaar is
-                        en 2 indien er een fout ontstond (b.v. als de opwaardeer informatie niet
-                        verkregen kon worden).
+                        Afterwards the program exists with an exit code of 0 if no newer release is
+                        available, with 1 if a newer release is available and with 2 if an error
+                        occured (e.g. if the update information could not be retrieved).
                         
                      </p>
                      
                      
                      <p>
-                        Deze optie is alleen beschikbaar indien het gebouwd is met ondersteuning
-                        voor libcurl.
+                        This option is only available if the program was built with support for
+                        libcurl.
                         
                      </p>
                      
@@ -258,29 +249,27 @@
                   <td>
                      
                      <p>
-                        Leest extra commandoregel argumenten in van een bestand
-                        <span class="parameter">options-file</span>. Regels met een spatie (lege ruimte) als
-                        eerste karakter, zijn  gemarkeerd als een hash (waarde)
-                        ('<span class="literal">#</span>')  worden behandeld als commentaar en  genegeerd. Een
-                        spatie aan het begin en einde van een regel worden verwijderd. Elke regel
-                        mag exact één waarde bevatten
+                        Reads additional command line arguments from the file
+                        <span class="parameter">options-file</span>.  Lines whose first non-whitespace
+                        character is a hash mark ('<span class="literal">#</span>') are treated as comments
+                        and ignored. White spaces at the start and end of a line will be
+                        stripped. Each line must contain exactly one option.
                         
                      </p>
                      
                      
                      <p>
-                        Verschillende karakters kunnen worden overgeslagen, b.v. als het nodig is
-                        een niet commentaar regel te starten met '#'. Deze regels worden beschreven
-                        in de sectie over: <a href="#mkvextract.escaping">Overslaan van
-                           speciale karakter(s) in tekst</a>.
+                        Several chars can be escaped, e.g. if you need to start a non-comment line
+                        with '#'. The rules are described in <a href="#mkvextract.escaping">the
+                           section about escaping text</a>.
                         
                      </p>
                      
                      
                      <p>
-                        De commandoregel '<span class="command">mkvextract tracks source.mkv --raw
-                           1:destination.raw</span>' kunnen worden geconverteerd naar één van de
-                        volgende optie bestanden:
+                        The command line '<span class="command">mkvextract tracks source.mkv --raw
+                           1:destination.raw</span>' could be converted into the following option
+                        file:
                         
                      </p>
                      
@@ -297,7 +286,7 @@ source.mkv
          
          
          
-         <h2><a name="mkvextract.description.tracks">2.2. Spoor uitpak mode</a></h2>
+         <h2><a name="mkvextract.description.tracks">2.2. Track extraction mode</a></h2>
          
          
          
@@ -313,10 +302,9 @@ source.mkv
          
          
          <p>
-            De volgende commandoregel opties zijn beschikbaar voor elk spoor in
-            '<span class="literal">tracks</span>' uitpak mode. Zij zullen vooraan moeten worden
-            geplaatst in de spoor specificatie (zie hieronder) Zij zouden toegepast
-            moeten zijn op.
+            The following command line options are available for each track in the
+            '<span class="literal">tracks</span>' extraction mode.  They have to appear in front
+            of the track specification (see below) they should be applied to.
             
          </p>
          
@@ -334,21 +322,21 @@ source.mkv
                   <td>
                      
                      <p>
-                        Stelt het karakter set in waarna het volgende ondertitel tekst spoor
-                        geconverteerd wordt. Is alleen geldig, wanneer een volgende ondertitel spoor
-                        verwijst naar een tekst ondertitel spoor. Standaard naar UTF-8.
+                        Sets the character set to convert the next text subtitle track to. Only
+                        valid if the next track ID targets a text subtitle track. It defaults to
+                        UTF-8.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><span class="option">--blockadd</span> <span class="parameter">niveau</span></td>
+                  <td class="varlistoption"><span class="option">--blockadd</span> <span class="parameter">level</span></td>
                   <td>
                      
                      <p>
-                        Houd alleen de BlockAdditions tot aan dit niveau. Standaard is alle niveaus
-                        te houden. Deze optie heeft alleen effect op bepaalde codecs zoals WAVPACK4.
+                        Keep only the BlockAdditions up to this level.  The default is to keep all
+                        levels.  This option only affects certain kinds of codecs like WAVPACK4.
                         
                      </p>
                      
@@ -359,10 +347,9 @@ source.mkv
                   <td>
                      
                      <p>
-                        Zorgt er voor dat <span class="productname">mkvextract</span>(1) uitpakt naar een <span class="abbrev">CUE</span>
-                        lijst/document/reeks van het hoofdstuk data en markeer data voor de volgende
-                        sporen naar een bestand waarvan de naam van het uitvoer spoor heeft waarna
-                        '<span class="literal">.cue</span>' eraan toegevoegd wordt.
+                        Causes <span class="productname">mkvextract</span>(1) to extract a <span class="abbrev">CUE</span> sheet from the chapter
+                        information and tag data for the following track into a file whose name is
+                        the track's output name with '<span class="literal">.cue</span>' appended to it.
                         
                      </p>
                      
@@ -373,13 +360,13 @@ source.mkv
                   <td>
                      
                      <p>
-                        Pakt de raw dat uit naar een bestand zonder enige inhoud data er
-                        omheen. Niet zoals <a href="#mkvextract.description.tracks.fullraw">--fullraw</a>
-                        dit merkteken markeren, veroorzaakt niet dat de inhoud van
-                        <span class="classname">CodecPrivate</span> element geschreven wordt naar de
-                        bestand. Deze mode werkt met alle <span class="classname">CodecIDs</span>, zelfs
-                        diegenen die <span class="productname">mkvextract</span>(1) niet eens ondersteund, maar het resulterende
-                        bestand kan onbruikbaar zijn.
+                        Extracts the raw data into a file without any container data around it.
+                        Unlike the <a href="#mkvextract.description.tracks.fullraw">--fullraw</a>
+                        flag this flag does not cause the contents of the
+                        <span class="classname">CodecPrivate</span> element to be written to the file.  This
+                        mode works with all <span class="classname">CodecIDs</span>, even the ones that
+                        <span class="productname">mkvextract</span>(1) doesn't support otherwise, but the resulting files might not be
+                        usable.
                         
                      </p>
                      
@@ -390,12 +377,12 @@ source.mkv
                   <td>
                      
                      <p>
-                        Pakt de raw data uit naar een bestand zonder enige inhoud data er omheen. De
-                        inhoud van het <span class="classname">CodecPrivate</span> element zal eerst naar
-                        het bestand worden geschreven als het spoor een dergelijk hoofd element
-                        bevat. Deze mode werkt met alle <span class="classname">CodecIDs</span>, zelfs
-                        diegene die <span class="productname">mkvextract</span>(1) niet eens ondersteund, maar het resulterende
-                        bestand kan onbruikbaar zijn.
+                        Extracts the raw data into a file without any container data around it.  The
+                        contents of the <span class="classname">CodecPrivate</span> element will be written
+                        to the file first if the track contains such a header element.  This mode
+                        works with all <span class="classname">CodecIDs</span>, even the ones that
+                        <span class="productname">mkvextract</span>(1) doesn't support otherwise, but the resulting files might not be
+                        usable.
                         
                      </p>
                      
@@ -406,20 +393,18 @@ source.mkv
                   <td>
                      
                      <p>
-                        Extraheert het spoor met het ID <span class="parameter">TID</span> naar het bestand
-                        <span class="parameter">outname</span> als een dergelijk spoor bestaat in het
-                        bronbestand. Deze optie kan meerdere keren geven worden. De spo(o)r(en) ID's
-                        zijn hetzelfde als diegene die met <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>'s <span class="option">--identify</span>
-                        optie worden verkregen.
+                        Causes extraction of the track with the ID <span class="parameter">TID</span> into
+                        the file <span class="parameter">outname</span> if such a track exists in the source
+                        file. This option can be given multiple times. The track IDs are the same as
+                        the ones output by <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>'s <span class="option">--identify</span> option.
                         
                      </p>
                      
                      
                      <p>
-                        Elke uitvoernaam zou slechts één maal mogen worden gebruikt. De
-                        uitzonderingen zijn RealAudio en RealVideo sporen. Als je dezelfde naam
-                        gebruikt voor verschillende sporen dan zullen die sporen in hetzelfde
-                        bestand bewaard worden. Voorbeeld:
+                        Each output name should be used only once. The exception are RealAudio and
+                        RealVideo tracks. If you use the same name for different tracks then those
+                        tracks will be saved in the same file. Example:
                         
                      </p>
                      
@@ -431,7 +416,7 @@ source.mkv
          
          
          
-         <h2><a name="mkvextract.description.tags">2.3. Markeringen extraheren mode</a></h2>
+         <h2><a name="mkvextract.description.tags">2.3. Tags extraction mode</a></h2>
          
          
          
@@ -444,15 +429,15 @@ source.mkv
          
          
          <p>
-            De geëxtraheerde markeringen zijn geschreven naar de apparaat/houder tenzij
-            de uitvoer is omgeleid (zie de sectie over: <a href="#mkvextract.output_redirection">Uitvoer omleiden</a> voor
+            The extracted tags are written to the console unless the output is
+            redirected (see the section about <a href="#mkvextract.output_redirection">output redirection</a> for
             details).
             
          </p>
          
          
          
-         <h2><a name="mkvextract.description.attachments">2.4. Bijlagen extraheren mode</a></h2>
+         <h2><a name="mkvextract.description.attachments">2.4. Attachments extraction mode</a></h2>
          
          
          
@@ -479,13 +464,13 @@ source.mkv
                   <td>
                      
                      <p>
-                        Zorgt voor het uitpakken van bijlage met het ID <span class="parameter">AID</span>
-                        naar het bestand <span class="parameter">outname</span> als een dergelijke bijlage
-                        bestaat in het bronbestand. Als de <span class="parameter">outname</span> wordt
-                        leeggelaten dan wordt de naam gebruikt die zich binnenin het <span class="productname">Matroska</span><sup>(tm)</sup>
-                        bronbestand bevindt. Deze optie kan meerdere malen worden gegeven. De ID's
-                        van de bijlagen zijn het zelfde als diegene die worden gecreëerd met
-                        <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>'s <span class="option">--identify</span> optie.
+                        Causes extraction of the attachment with the ID <span class="parameter">AID</span>
+                        into the file <span class="parameter">outname</span> if such an attachment exists in
+                        the source file.  If the <span class="parameter">outname</span> is left empty then
+                        the name of the attachment inside the source <span class="productname">Matroska</span><sup>(tm)</sup> file is used
+                        instead.  This option can be given multiple times.  The attachment IDs are
+                        the same as the ones output by <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>'s <span class="option">--identify</span>
+                        option.
                         
                      </p>
                      
@@ -496,7 +481,7 @@ source.mkv
          
          
          
-         <h2><a name="mkvextract.description.chapters">2.5. Hoofdstuk uitpak mode</a></h2>
+         <h2><a name="mkvextract.description.chapters">2.5. Chapters extraction mode</a></h2>
          
          
          
@@ -521,10 +506,10 @@ source.mkv
                   <td>
                      
                      <p>
-                        Exporteert het hoofdstuk informatie in een simpel tekst formaat gebruikt in
-                        de <span class="abbrev">OGM</span> hulpmiddelen (CHAPTER01=..., CHAPTER01NAME=...). In
-                        deze mode wordt sommige informatie overgeslagen. Standaard is het hoofdstuk
-                        uitvoer naar <span class="abbrev">XML</span> formaat.
+                        Exports the chapter information in the simple format used in the
+                        <span class="abbrev">OGM</span> tools (CHAPTER01=..., CHAPTER01NAME=...). In this mode
+                        some information has to be discarded. Default is to output the chapters in
+                        <span class="abbrev">XML</span> format.
                         
                      </p>
                      
@@ -535,15 +520,15 @@ source.mkv
          
          
          <p>
-            De geëxtraheerde hoofdstukken zijn geschreven naar de apparaat/houder tenzij
-            de uitvoer is omgeleid (zie de sectie over: <a href="#mkvextract.output_redirection">Uitvoer omleiden</a> voor
+            The extracted chapters are written to the console unless the output is
+            redirected (see the section about <a href="#mkvextract.output_redirection">output redirection</a> for
             details).
             
          </p>
          
          
          
-         <h2><a name="mkvextract.description.cuesheets">2.6. Volg document(en) (cue) extraheren mode</a></h2>
+         <h2><a name="mkvextract.description.cuesheets">2.6. Cue sheet extraction mode</a></h2>
          
          
          
@@ -556,15 +541,15 @@ source.mkv
          
          
          <p>
-            De geëxtraheerde volg document(en) (cue) zijn geschreven naar de
-            apparaat/houder tenzij de uitvoer is omgeleid (zie de sectie over: <a href="#mkvextract.output_redirection">Uitvoer omleiden</a> voor
+            The extracted cue sheet is written to the console unless the output is
+            redirected (see the section about <a href="#mkvextract.output_redirection">output redirection</a> for
             details).
             
          </p>
          
          
          
-         <h2><a name="mkvextract.description.timecodes_v2">2.7. Tijd code extraheren mode</a></h2>
+         <h2><a name="mkvextract.description.timecodes_v2">2.7. Timecode extraction mode</a></h2>
          
          
          
@@ -580,8 +565,8 @@ source.mkv
          
          
          <p>
-            De geëxtraheerde hoofdstukken zijn geschreven naar de apparaat/houder tenzij
-            de uitvoer is omgeleid (zie de sectie over: <a href="#mkvextract.output_redirection">Uitvoer omleiden</a> voor
+            The extracted timecodes are written to the console unless the output is
+            redirected (see the section about <a href="#mkvextract.output_redirection">output redirection</a> for
             details).
             
          </p>
@@ -600,17 +585,17 @@ source.mkv
                   <td>
                      
                      <p>
-                        Extraheert tijd codes voor het spoor met het ID <span class="parameter">TID</span>
-                        naar het bestand <span class="parameter">outname</span> als een dergelijk spoor
-                        bestaat in het bronbestand. Deze optie kan meerdere keren geven worden. De
-                        spo(o)r(en) ID's zijn hetzelfde als diegene die met <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>'s
-                        <span class="option">--identify</span> optie worden verkregen.
+                        Causes extraction of the timecodes for the track with the ID
+                        <span class="parameter">TID</span> into the file <span class="parameter">outname</span> if
+                        such a track exists in the source file. This option can be given multiple
+                        times. The track IDs are the same as the ones output by <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>'s
+                        <span class="option">--identify</span> option.
                         
                      </p>
                      
                      
                      <p>
-                        Voorbeeld:
+                        Example:
                         
                      </p>
                      
@@ -621,31 +606,29 @@ source.mkv
          </table>
          
          
-         <h1><a name="mkvextract.output_redirection">3. Uitvoer omleiden</a></h1>
+         <h1><a name="mkvextract.output_redirection">3. Output redirection</a></h1>
          
          
          
          <p>
-            Verschillende extractie modes veroorzaken dat <span class="productname">mkvextract</span>(1) de geëxtraheerde
-            data wegschrijft naar de apparaat/houder. In algemene zin, zijn er twee
-            manieren om deze data naar een bestand te schrijven: één verzorgd door een
-            'schil' en één verzorgd door <span class="productname">mkvextract</span>(1) zelf.
+            Several extraction modes cause <span class="productname">mkvextract</span>(1) to write the extracted data to
+            the console. There are generally two ways of writing this data into a file:
+            one provided by the shell and one provided by <span class="productname">mkvextract</span>(1) itself.
             
          </p>
          
          
          <p>
-            Het in de schil ingebouwde omleidingsmechanisme wordt gebruikt door het
-            toevoegen '<span class="literal">&gt; output-filename.ext</span>' op de
-            commandoregel. Voorbeeld:
+            The shell's builtin redirection mechanism is used by appending
+            '<span class="literal">&gt; output-filename.ext</span>' to the command line. Example:
             
          </p>
          
          <pre class="screen">$ mkvextract tags source.mkv &gt; tags.xml</pre>
          
          <p>
-            <span class="productname">mkvextract</span>(1)'s eigen omleiding wordt aangehaald met <a href="#mkvextract.description.common.redirect_output">--redirect-output</a>
-            option. Voorbeeld:
+            <span class="productname">mkvextract</span>(1)'s own redirection is invoked with the <a href="#mkvextract.description.common.redirect_output">--redirect-output</a>
+            option. Example:
             
          </p>
          
@@ -655,23 +638,35 @@ source.mkv
             <p class="note-title">Note:</p>
             
             <p>
-               Met Windows zal je waarschijnlijk moeten gebruiken <a href="#mkvextract.description.common.redirect_output">--redirect-output</a>
-               optie omdat, <span class="command">cmd.exe</span> soms een speciaal karakter
-               interpreteert nog voordat ze geschreven worden naar een uitvoer bestand met
-               als resultaat een 'gebroken' uitvoer.
+               On Windows you should probably use the <a href="#mkvextract.description.common.redirect_output">--redirect-output</a>
+               option because <span class="command">cmd.exe</span> sometimes interpretes special
+               characters before they're written into the output file resulting in broken
+               output.
                
             </p>
             
          </div>
          
-         <h1><a name="mkvextract.output_file_formats">4. Uitvoer bestandsformaten</a></h1>
+         <h1><a name="mkvextract.text_files_and_charsets">4. Text files and character set conversions</a></h1>
          
          
          
          <p>
-            De beslissing over het uitvoer formaat is gebaseerd op het spoor type, niet
-            op de gebruikte extensie van de uitvoer bestandsnaam. De volgende spoor
-            typen worden momenteel ondersteund:
+            For an in-depth discussion about how all tools in the MKVToolNix suite
+            handle character set conversions, input/output encoding, command line
+            encoding and console encoding please see the identically-named section in
+            the <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> man page.
+            
+         </p>
+         
+         <h1><a name="mkvextract.output_file_formats">5. Output file formats</a></h1>
+         
+         
+         
+         <p>
+            The decision about the output format is based on the track type, not on the
+            extension used for the output file name. The following track types are
+            supported at the moment:
             
          </p>
          
@@ -689,10 +684,10 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="abbrev">H.264</span> / <span class="abbrev">AVC</span> video sporen worden geschreven
-                        naar <span class="abbrev">H.264</span> elementaire stromen welke verder verwerkt kunnen
-                        worden b.v. <span class="productname">MP4Box</span><sup>(tm)</sup> van het
-                        <span class="productname">GPAC</span><sup>(tm)</sup> pakket.
+                        <span class="abbrev">H.264</span> / <span class="abbrev">AVC</span> video tracks are written to
+                        <span class="abbrev">H.264</span> elementary streams which can be processed further
+                        with e.g. <span class="productname">MP4Box</span><sup>(tm)</sup> from the
+                        <span class="productname">GPAC</span><sup>(tm)</sup> package.
                         
                      </p>
                      
@@ -703,9 +698,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        Vaste <span class="abbrev">FPS</span> video sporen met deze
-                        <span class="classname">CodecID</span> worden geschreven naar <span class="abbrev">AVI</span>
-                        bestanden.
+                        Fixed <span class="abbrev">FPS</span> video tracks with this
+                        <span class="classname">CodecID</span> are written to <span class="abbrev">AVI</span> files.
                         
                      </p>
                      
@@ -716,8 +710,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="productname">RealVideo</span><sup>(tm)</sup> sporen worden geschreven naar
-                        <span class="productname">RealMedia</span><sup>(tm)</sup> bestanden.
+                        <span class="productname">RealVideo</span><sup>(tm)</sup> tracks are written to
+                        <span class="productname">RealMedia</span><sup>(tm)</sup> files.
                         
                      </p>
                      
@@ -728,8 +722,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="productname">Theora</span><sup>(tm)</sup> stromen worden geschreven binnen een
-                        <span class="productname">Ogg</span><sup>(tm)</sup> bestand
+                        <span class="productname">Theora</span><sup>(tm)</sup> streams will be written within an
+                        <span class="productname">Ogg</span><sup>(tm)</sup> container
                         
                      </p>
                      
@@ -752,8 +746,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        MPEG-1 Audio Layer II stromen worden uitgpakt naar raw <span class="abbrev">MP2</span>
-                        bestanden.
+                        MPEG-1 Audio Layer II streams will be extracted to raw <span class="abbrev">MP2</span>
+                        files.
                         
                      </p>
                      
@@ -764,8 +758,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        Deze worden uitgepakt naar <span class="abbrev">MP3</span> en <span class="abbrev">AC3</span>
-                        bestanden.
+                        These will be extracted to raw <span class="abbrev">MP3</span> and <span class="abbrev">AC3</span>
+                        files.
                         
                      </p>
                      
@@ -776,8 +770,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        Raw <span class="abbrev">PCM</span> data zal naar een <span class="abbrev">WAV</span> bestand
-                        geschreven worden.
+                        Raw <span class="abbrev">PCM</span> data will be written to a <span class="abbrev">WAV</span>
+                        file.
                         
                      </p>
                      
@@ -788,10 +782,10 @@ source.mkv
                   <td>
                      
                      <p>
-                        Alle <span class="abbrev">AAC</span> bestanden zullen geschreven worden in een
-                        <span class="abbrev">AAC</span> bestand met <span class="abbrev">ADTS</span> koppen voor elk
-                        pakket. De <span class="abbrev">ADTS</span> koppen bevatten géén verouderd
-                        nadrukgebiedsveld.
+                        All <span class="abbrev">AAC</span> files will be written into an <span class="abbrev">AAC</span>
+                        file with <span class="abbrev">ADTS</span> headers before each packet. The
+                        <span class="abbrev">ADTS</span> headers will not contain the deprecated emphasis
+                        field.
                         
                      </p>
                      
@@ -802,7 +796,7 @@ source.mkv
                   <td>
                      
                      <p>
-                        Vorbis audio zal worden geschreven naar een <span class="productname">OggVorbis</span><sup>(tm)</sup> bestand.
+                        Vorbis audio will be written into an <span class="productname">OggVorbis</span><sup>(tm)</sup> file.
                         
                      </p>
                      
@@ -813,8 +807,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="productname">RealAudio</span><sup>(tm)</sup> sporen worden geschreven naar
-                        <span class="productname">RealMedia</span><sup>(tm)</sup> bestanden.
+                        <span class="productname">RealAudio</span><sup>(tm)</sup> tracks are written to
+                        <span class="productname">RealMedia</span><sup>(tm)</sup> files.
                         
                      </p>
                      
@@ -825,12 +819,11 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="productname">TrueAudio</span><sup>(tm)</sup> sporen worden geschreven naar
-                        <span class="abbrev">TTA</span> bestanden. Opmerking: door een limitatie in
-                        <span class="productname">Matroska</span><sup>(tm)</sup>'s tijd code precisie zal de geëxtraheerde bestandskop
-                        verschillend zijn aangaande deze twee velden: <span class="varname">data_length</span>
-                        (de totale nummers van voorbeelden in het bestand) en de
-                        <span class="abbrev">CRC</span>.
+                        <span class="productname">TrueAudio</span><sup>(tm)</sup> tracks are written to
+                        <span class="abbrev">TTA</span> files. Please note that due to <span class="productname">Matroska</span><sup>(tm)</sup>'s limited
+                        timecode precision the extracted file's header will be different regarding
+                        two fields: <span class="varname">data_length</span> (the total number of samples in
+                        the file) and the <span class="abbrev">CRC</span>.
                         
                      </p>
                      
@@ -841,7 +834,7 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="abbrev">ALAC</span> worden geschreven naar <span class="abbrev">CAF</span> bestanden.
+                        <span class="abbrev">ALAC</span> tracks are written to <span class="abbrev">CAF</span> files.
                         
                      </p>
                      
@@ -852,8 +845,7 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="abbrev">FLAC</span> sporen worden geschreven naar raw
-                        <span class="abbrev">FLAC</span> bestanden.
+                        <span class="abbrev">FLAC</span> tracks are written to raw <span class="abbrev">FLAC</span> files.
                         
                      </p>
                      
@@ -864,8 +856,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="productname">WavPack</span><sup>(tm)</sup> sporen worden geschreven naar
-                        <span class="productname">WV</span><sup>(tm)</sup> bestanden.
+                        <span class="productname">WavPack</span><sup>(tm)</sup> tracks are written to <span class="abbrev">WV</span>
+                        files.
                         
                      </p>
                      
@@ -888,8 +880,7 @@ source.mkv
                   <td>
                      
                      <p>
-                        Simpele tekst ondertitels worden geschreven in <span class="abbrev">SRT</span>
-                        bestanden.
+                        Simple text subtitles will be written as <span class="abbrev">SRT</span> files.
                         
                      </p>
                      
@@ -900,9 +891,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="abbrev">SSA</span> en <span class="abbrev">ASS</span> tekst ondertitels worden
-                        respectievelijk geschreven als <span class="abbrev">SSA</span>/<span class="abbrev">ASS</span>
-                        bestanden.
+                        <span class="abbrev">SSA</span> and <span class="abbrev">ASS</span> text subtitles will be written
+                        as <span class="abbrev">SSA</span>/<span class="abbrev">ASS</span> files respectively.
                         
                      </p>
                      
@@ -913,8 +903,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="productname">Kate</span><sup>(tm)</sup> de stromen zullen binnen een
-                        <span class="productname">Ogg</span><sup>(tm)</sup> bestand worden geschreven.
+                        <span class="productname">Kate</span><sup>(tm)</sup> streams will be written within an
+                        <span class="productname">Ogg</span><sup>(tm)</sup> container.
                         
                      </p>
                      
@@ -925,9 +915,9 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="productname">VobSub</span><sup>(tm)</sup> ondetitels worden geschreven als
-                        <span class="abbrev">SUB</span> samen met de bijbehorende index bestanden, als
-                        <span class="abbrev">IDX</span> bestanden.
+                        <span class="productname">VobSub</span><sup>(tm)</sup> subtitles will be written as
+                        <span class="abbrev">SUB</span> files along with the respective index files, as
+                        <span class="abbrev">IDX</span> files.
                         
                      </p>
                      
@@ -938,8 +928,8 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="abbrev">USF</span> tekst ondertitels worden geschreven als
-                        <span class="abbrev">USF</span> bestanden.
+                        <span class="abbrev">USF</span> text subtitles will be written as <span class="abbrev">USF</span>
+                        files.
                         
                      </p>
                      
@@ -950,60 +940,58 @@ source.mkv
                   <td>
                      
                      <p>
-                        <span class="abbrev">PGS</span> ondertitels worden geschreven als <span class="abbrev">SUP</span>
-                        bestanden.
+                        <span class="abbrev">PGS</span> subtitles will be written as <span class="abbrev">SUP</span>
+                        files.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption">Markeringen</td>
+                  <td class="varlistoption">Tags</td>
                   <td>
                      
                      <p>
-                        Markeringen worden geconverteerd naar een <span class="abbrev">XML</span> formaat. Dit formaat is
-                        hetzelfde dat <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> ondersteund voor het lezen van markeringen.
+                        Tags are converted to a <span class="abbrev">XML</span> format. This format is the same that
+                        <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> supports for reading tags.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption">Bijlagen</td>
+                  <td class="varlistoption">Attachments</td>
                   <td>
                      
                      <p>
-                        Bijlagen worden geschreven naar de uitvoer zoals ze zijn. Geen enkele
-                        conversie (welke conversie dan ook) wordt uitgevoerd.
+                        Attachments are written to they output file as they are. No conversion
+                        whatsoever is done.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption">Hoofdstukken</td>
+                  <td class="varlistoption">Chapters</td>
                   <td>
                      
                      <p>
-                        Hoofdstukken worden geconverteerd naar een <span class="abbrev">XML</span> formaat. Dit formaat is
-                        hetzelfde welke <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> ondersteund voor het lezen van
-                        hoofdstukken. Alternatief is een 'uitgeklede versie' welke uitvoert naar het
-                        simpele <span class="abbrev">OGM</span> stijl formaat.
+                        Chapters are converted to a <span class="abbrev">XML</span> format. This format is the same that
+                        <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> supports for reading chapters. Alternatively a stripped-down
+                        version can be output in the simple <span class="abbrev">OGM</span> style format.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption">Tijd codes</td>
+                  <td class="varlistoption">Timecodes</td>
                   <td>
                      
                      <p>
-                        Tijd codes worden het eerst gesorteerd en daarna geschreven als en tijd code
-                        v2 volg baar bestandformaat, klaar om aangevoerd te worden naar
-                        <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>. Het extraheren naar andere formaten (v1, v3 en v4) zijn niet
-                        ondersteund.
+                        Timecodes are first sorted and then output as a timecode v2 format compliant
+                        file ready to be fed to <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>.  The extraction to other formats (v1, v3
+                        and v4) is not supported.
                         
                      </p>
                      
@@ -1012,12 +1000,12 @@ source.mkv
             </tbody>
          </table>
          
-         <h1><a name="d4e1454">5. Verlaat codes</a></h1>
+         <h1><a name="d4e1469">6. Exit codes</a></h1>
          
          
          
          <p>
-            <span class="productname">mkvextract</span>(1) sluit af met drie afsluit codes:
+            <span class="productname">mkvextract</span>(1) exits with one of three exit codes:
             
          </p>
          
@@ -1027,8 +1015,8 @@ source.mkv
             <li>
                
                <p>
-                  <span class="constant">0</span> -- Deze verlaat code betekend dat de extractie
-                  succesvol is voltooid.
+                  <span class="constant">0</span> -- This exit codes means that extraction has
+                  completed successfully.
                   
                </p>
                
@@ -1038,13 +1026,11 @@ source.mkv
             <li>
                
                <p>
-                  <span class="constant">1</span> -- In dit geval heeft <span class="productname">mkvextract</span>(1) minstens één
-                  waarschuwing uitgegeven, maar extractie is doorgegaan. Een waarschuwing
-                  wordt vooraf bepaald met de tekst
-                  '<span class="literal">Waarschuwing:</span>'. Afhankelijk van de 'tegengekomen'
-                  kwesties kan het resultaat goed of slecht zijn. De gebruiker wordt
-                  geadviseerd om zowel de waarschuwing als de resulterende bestanden te
-                  controleren.
+                  <span class="constant">1</span> -- In this case <span class="productname">mkvextract</span>(1) has output at least one
+                  warning, but extraction did continue.  A warning is prefixed with the text
+                  '<span class="literal">Warning:</span>'.  Depending on the issues involved the
+                  resulting files might be ok or not.  The user is urged to check both the
+                  warning and the resulting files.
                   
                </p>
                
@@ -1054,10 +1040,10 @@ source.mkv
             <li>
                
                <p>
-                  <span class="constant">2</span> -- Deze verlaat code wordt gebruikt nadat een fout is
-                  ontstaan. <span class="productname">mkvextract</span>(1) breekt direct af na het uitgeven van de
-                  waarschuwing. Fout berichten, bereik van verkeerde commandoregel argumenten
-                  tot aan lees/schrijf fouten naar gebroken bestanden.
+                  <span class="constant">2</span> -- This exit code is used after an error occurred.
+                  <span class="productname">mkvextract</span>(1) aborts right after outputting the error message.  Error
+                  messages range from wrong command line arguments over read/write errors to
+                  broken files.
                   
                </p>
                
@@ -1065,33 +1051,32 @@ source.mkv
             
          </ul>
          
-         <h1><a name="mkvextract.escaping">6. Overslaan van speciale karakter(s) in tekst</a></h1>
+         <h1><a name="mkvextract.escaping">7. Escaping special chars in text</a></h1>
          
          
          <p>
-            Er zijn een paar plaatsen waar speciale karakters zouden of moeten worden
-            overgeslagen. De regels voor het overslaan zijn simpel: elk karakter dat
-            overgeslagen dient te worden wordt vervangen door een backslash "\" gevolgd
-            door een ander karakter.
+            There are a few places in which special characters in text must or should be
+            escaped. The rules for escaping are simple: each character that needs
+            escaping is replaced with a backslash followed by another character.
             
          </p>
          
          
          <p>
-            De regels zijn: ' ' (een spatie) wordt '\s', '"' (dubbele
-            aanhalingstekens) wordt '\2', ':' wordt '\c', '#' wordt '\h' en '\' (een
-            enkele (backslash) zelf wordt '\\'.
+            The rules are: ' ' (a space) becomes '\s', '"' (double quotes) becomes
+            '\2', ':' becomes '\c', '#' becomes '\h' and '\' (a single backslash) itself
+            becomes '\\'.
             
          </p>
          
-         <h1><a name="mkvextract.environment_variables">7. Omgevingsvariabelen</a></h1>
+         <h1><a name="mkvextract.environment_variables">8. Environment variables</a></h1>
          
          
          
          <p>
-            <span class="productname">mkvextract</span>(1) gebruikt de standaard variabelen vanuit het systeem locatie
-            (b.v. <span class="varname">LANG</span> en de <span class="varname">LC_*</span> family). Extra
-            variabelen:
+            <span class="productname">mkvextract</span>(1) uses the default variables that determine the system's locale
+            (e.g. <span class="varname">LANG</span> and the <span class="varname">LC_*</span>
+            family). Additional variables:
             
          </p>
          
@@ -1105,37 +1090,37 @@ source.mkv
             </thead>
             <tbody>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_DEBUG</span> en de korte versie
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_DEBUG</span> and its short form
                      <span class="varname">MTX_DEBUG</span></td>
                   <td>
                      
-                     <p>De inhoud wordt behandeld alsof het via de <a href="#mkvextract.description.debug">--debug</a> optie
-                        gepasseerd is.
+                     <p>The content is treated as if it had been passed via the <a href="#mkvextract.description.debug">--debug</a>
+                        option.
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_ENGAGE</span> en de korte versie
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_ENGAGE</span> and its short form
                      <span class="varname">MTX_ENGAGE</span></td>
                   <td>
                      
-                     <p>De inhoud wordt behandeld alsof het via de <a href="#mkvextract.description.engage">--engage</a>
-                        optie gepasseerd is.
+                     <p>The content is treated as if it had been passed via the <a href="#mkvextract.description.engage">--engage</a>
+                        option.
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_OPTIONS</span> en de korte versie
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_OPTIONS</span> and its short form
                      <span class="varname">MTX_OPTIONS</span></td>
                   <td>
                      
-                     <p>De inhoud wordt gesplitst op een spatie. De gedeeltelijk resulterende reeks
-                        wordt behandeld alsof het gedaan is via de commandoregel. Indien het nodig
-                        is speciale karakters te gebruiken (b.v. spaties) dan moet je die
-                        "insluiten" (zie de sectie over: <a href="#mkvextract.escaping">Overslaan van speciale karakter(s) in
-                           tekst</a>).
+                     <p>The content is split on white space. The resulting partial strings are
+                        treated as if it had been passed as command line options. If you need to
+                        pass special characters (e.g. spaces) then you have to escape them (see
+                        <a href="#mkvextract.escaping">the section about escaping special
+                           characters in text</a>).
                      </p>
                      
                   </td>
@@ -1143,7 +1128,7 @@ source.mkv
             </tbody>
          </table>
          
-         <h1><a name="mkvextract.seealso">8. Zie ook</a></h1>
+         <h1><a name="mkvextract.seealso">9. See also</a></h1>
          
          
          <p>
@@ -1151,12 +1136,12 @@ source.mkv
             
          </p>
          
-         <h1><a name="mkvextract.www">9. WWW</a></h1>
+         <h1><a name="mkvextract.www">10. WWW</a></h1>
          
          
          <p>
-            De laatste versie kan altijd gevonden worden op de <a href="http://www.bunkus.org/videotools/mkvtoolnix/">MKVToolNix</a> thuis
-            basis.
+            The latest version can always be found at <a href="http://www.bunkus.org/videotools/mkvtoolnix/">the MKVToolNix
+               homepage</a>.
             
          </p>
          

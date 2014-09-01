@@ -114,11 +114,11 @@
                   <td class="varlistoption"><span class="option">-w</span>, <span class="option">--webm</span></td>
                   <td>
                      
-                     <p>erstellt eine WebM-konforme Datei. Dies wird auch eingeschaltet, falls die
-                        Namensendung der Ausgabedatei »webm« ist. Dieser Modus erzwingt mehrere
-                        Einschränkungen. Die einzigen erlauben Codecs sind VP8-Video und
-                        Vorbis-Tonspuren. Weder Kapitel noch Tags sind erlaubt. Das Kopfelement
-                        DocType wird in »webm« geändert.
+                     <p>Create a WebM compliant file. This is also turned on if the output file
+                        name's extension is "webm". This mode enforces several
+                        restrictions. The only allowed codecs are VP8, VP9 video and Opus, Vorbis
+                        audio tracks. Neither chapters nor tags are allowed. The DocType header item
+                        is changed to "webm".
                         
                      </p>
                      
@@ -497,6 +497,29 @@
                   </td>
                </tr>
                <tr>
+                  <td class="varlistoption"><span class="option">--disable-track-statistics-tags</span></td>
+                  <td>
+                     
+                     <p>
+                        Normalerweise schreibt <span class="productname">mkvmerge</span>(1) bestimmte Tags mit Statistiken für jede
+                        Spur. Falls solche Tags bereits existieren, werden sie überschrieben. Die
+                        Tags lauten <span class="constant">BPS</span>, <span class="constant">DURATION</span>,
+                        <span class="constant">NUMBER_OF_BYTES</span> und
+                        <span class="constant">NUMBER_OF_FRAMES</span>.
+                        
+                     </p>
+                     
+                     
+                     <p>
+                        Mit dieser Option wird <span class="productname">mkvmerge</span>(1) angewiesen, keine solchen Tags zu
+                        schreiben und bereits existierende Tags mit denselben Namen nicht zu
+                        verändern.
+                        
+                     </p>
+                     
+                  </td>
+               </tr>
+               <tr>
                   <td class="varlistoption"><a name="mkvmerge.description.timecode_scale"><span class="option">--timecode-scale</span> <span class="parameter">Faktor</span></a></td>
                   <td>
                      
@@ -535,7 +558,7 @@
          
          
          
-         <h2><a name="d4e766">2.5. Datei aufteilen, verknüpfen, anhängen und verketten (weitere globale
+         <h2><a name="d4e806">2.5. Datei aufteilen, verknüpfen, anhängen und verketten (weitere globale
                Optionen)</a></h2>
          
          
@@ -1359,7 +1382,7 @@ $ mkvmerge -o Ausgabe.mkv '(' Datei.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e1796">2.6. Unterstützung von Anhängen (weitere globale Optionen)</a></h2>
+         <h2><a name="d4e1836">2.6. Unterstützung von Anhängen (weitere globale Optionen)</a></h2>
          
          
          
@@ -1451,7 +1474,7 @@ $ mkvmerge -o Ausgabe.mkv '(' Datei.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e1937">2.7. Optionen, die für jede Eingabedatei verwendet werden können</a></h2>
+         <h2><a name="d4e1977">2.7. Optionen, die für jede Eingabedatei verwendet werden können</a></h2>
          
          
          
@@ -2100,7 +2123,7 @@ $ mkvmerge -o Ausgabe.mkv '(' Datei.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e3007">2.8. Optionen, die nur für Videospuren gelten</a></h2>
+         <h2><a name="d4e3047">2.8. Optionen, die nur für Videospuren gelten</a></h2>
          
          
          
@@ -2252,7 +2275,7 @@ $ mkvmerge -o Ausgabe.mkv '(' Datei.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e3252">2.9. Optionen, die nur für Untertitelspuren gelten</a></h2>
+         <h2><a name="d4e3292">2.9. Optionen, die nur für Untertitelspuren gelten</a></h2>
          
          
          
@@ -2294,7 +2317,7 @@ $ mkvmerge -o Ausgabe.mkv '(' Datei.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e3292">2.10. Weitere Optionen</a></h2>
+         <h2><a name="d4e3332">2.10. Weitere Optionen</a></h2>
          
          
          
@@ -2493,12 +2516,15 @@ $ mkvmerge -o Ausgabe.mkv '(' Datei.mkv ')'</pre>
                   <td>
                      
                      <p>
-                        Turns on GUI mode. In this mode specially-formatted lines may be output that
-                        can tell a controlling GUI what's happening. These messages follow the
-                        format '<span class="literal">#GUI#message</span>'. The message may be followed by
-                        key/value pairs as in
-                        '<span class="literal">#GUI#message#key1=value1#key2=value2…</span>'. Neither the
-                        messages nor the keys are ever translated and always output in English.
+                        Schaltet den Modus für graphische Benutzeroberflächen an. In diesem Modus
+                        können auf bestimmte Art formatierte Zeilen ausgegeben werden, die einem
+                        aufrufenden Programm mitteilen, was <span class="productname">mkvmerge</span>(1) gerade tut. Diese Nachrichten
+                        haben das folgende Format: '<span class="literal">#GUI#Nachricht</span>'. Der
+                        Nachricht folgen potenziell Schlüssel/Wert-Paare wie
+                        z.B.
+                        '<span class="literal">#GUI#Nachricht#schluessel1=wert1#schluessel2=wert2…</span>'.
+                        Weder die Nachricht selber noch die Schlüssel werden jemals übersetzt
+                        sondern immer in Englisch ausgegeben.
                         
                      </p>
                      
@@ -2952,8 +2978,8 @@ $ mkvmerge -o MM-komplett.mkv MeinFilm-mit-Ton.mkv MeinFilm-fügt-Ton-hinzu.ogg<
          
          <pre class="screen">$ mkvmerge -i v.mkv
 Datei »v.mkv«: Container: Matroska
-Spur-ID 1: Video (V_MS/VFW/FOURCC, DIV3)
-Spur-ID 2: Ton (A_MPEG/L3)</pre>
+Spur-ID 0: Video (V_MS/VFW/FOURCC, DIV3)
+Spur-ID 1: Ton (A_MPEG/L3)</pre>
          
          <p>
             Verwechseln Sie nicht die Spur-IDs, die den Spuren zugewiesen sind, die in
@@ -3051,6 +3077,9 @@ Spur-ID 2: Ton (A_MPEG/L3)</pre>
          </div>
          
          
+         <h2><a name="mkvmerge.text_files_and_charsets.introduction">7.1. Einleitung</a></h2>
+         
+         
          <p>
             Jedweder Text in einer <span class="productname">Matroska</span><sup>(tm)</sup>-Datei wird in UTF-8 codiert. Das bedeutet,
             dass <span class="productname">mkvmerge</span>(1) jede Textdatei, die es liest, ebenso wie jeden auf der
@@ -3073,6 +3102,11 @@ Spur-ID 2: Ton (A_MPEG/L3)</pre>
          </p>
          
          
+         
+         <h2><a name="mkvmerge.text_files_and_charsets.byte_order_markers">7.2. Byte-Reihenfolge-Markierungen (engl. BOM)</a></h2>
+         
+         
+         
          <p>
             Textdateien, die mit einem BOM beginnen, sind bereits in einer
             Erscheinungsform von UTF codiert. <span class="productname">mkvmerge</span>(1) untersützt die folgenden fünf
@@ -3083,6 +3117,11 @@ Spur-ID 2: Ton (A_MPEG/L3)</pre>
             werden stillschweigend irgnoriert.
             
          </p>
+         
+         
+         
+         <h2><a name="mkvmerge.text_files_and_charsets.unix">7.3. Linux und Unixoide Betriebssysteme inklusive Mac OS</a></h2>
+         
          
          
          <p>
@@ -3098,30 +3137,74 @@ Spur-ID 2: Ton (A_MPEG/L3)</pre>
          </p>
          
          
+         
+         <h2><a name="mkvmerge.text_files_and_charsets.windows">7.4. Windows</a></h2>
+         
+         
+         
          <p>
-            Auf Windows gibt es tatsächlich zwei verschiedene Zeichensätze, die
-            <span class="productname">mkvmerge</span>(1) aufgrund der Art, wie das Windows-Shell-Programm
-            <span class="command">cmd.exe</span> implementiert ist, benutzt. Der erste Zeichensatz
-            wird durch Aufrufen des Systemaufrufs <span class="function">GetACP()</span>
-            bestimmt. Dieser Zeichensatz wird als Voreinstellung für
-            Textdateiumwandlungen und für alle durch <span class="abbrev">GUI</span>-Programme im
-            Paket MKVToolNix angezeigten Elemente verwendet.
+            Unter Windows wird der für die Konvertierung von Textdateien benutzte
+            Zeichensatz durch einen Aufruf der Systemfunktion
+            <span class="function">GetACP()</span> ermittelt.
             
          </p>
          
          
          <p>
-            Ein weiterer Zeichensatz könnte benutzt werden, falls
-            <span class="command">cmd.exe</span> verwendet wird. Das Lesen der Befehlszeile wird
-            jedoch mit der Funktion <span class="function">GetCommandLineW()</span> erledigt, die
-            bereits eine Unicode-Zeichenkette zurückgibt. Daher wird die Option
-            <span class="option">--command-line-charset</span> unter Windows ignoriert. Die Ausgabe
-            auf die Konsole wird mit der Funktion <span class="function">WriteConsoleW()</span>
-            realisiert. Deshalb wird die Funktion <span class="option">--output-charset</span>
-            unter Windows nur benutzt, falls die Ausgabe mit
-            <span class="option">--redirect-output</span> umgeleitet wird.
+            Das Auslesen der Kommandozeile geschieht mit der Funktion
+            <span class="function">GetCommandLineW()</span>, die bereits eine
+            Unicode-Zeichenkette zurückliefert. Deshalb wird die Option
+            <span class="option">--command-line-charset</span> unter Windows ignoriert.
             
          </p>
+         
+         
+         <p>
+            Die Konsolenausgabe umfasst drei Szenarien:
+            
+         </p>
+         
+         
+         <ol>
+            
+            <li>
+               
+               <p>
+                  Falls die Ausgabe mittels der Option <a href="#mkvmerge.description.redirect_output">--redirect-output</a>
+                  umgeleitet wurde, so ist der Zeichensatz UTF-8. Dies kann mit der Option
+                  <a href="#mkvmerge.description.output_charset">--output-charset</a>
+                  geändert werden.
+                  
+               </p>
+               
+               
+               <p>
+                  Falls die Ausgabe durch <span class="command">cmd.exe</span> selber umgeleitet wurde,
+                  wie z.B. mit <span class="literal">mkvinfo file.mkv &gt; info.txt</span>, dann wird
+                  immer der Zeichensatz UTF-8 benutzt, was nicht geändert werden kann.
+                  
+               </p>
+               
+               
+               <p>
+                  Wenn hingegen direkt auf die Konsole geschrieben wird, so wird die
+                  Windows-Funktion <span class="function">WriteConsoleW()</span> dafür benutzt, und die
+                  Option <a href="#mkvmerge.description.output_charset">--output-charset</a>
+                  wird ignoriert. Die Konsole sollte in der Lage sein, alle Unicode-Zeichen
+                  auszugeben, für deren entsprechende Sprache Sprachuntersützung installiert
+                  ist (z.B. könnten chinesische Zeichen in englischen Windows-Versionen nicht
+                  ausgegeben werden).
+                  
+               </p>
+               
+            </li>
+            
+         </ol>
+         
+         
+         
+         <h2><a name="mkvmerge.text_files_and_charsets.options">7.5. Kommandozeilenoptionen</a></h2>
+         
          
          
          <p>
@@ -3177,13 +3260,18 @@ Spur-ID 2: Ton (A_MPEG/L3)</pre>
                   <a href="#mkvmerge.description.output_charset">--output-charset</a>
                   für alle auf die Konsole oder in eine Datei geschriebenen Zeichenketten,
                   falls die Ausgabe mit der Option <a href="#mkvmerge.description.redirect_output">--redirect-output</a>
-                  umgeleitet wurde.
+                  umgeleitet wurde. Auf anderen Systemen als Windows ist der
+                  Standardzeichensatz derjenige, den das System aktuell verwendet. Unter
+                  Windows ist der Standard sowohl für die Umleitung mittels <a href="#mkvmerge.description.redirect_output">--redirect-output</a>
+                  als auch durch <span class="command">cmd.exe</span> selber, e.g. <span class="literal">mkvinfo
+                     file.mkv &gt; info.txt</span>, der Zeichensatz UTF-8.
                   
                </p>
                
             </li>
             
          </ul>
+         
          
          <h1><a name="mkvmerge.option_files">8. Optionsdateien</a></h1>
          
@@ -3636,7 +3724,7 @@ CHAPTER03NAME=Baby stellt das Haus auf den Kopf</pre>
           ChapterProcessData (binary)</pre>
          
          
-         <h2><a name="d4e4926">14.3. Allgemeine Hinweise</a></h2>
+         <h2><a name="d4e5026">14.3. Allgemeine Hinweise</a></h2>
          
          
          <p>
@@ -3670,7 +3758,7 @@ CHAPTER03NAME=Baby stellt das Haus auf den Kopf</pre>
          
          
          
-         <h2><a name="d4e4992">15.1. Einleitung</a></h2>
+         <h2><a name="d4e5092">15.1. Einleitung</a></h2>
          
          
          
@@ -4017,7 +4105,7 @@ CHAPTER03NAME=Baby stellt das Haus auf den Kopf</pre>
          </p>
          
          
-         <h2><a name="d4e5442">18.1. Zeitstempeldateiformat v1</a></h2>
+         <h2><a name="d4e5542">18.1. Zeitstempeldateiformat v1</a></h2>
          
          
          <p>
@@ -4038,7 +4126,7 @@ assume 27.930
 1500,1700,30</pre>
          
          
-         <h2><a name="d4e5466">18.2. Zeitstempeldateiformat v2</a></h2>
+         <h2><a name="d4e5566">18.2. Zeitstempeldateiformat v2</a></h2>
          
          
          
@@ -4058,7 +4146,7 @@ assume 27.930
 80</pre>
          
          
-         <h2><a name="d4e5481">18.3. Zeitstempeldateiformat v3</a></h2>
+         <h2><a name="d4e5581">18.3. Zeitstempeldateiformat v3</a></h2>
          
          
          <p>
@@ -4081,7 +4169,7 @@ gap, 10.050
 2.000,38.236</pre>
          
          
-         <h2><a name="d4e5499">18.4. Zeitstempeldateiformat v4</a></h2>
+         <h2><a name="d4e5599">18.4. Zeitstempeldateiformat v4</a></h2>
          
          
          <p>

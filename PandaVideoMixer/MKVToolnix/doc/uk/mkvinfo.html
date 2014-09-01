@@ -13,24 +13,25 @@
       <div id="toc" class="toc">
          <h1>Table of contents</h1>
          <ul>
-            <li><a href="#mkvinfo.synopsis">1. Короткий опис</a></li>
-            <li><a href="#mkvinfo.description">2. Опис</a></li>
+            <li><a href="#mkvinfo.synopsis">1. Synopsis</a></li>
+            <li><a href="#mkvinfo.description">2. Description</a></li>
             <li><a href="#mkvinfo.verbosity_levels">3. Verbosity levels</a></li>
-            <li><a href="#d4e593">4. Коди завершення</a></li>
-            <li><a href="#mkvinfo.escaping">5. Виокремлення спеціальних символів у тексті</a></li>
-            <li><a href="#mkvinfo.environment_variables">6. Environment variables</a></li>
-            <li><a href="#mkvinfo.seealso">7. Дивіться також</a></li>
-            <li><a href="#mkvinfo.www">8. WWW</a></li>
+            <li><a href="#mkvinfo.text_files_and_charsets">4. Text files and character set conversions</a></li>
+            <li><a href="#d4e608">5. Exit codes</a></li>
+            <li><a href="#mkvinfo.escaping">6. Escaping special chars in text</a></li>
+            <li><a href="#mkvinfo.environment_variables">7. Environment variables</a></li>
+            <li><a href="#mkvinfo.seealso">8. See also</a></li>
+            <li><a href="#mkvinfo.www">9. WWW</a></li>
          </ul>
       </div>
       <div class="content">
-         <h1><a name="mkvinfo.synopsis">1. Короткий опис</a></h1>
+         <h1><a name="mkvinfo.synopsis">1. Synopsis</a></h1>
          
          
          <div class="cmdsynopsis"><span class="commandname">mkvinfo</span> options {source-filename}
          </div>
          
-         <h1><a name="mkvinfo.description">2. Опис</a></h1>
+         <h1><a name="mkvinfo.description">2. Description</a></h1>
          
          
          <p>
@@ -134,9 +135,8 @@
                   <td>
                      
                      <p>
-                        Встановлює набір символів заданого в командному рядку для
-                        конвертації. Типово використовується набір символів згідно поточної локалі
-                        системи.
+                        Sets the character set to convert strings given on the command line from. It
+                        defaults to the character set given by system's current locale.
                         
                      </p>
                      
@@ -147,9 +147,8 @@
                   <td>
                      
                      <p>
-                        Встановлює вихідний набір символів заданого в командному рядку для
-                        конвертації. Типово використовується набір символів згідно поточної локалі
-                        системи.
+                        Sets the character set to which strings are converted that are to be
+                        output.  It defaults to the character set given by system's current locale.
                         
                      </p>
                      
@@ -251,8 +250,7 @@
                   <td>
                      
                      <p>
-                        Відображається інформація про використання додатку і відбувається завершення
-                        роботи додатку.
+                        Show usage information and exit.
                         
                      </p>
                      
@@ -263,8 +261,7 @@
                   <td>
                      
                      <p>
-                        Відображається інформація про версію додатку і відбувається завершення
-                        роботи додатку.
+                        Show version information and exit.
                         
                      </p>
                      
@@ -287,15 +284,16 @@
                      
                      
                      <p>
-                        Після чого додаток завершує роботу з кодом повернення 0, якщо немає нової
-                        версії, і з кодом 2, якщо виникла помилка (наприклад, коли не було отримано
-                        інформації про оновлення взагалі).
+                        Afterwards the program exists with an exit code of 0 if no newer release is
+                        available, with 1 if a newer release is available and with 2 if an error
+                        occured (e.g. if the update information could not be retrieved).
                         
                      </p>
                      
                      
                      <p>
-                        Дана опція наявна лише тоді, коли додаток компілювався з підтримкою libcurl.
+                        This option is only available if the program was built with support for
+                        libcurl.
                         
                      </p>
                      
@@ -306,11 +304,11 @@
                   <td>
                      
                      <p>
-                        Зчитує додаткові параметри командного рядка з файла
-                        <span class="parameter">options-file</span>. Рядки, які містять зразу після символу
-                        переносу рядка мітку хеша ('<span class="literal">#</span>') сприймаються як коментарі
-                        і ігноруються. Символи переносу на початку і в кінці рядка
-                        опускаються. Кожний рядок має містити лише один параметр.
+                        Reads additional command line arguments from the file
+                        <span class="parameter">options-file</span>.  Lines whose first non-whitespace
+                        character is a hash mark ('<span class="literal">#</span>') are treated as comments
+                        and ignored. White spaces at the start and end of a line will be
+                        stripped. Each line must contain exactly one option.
                         
                      </p>
                      
@@ -390,7 +388,19 @@ info.txt</pre>
             
          </p>
          
-         <h1><a name="d4e593">4. Коди завершення</a></h1>
+         <h1><a name="mkvinfo.text_files_and_charsets">4. Text files and character set conversions</a></h1>
+         
+         
+         
+         <p>
+            For an in-depth discussion about how all tools in the MKVToolNix suite
+            handle character set conversions, input/output encoding, command line
+            encoding and console encoding please see the identically-named section in
+            the <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> man page.
+            
+         </p>
+         
+         <h1><a name="d4e608">5. Exit codes</a></h1>
          
          
          
@@ -439,14 +449,13 @@ info.txt</pre>
             
          </ul>
          
-         <h1><a name="mkvinfo.escaping">5. Виокремлення спеціальних символів у тексті</a></h1>
+         <h1><a name="mkvinfo.escaping">6. Escaping special chars in text</a></h1>
          
          
          <p>
-            Є декілька місць, де спеціальні символи у тексті мають або повинні бути
-            виокремлені. Правила для виокремлювання прості: кожен символ, що потребує
-            виокремлення, замінюється на зворотній слеш з деяким символом, що йде після
-            нього.
+            There are a few places in which special characters in text must or should be
+            escaped. The rules for escaping are simple: each character that needs
+            escaping is replaced with a backslash followed by another character.
             
          </p>
          
@@ -458,7 +467,7 @@ info.txt</pre>
             
          </p>
          
-         <h1><a name="mkvinfo.environment_variables">6. Environment variables</a></h1>
+         <h1><a name="mkvinfo.environment_variables">7. Environment variables</a></h1>
          
          
          
@@ -516,7 +525,7 @@ info.txt</pre>
             </tbody>
          </table>
          
-         <h1><a name="mkvinfo.seealso">7. Дивіться також</a></h1>
+         <h1><a name="mkvinfo.seealso">8. See also</a></h1>
          
          
          <p>
@@ -524,11 +533,11 @@ info.txt</pre>
             
          </p>
          
-         <h1><a name="mkvinfo.www">8. WWW</a></h1>
+         <h1><a name="mkvinfo.www">9. WWW</a></h1>
          
          
          <p>
-            Остання версія завжди може бути знайдена на веб-сторінці <a href="http://www.bunkus.org/videotools/mkvtoolnix/">the MKVToolNix
+            The latest version can always be found at <a href="http://www.bunkus.org/videotools/mkvtoolnix/">the MKVToolNix
                homepage</a>.
             
          </p>

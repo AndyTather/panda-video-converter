@@ -13,26 +13,27 @@
       <div id="toc" class="toc">
          <h1>Table of contents</h1>
          <ul>
-            <li><a href="#mkvpropedit.synopsis">1. Короткий опис</a></li>
-            <li><a href="#mkvpropedit.description">2. Опис</a></li>
+            <li><a href="#mkvpropedit.synopsis">1. Synopsis</a></li>
+            <li><a href="#mkvpropedit.description">2. Description</a></li>
             <li><a href="#mkvpropedit.edit_selectors">3. Edit selectors</a></li>
             <li><a href="#mkvpropedit.attachment_selectors">4. Attachment selectors</a></li>
             <li><a href="#mkvpropedit.examples">5. Examples</a></li>
-            <li><a href="#d4e1347">6. Коди завершення</a></li>
-            <li><a href="#mkvpropedit.escaping">7. Виокремлення спеціальних символів у тексті</a></li>
-            <li><a href="#mkvpropedit.environment_variables">8. Environment variables</a></li>
-            <li><a href="#mkvpropedit.seealso">9. Дивіться також</a></li>
-            <li><a href="#mkvpropedit.www">10. WWW</a></li>
+            <li><a href="#d4e1347">6. Exit codes</a></li>
+            <li><a href="#mkvinfo.text_files_and_charsets">7. Text files and character set conversions</a></li>
+            <li><a href="#mkvpropedit.escaping">8. Escaping special chars in text</a></li>
+            <li><a href="#mkvpropedit.environment_variables">9. Environment variables</a></li>
+            <li><a href="#mkvpropedit.seealso">10. See also</a></li>
+            <li><a href="#mkvpropedit.www">11. WWW</a></li>
          </ul>
       </div>
       <div class="content">
-         <h1><a name="mkvpropedit.synopsis">1. Короткий опис</a></h1>
+         <h1><a name="mkvpropedit.synopsis">1. Synopsis</a></h1>
          
          
          <div class="cmdsynopsis"><span class="commandname">mkvpropedit</span> options {source-filename} {actions}
          </div>
          
-         <h1><a name="mkvpropedit.description">2. Опис</a></h1>
+         <h1><a name="mkvpropedit.description">2. Description</a></h1>
          
          
          <p>
@@ -444,9 +445,8 @@
                   <td>
                      
                      <p>
-                        Встановлює набір символів заданого в командному рядку для
-                        конвертації. Типово використовується набір символів згідно поточної локалі
-                        системи.
+                        Sets the character set to convert strings given on the command line from. It
+                        defaults to the character set given by system's current locale.
                         
                      </p>
                      
@@ -457,9 +457,8 @@
                   <td>
                      
                      <p>
-                        Встановлює вихідний набір символів заданого в командному рядку для
-                        конвертації. Типово використовується набір символів згідно поточної локалі
-                        системи.
+                        Sets the character set to which strings are converted that are to be
+                        output.  It defaults to the character set given by system's current locale.
                         
                      </p>
                      
@@ -486,13 +485,13 @@
                   <td>
                      
                      <p>
-                        Задає примусове використання мовного перекладу <span class="parameter">code</span>
-                        інтерфейсу (наприклад, '<span class="literal">de_DE</span>' для німецького
-                        перекладу). Тому, краще використовувати змінні середовища
-                        <span class="varname">LANG</span>, <span class="varname">LC_MESSAGES</span> і
-                        <span class="varname">LC_ALL</span>. Після введення <span class="literal">list</span>' як
-                        <span class="parameter">code</span> <a href="mkvextract.html"><span class="productname">mkvextract</span>(1)</a> відобразить список доступних
-                        перекладів.
+                        Forces the translations for the language <span class="parameter">code</span> to be
+                        used (e.g.  '<span class="literal">de_DE</span>' for the German translations). It is
+                        preferable to use the environment variables <span class="varname">LANG</span>,
+                        <span class="varname">LC_MESSAGES</span> and <span class="varname">LC_ALL</span>
+                        though. Entering '<span class="literal">list</span>' as the
+                        <span class="parameter">code</span> will cause <a href="mkvextract.html"><span class="productname">mkvextract</span>(1)</a> to output a list of
+                        available translations.
                         
                      </p>
                      
@@ -544,7 +543,7 @@
                   <td>
                      
                      <p>
-                        Задає відображення розширеної інформації про важливі елементи <span class="productname">Matroska</span><sup>(tm)</sup>.
+                        Be verbose and show all the important <span class="productname">Matroska</span><sup>(tm)</sup> elements as they're read.
                         
                      </p>
                      
@@ -555,8 +554,7 @@
                   <td>
                      
                      <p>
-                        Відображається інформація про використання додатку і відбувається завершення
-                        роботи додатку.
+                        Show usage information and exit.
                         
                      </p>
                      
@@ -567,8 +565,7 @@
                   <td>
                      
                      <p>
-                        Відображається інформація про версію додатку і відбувається завершення
-                        роботи додатку.
+                        Show version information and exit.
                         
                      </p>
                      
@@ -591,15 +588,16 @@
                      
                      
                      <p>
-                        Після чого додаток завершує роботу з кодом повернення 0, якщо немає нової
-                        версії, і з кодом 2, якщо виникла помилка (наприклад, коли не було отримано
-                        інформації про оновлення взагалі).
+                        Afterwards the program exists with an exit code of 0 if no newer release is
+                        available, with 1 if a newer release is available and with 2 if an error
+                        occured (e.g. if the update information could not be retrieved).
                         
                      </p>
                      
                      
                      <p>
-                        Дана опція наявна лише тоді, коли додаток компілювався з підтримкою libcurl.
+                        This option is only available if the program was built with support for
+                        libcurl.
                         
                      </p>
                      
@@ -610,11 +608,11 @@
                   <td>
                      
                      <p>
-                        Зчитує додаткові параметри командного рядка з файла
-                        <span class="parameter">options-file</span>. Рядки, які містять зразу після символу
-                        переносу рядка мітку хеша ('<span class="literal">#</span>') сприймаються як коментарі
-                        і ігноруються. Символи переносу на початку і в кінці рядка
-                        опускаються. Кожний рядок має містити лише один параметр.
+                        Reads additional command line arguments from the file
+                        <span class="parameter">options-file</span>.  Lines whose first non-whitespace
+                        character is a hash mark ('<span class="literal">#</span>') are treated as comments
+                        and ignored. White spaces at the start and end of a line will be
+                        stripped. Each line must contain exactly one option.
                         
                      </p>
                      
@@ -940,7 +938,7 @@ name=Comments</pre>
          </p>
          
          <pre class="screen">$ mkvpropedit movie.mkv --delete-attachment mime-type:application/x-truetype-font</pre>
-         <h1><a name="d4e1347">6. Коди завершення</a></h1>
+         <h1><a name="d4e1347">6. Exit codes</a></h1>
          
          
          
@@ -991,14 +989,25 @@ name=Comments</pre>
             
          </ul>
          
-         <h1><a name="mkvpropedit.escaping">7. Виокремлення спеціальних символів у тексті</a></h1>
+         <h1><a name="mkvinfo.text_files_and_charsets">7. Text files and character set conversions</a></h1>
+         
          
          
          <p>
-            Є декілька місць, де спеціальні символи у тексті мають або повинні бути
-            виокремлені. Правила для виокремлювання прості: кожен символ, що потребує
-            виокремлення, замінюється на зворотній слеш з деяким символом, що йде після
-            нього.
+            For an in-depth discussion about how all tools in the MKVToolNix suite
+            handle character set conversions, input/output encoding, command line
+            encoding and console encoding please see the identically-named section in
+            the <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> man page.
+            
+         </p>
+         
+         <h1><a name="mkvpropedit.escaping">8. Escaping special chars in text</a></h1>
+         
+         
+         <p>
+            There are a few places in which special characters in text must or should be
+            escaped. The rules for escaping are simple: each character that needs
+            escaping is replaced with a backslash followed by another character.
             
          </p>
          
@@ -1010,7 +1019,7 @@ name=Comments</pre>
             
          </p>
          
-         <h1><a name="mkvpropedit.environment_variables">8. Environment variables</a></h1>
+         <h1><a name="mkvpropedit.environment_variables">9. Environment variables</a></h1>
          
          
          
@@ -1069,7 +1078,7 @@ name=Comments</pre>
             </tbody>
          </table>
          
-         <h1><a name="mkvpropedit.seealso">9. Дивіться також</a></h1>
+         <h1><a name="mkvpropedit.seealso">10. See also</a></h1>
          
          
          <p>
@@ -1077,11 +1086,11 @@ name=Comments</pre>
             
          </p>
          
-         <h1><a name="mkvpropedit.www">10. WWW</a></h1>
+         <h1><a name="mkvpropedit.www">11. WWW</a></h1>
          
          
          <p>
-            Остання версія завжди може бути знайдена на веб-сторінці <a href="http://www.bunkus.org/videotools/mkvtoolnix/">the MKVToolNix
+            The latest version can always be found at <a href="http://www.bunkus.org/videotools/mkvtoolnix/">the MKVToolNix
                homepage</a>.
             
          </p>

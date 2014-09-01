@@ -16,11 +16,12 @@
             <li><a href="#mkvinfo.synopsis">1. Übersicht</a></li>
             <li><a href="#mkvinfo.description">2. Beschreibung</a></li>
             <li><a href="#mkvinfo.verbosity_levels">3. Detailstufen</a></li>
-            <li><a href="#d4e593">4. Rückgabewerte</a></li>
-            <li><a href="#mkvinfo.escaping">5. Sonderzeichen in Text maskieren</a></li>
-            <li><a href="#mkvinfo.environment_variables">6. Umgebungsvariablen</a></li>
-            <li><a href="#mkvinfo.seealso">7. Siehe auch</a></li>
-            <li><a href="#mkvinfo.www">8. WWW</a></li>
+            <li><a href="#mkvinfo.text_files_and_charsets">4. Umwandlungen von Textdateien und Zeichensätzen</a></li>
+            <li><a href="#d4e620">5. Rückgabewerte</a></li>
+            <li><a href="#mkvinfo.escaping">6. Sonderzeichen in Text maskieren</a></li>
+            <li><a href="#mkvinfo.environment_variables">7. Umgebungsvariablen</a></li>
+            <li><a href="#mkvinfo.seealso">8. Siehe auch</a></li>
+            <li><a href="#mkvinfo.www">9. WWW</a></li>
          </ul>
       </div>
       <div class="content">
@@ -220,18 +221,21 @@
                   <td>
                      
                      <p>
-                        Turns on GUI mode. In this mode specially-formatted lines may be output that
-                        can tell a controlling GUI what's happening. These messages follow the
-                        format '<span class="literal">#GUI#message</span>'. The message may be followed by
-                        key/value pairs as in
-                        '<span class="literal">#GUI#message#key1=value1#key2=value2…</span>'. Neither the
-                        messages nor the keys are ever translated and always output in English.
+                        Schaltet den Modus für graphische Benutzeroberflächen an. In diesem Modus
+                        können auf bestimmte Art formatierte Zeilen ausgegeben werden, die einem
+                        aufrufenden Programm mitteilen, was <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> gerade tut. Diese Nachrichten
+                        haben das folgende Format: '<span class="literal">#GUI#Nachricht</span>'. Der
+                        Nachricht folgen potenziell Schlüssel/Wert-Paare wie
+                        z.B.
+                        '<span class="literal">#GUI#Nachricht#schluessel1=wert1#schluessel2=wert2…</span>'.
+                        Weder die Nachricht selber noch die Schlüssel werden jemals übersetzt
+                        sondern immer in Englisch ausgegeben.
                         
                      </p>
                      
                      
-                     <p>This switch has nothing to do with the <span class="option">--gui</span> parameter
-                        which causes mkvinfo to display its own GUI.
+                     <p>Diese Option hat nichts mit der Option <span class="option">--gui</span> zu tun, welche
+                        dafür sorgt, dass <span class="productname">mkvinfo</span>(1) seine graphische Benutzeroberfläche anzeigt.
                      </p>
                      
                   </td>
@@ -395,7 +399,21 @@ Info.txt</pre>
             
          </p>
          
-         <h1><a name="d4e593">4. Rückgabewerte</a></h1>
+         <h1><a name="mkvinfo.text_files_and_charsets">4. Umwandlungen von Textdateien und Zeichensätzen</a></h1>
+         
+         
+         
+         <p>
+            Für eine tiefer gehende Diskussion darüber, wie die Programme in der
+            MKVToolNix-Sammlung die Umwandlung von Zeichensätzen,
+            Eingabe-/Ausgabecodierung, Kommandozeilenzeichensätze und
+            Konsolenzeichensätze handhaben, sei auf den Abschnitt »Umwandlungen von
+            Textdateien und Zeichensätzen« in der Handbuchseite von <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>
+            verwiesen.
+            
+         </p>
+         
+         <h1><a name="d4e620">5. Rückgabewerte</a></h1>
          
          
          
@@ -445,7 +463,7 @@ Info.txt</pre>
             
          </ul>
          
-         <h1><a name="mkvinfo.escaping">5. Sonderzeichen in Text maskieren</a></h1>
+         <h1><a name="mkvinfo.escaping">6. Sonderzeichen in Text maskieren</a></h1>
          
          
          <p>
@@ -464,7 +482,7 @@ Info.txt</pre>
             
          </p>
          
-         <h1><a name="mkvinfo.environment_variables">6. Umgebungsvariablen</a></h1>
+         <h1><a name="mkvinfo.environment_variables">7. Umgebungsvariablen</a></h1>
          
          
          
@@ -523,7 +541,7 @@ Info.txt</pre>
             </tbody>
          </table>
          
-         <h1><a name="mkvinfo.seealso">7. Siehe auch</a></h1>
+         <h1><a name="mkvinfo.seealso">8. Siehe auch</a></h1>
          
          
          <p>
@@ -531,7 +549,7 @@ Info.txt</pre>
             
          </p>
          
-         <h1><a name="mkvinfo.www">8. WWW</a></h1>
+         <h1><a name="mkvinfo.www">9. WWW</a></h1>
          
          
          <p>

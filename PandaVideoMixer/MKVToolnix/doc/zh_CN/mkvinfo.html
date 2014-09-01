@@ -3,38 +3,41 @@
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>mkvinfo -- 输出关于 Matroska 文件中各轨的信息</title>
+      <title>mkvinfo -- Print information about elements in Matroska files</title>
       <link rel="stylesheet" type="text/css" href="mkvtoolnix-doc.css">
    </head>
    <body>
-      <div class="heading">mkvinfo -- 输出关于 <span class="productname">Matroska</span><sup>(tm)</sup> 文件中各轨的信息
+      <div class="heading">mkvinfo -- Print information about elements in <span class="productname">Matroska</span><sup>(tm)</sup> files
       </div>
       <hr>
       <div id="toc" class="toc">
          <h1>Table of contents</h1>
          <ul>
-            <li><a href="#mkvinfo.synopsis">1. 概要</a></li>
-            <li><a href="#mkvinfo.description">2. 说明</a></li>
-            <li><a href="#mkvinfo.verbosity_levels">3. “详细”程度</a></li>
-            <li><a href="#d4e593">4. 退出代码</a></li>
-            <li><a href="#mkvinfo.escaping">5. 文本中特殊字符的转义</a></li>
-            <li><a href="#mkvinfo.environment_variables">6. 环境变量</a></li>
-            <li><a href="#mkvinfo.seealso">7. 参阅</a></li>
-            <li><a href="#mkvinfo.www">8. 网络</a></li>
+            <li><a href="#mkvinfo.synopsis">1. Synopsis</a></li>
+            <li><a href="#mkvinfo.description">2. Description</a></li>
+            <li><a href="#mkvinfo.verbosity_levels">3. Verbosity levels</a></li>
+            <li><a href="#mkvinfo.text_files_and_charsets">4. Text files and character set conversions</a></li>
+            <li><a href="#d4e608">5. Exit codes</a></li>
+            <li><a href="#mkvinfo.escaping">6. Escaping special chars in text</a></li>
+            <li><a href="#mkvinfo.environment_variables">7. Environment variables</a></li>
+            <li><a href="#mkvinfo.seealso">8. See also</a></li>
+            <li><a href="#mkvinfo.www">9. WWW</a></li>
          </ul>
       </div>
       <div class="content">
-         <h1><a name="mkvinfo.synopsis">1. 概要</a></h1>
+         <h1><a name="mkvinfo.synopsis">1. Synopsis</a></h1>
          
          
-         <div class="cmdsynopsis"><span class="commandname">mkvinfo</span> 选项 {源文件名}
+         <div class="cmdsynopsis"><span class="commandname">mkvinfo</span> options {source-filename}
          </div>
          
-         <h1><a name="mkvinfo.description">2. 说明</a></h1>
+         <h1><a name="mkvinfo.description">2. Description</a></h1>
          
          
          <p>
-            本程序可列出 <span class="productname">Matroska</span><sup>(tm)</sup>文件中包含的所有轨道，输出信息可以限定为文件的轨道列表以及所用编解码器的信息。
+            This program lists all elements contained in a <span class="productname">Matroska</span><sup>(tm)</sup>. The output can be
+            limited to a list of tracks in the file including information about the
+            codecs used.
             
          </p>
          
@@ -52,7 +55,8 @@
                   <td>
                      
                      <p>
-                        启动 <span class="abbrev">GUI</span>。本选项仅当 mkvinfo 编译时附加 <span class="abbrev">GUI</span> 支持时可用。
+                        Start the <span class="abbrev">GUI</span>. This option is only available if mkvinfo was
+                        compiled with <span class="abbrev">GUI</span> support.
                         
                      </p>
                      
@@ -63,7 +67,8 @@
                   <td>
                      
                      <p>
-                        计算并显示各帧的 <span class="function">Adler32</span> 校验码。仅当调试时有用处。
+                        Calculates and display the <span class="function">Adler32</span> checksum for each
+                        frame. Useful for debugging only.
                         
                      </p>
                      
@@ -74,7 +79,7 @@
                   <td>
                      
                      <p>
-                        仅显示 <span class="productname">mkvinfo</span>(1) 所获取信息的简要概述，而非各元素。
+                        Only show a terse summary of what <span class="productname">mkvinfo</span>(1) finds and not each element.
                         
                      </p>
                      
@@ -85,7 +90,8 @@
                   <td>
                      
                      <p>
-                        在“详细”模式下为各轨道显示统计信息。如果“详细”程度为 0 级，则将同时将级别设为 1。
+                        Show statistics for each track in verbose mode. Also sets verbosity to 1 if
+                        it was at level 0 before.
                         
                      </p>
                      
@@ -96,7 +102,7 @@
                   <td>
                      
                      <p>
-                        以十六进制转储形式显示各帧的前 16 字节。
+                        Show the first 16 bytes of each frame as a hex dump.
                         
                      </p>
                      
@@ -107,7 +113,7 @@
                   <td>
                      
                      <p>
-                        以十六进制转储形式显示各帧的所有字节。
+                        Show all bytes of each frame as a hex dump.
                         
                      </p>
                      
@@ -118,29 +124,31 @@
                   <td>
                      
                      <p>
-                        显示各元素的尺寸，含头部所占用的尺寸。
+                        Show the size of each element including its header.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.command_line_charset"><span class="option">--command-line-charset</span> <span class="parameter">字符集</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.command_line_charset"><span class="option">--command-line-charset</span> <span class="parameter">character-set</span></a></td>
                   <td>
                      
                      <p>
-                        设定在命令行给出的字符串的字符集，用于转为其他字符集。默认为系统当前区域设置中所给定的字符集。
+                        Sets the character set to convert strings given on the command line from. It
+                        defaults to the character set given by system's current locale.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.output_charset"><span class="option">--output-charset</span> <span class="parameter">字符集</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.output_charset"><span class="option">--output-charset</span> <span class="parameter">character-set</span></a></td>
                   <td>
                      
                      <p>
-                        设置输出的字符串应被转换到何种字符集。默认为系统当前区域设置中所给定的字符集。
+                        Sets the character set to which strings are converted that are to be
+                        output.  It defaults to the character set given by system's current locale.
                         
                      </p>
                      
@@ -148,51 +156,57 @@
                </tr>
                <tr>
                   <td class="varlistoption"><a name="mkvinfo.description.redirect_output"><span class="option">-r</span>, <span class="option">--redirect-output</span>
-                        <span class="parameter">文件名</span></a></td>
+                        <span class="parameter">file-name</span></a></td>
                   <td>
                      
                      <p>
-                        将所有信息输出至文件
-                        <span class="parameter">文件名</span>，而不是在命令行显示。尽管该操作可以用输出重定向轻松实现，但在特定情况下还是缺不得它：当终端写入文件之前重新解释（覆盖输出）时。
-                        <a href="#mkvinfo.description.output_charset">--output-charset</a>
-                        中所选定的字符集将被优先选用。
+                        Writes all messages to the file <span class="parameter">file-name</span> instead of
+                        to the console.  While this can be done easily with output redirection there
+                        are cases in which this option is needed: when the terminal reinterprets the
+                        output before writing it to a file.  The character set set with <a href="#mkvinfo.description.output_charset">--output-charset</a>
+                        is honored.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.ui_language"><span class="option">--ui-language</span> <span class="parameter">语言代码</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.ui_language"><span class="option">--ui-language</span> <span class="parameter">code</span></a></td>
                   <td>
                      
                      <p>
-                        强制使用语言代码 <span class="parameter">语言代码</span> 所对应的翻译（如  '<span class="literal">de_DE</span>'
-                        对应德文翻译）。使用 <span class="varname">LANG</span>、<span class="varname">LC_MESSAGES</span> 及
-                        <span class="varname">LC_ALL</span> 这些环境变量更好。如果在 <span class="parameter">code</span> 处输入
-                        '<span class="literal">list</span>'，<span class="productname">mkvinfo</span>(1) 将输出可用翻译的列表。
+                        Forces the translations for the language <span class="parameter">code</span> to be
+                        used (e.g.  '<span class="literal">de_DE</span>' for the German translations). It is
+                        preferable to use the environment variables <span class="varname">LANG</span>,
+                        <span class="varname">LC_MESSAGES</span> and <span class="varname">LC_ALL</span>
+                        though. Entering '<span class="literal">list</span>' as the
+                        <span class="parameter">code</span> will cause <span class="productname">mkvinfo</span>(1) to output a list of
+                        available translations.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.debug"><span class="option">--debug</span> <span class="parameter">主题</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.debug"><span class="option">--debug</span> <span class="parameter">topic</span></a></td>
                   <td>
                      
                      <p>
-                        为特定功能开启调试。该选项仅对开发者有用。
+                        Turn on debugging for a specific feature. This option is only useful for
+                        developers.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.engage"><span class="option">--engage</span> <span class="parameter">功能</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.engage"><span class="option">--engage</span> <span class="parameter">feature</span></a></td>
                   <td>
                      
                      <p>
-                        开启实验性功能。可用功能列表可通过 <span class="command">mkvinfo --engage list</span>
-                        获取。通常情况下不应该使用这些功能。
+                        Turn on experimental features. A list of available features can be requested
+                        with <span class="command">mkvinfo --engage list</span>. These features are not meant
+                        to be used in normal situations.
                         
                      </p>
                      
@@ -224,8 +238,8 @@
                   <td>
                      
                      <p>
-                        使输出更详尽。请参阅关于 <a href="#mkvinfo.verbosity_levels">“详细”程度</a>
-                        的段落获取在哪些层级将输出哪些信息的描述。
+                        Be more verbose. See the section about <a href="#mkvinfo.verbosity_levels">verbosity levels</a> for a description
+                        which information will be output at which level.
                         
                      </p>
                      
@@ -236,7 +250,7 @@
                   <td>
                      
                      <p>
-                        显示用法信息并退出。
+                        Show usage information and exit.
                         
                      </p>
                      
@@ -247,7 +261,7 @@
                   <td>
                      
                      <p>
-                        显示版本信息并退出。
+                        Show version information and exit.
                         
                      </p>
                      
@@ -258,109 +272,140 @@
                   <td>
                      
                      <p>
-                        联机下载 URL <a href="http://mkvtoolnix-releases.bunkus.org/latest-release.xml">http://mkvtoolnix-releases.bunkus.org/latest-release.xml</a>
-                        以检查新版本。将以 <span class="literal">键=值</span> 的样式输出四行: 检索信息的 URL（键
-                        <span class="literal">version_check_url</span>），当前运行的版本（键
-                        <span class="literal">running_version</span>），最新版本号（键
-                        <span class="literal">available_version</span>）及其下载 URL（键
-                        <span class="literal">download_url</span>）。
+                        Checks online for new releases by downloading the URL <a href="http://mkvtoolnix-releases.bunkus.org/latest-release.xml">http://mkvtoolnix-releases.bunkus.org/latest-release.xml</a>.
+                        Four lines will be output in <span class="literal">key=value</span> style: the URL
+                        from where the information was retrieved (key
+                        <span class="literal">version_check_url</span>), the currently running version (key
+                        <span class="literal">running_version</span>), the latest release's version (key
+                        <span class="literal">available_version</span>) and the download URL (key
+                        <span class="literal">download_url</span>).
                         
                      </p>
                      
                      
                      <p>
-                        若无更新版本可用，程序将以退出码 0 退出，若有更新版本可用，退出码为 1，若出现错误（如无法检索更新信息），退出码则为 2。
+                        Afterwards the program exists with an exit code of 0 if no newer release is
+                        available, with 1 if a newer release is available and with 2 if an error
+                        occured (e.g. if the update information could not be retrieved).
                         
                      </p>
                      
                      
                      <p>
-                        此选项仅当程序附带 libcurl 支持编译时可用。
+                        This option is only available if the program was built with support for
+                        libcurl.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><span class="option">@</span><span class="parameter">选项文件</span></td>
+                  <td class="varlistoption"><span class="option">@</span><span class="parameter">options-file</span></td>
                   <td>
                      
                      <p>
-                        从文件 <span class="parameter">选项文件</span> 中读取额外的命令行参数。首个非空白字符为井号
-                        ('<span class="literal">#</span>') 的行将被当作注释对待，在处理过程中将被忽略。各行开头与结尾的空白将被除去。各行必须恰好仅含一个选项。
+                        Reads additional command line arguments from the file
+                        <span class="parameter">options-file</span>.  Lines whose first non-whitespace
+                        character is a hash mark ('<span class="literal">#</span>') are treated as comments
+                        and ignored. White spaces at the start and end of a line will be
+                        stripped. Each line must contain exactly one option.
                         
                      </p>
                      
                      
                      <p>
-                        有些字符可以转义，如当您需要使用 '#' 作为一个不是评论的行的开头。规则在<a href="#mkvinfo.escaping">关于转义文本的段落</a>有描述。
+                        Several chars can be escaped, e.g. if you need to start a non-comment line
+                        with '#'. The rules are described in <a href="#mkvinfo.escaping">the
+                           section about escaping text</a>.
                         
                      </p>
                      
                      
                      <p>
-                        命令行 '<span class="command">mkvinfo -v -v 输入.mkv --redirect-output 信息.txt</span>'
-                        可以转换为下面所示的选项文件:
+                        The command line '<span class="command">mkvinfo -v -v input.mkv --redirect-output
+                           info.txt</span>' could be converted into the following option file:
                         
                      </p>
                      
-                     <pre class="programlisting"># 更为详尽
+                     <pre class="programlisting"># Be more verbose
 -v
 -v
-# 解析 输入.mkv
-输入.mkv
-# 并将输出信息写入 信息.txt
+# Parse input.mkv
+input.mkv
+# and write the output to info.txt
 --redirect-output
-信息.txt</pre>
+info.txt</pre>
                      </td>
                </tr>
             </tbody>
          </table>
          
-         <h1><a name="mkvinfo.verbosity_levels">3. “详细”程度</a></h1>
+         <h1><a name="mkvinfo.verbosity_levels">3. Verbosity levels</a></h1>
          
          
          
          <p>
-            <a href="#mkvinfo.description.verbose">-v</a> 选项可以使
-            <span class="productname">mkvinfo</span>(1) 增强其“详细”程度并输出关于当前文件的更多信息。
+            The <a href="#mkvinfo.description.verbose">-v</a>
+            option can be used to increase <span class="productname">mkvinfo</span>(1)'s verbosity level and print more
+            information about the current file.
             
          </p>
          
          
          <p>
-            在 level 0 <span class="productname">mkvinfo</span>(1) 仅输出它发现的轨道头及其类型。头部解析完毕后（更专业地：遇到首个簇时），<span class="productname">mkvinfo</span>(1)
-            将退出执行。在此层级，定位头项与 cue 索引不会显示出来——即使它们位于轨道信息之前。
+            At level 0 <span class="productname">mkvinfo</span>(1) will print only the track headers it finds and their
+            types. <span class="productname">mkvinfo</span>(1) will exit as soon as the headers are parsed completely
+            (more technical: as soon as the first cluster is encountered). In this level
+            the seek head entries and the cues will not be displayed -- even if they're
+            located in front of the track information.
             
          </p>
          
          
          <p>
-            在 level 1 <span class="productname">mkvinfo</span>(1) 同样将输出在整个文件中遇到的所有 <span class="productname">Matroska</span><sup>(tm)</sup> 元素，此外还将输出定位头项与 cue
-            索引项。如果启用了简要模式，<span class="productname">mkvinfo</span>(1) 还将输出各帧位置。
+            At level 1 <span class="productname">mkvinfo</span>(1) will also print all <span class="productname">Matroska</span><sup>(tm)</sup> elements encountered for
+            the complete file but the seek head entries and the cue entries. If the
+            summary mode is enabled then <span class="productname">mkvinfo</span>(1) will output the frame position as
+            well.
             
          </p>
          
          
          <p>
-            在 level 2 <span class="productname">mkvinfo</span>(1) 同样将输出定位头项与 cue 索引项，以及文件中各 <span class="productname">Matroska</span><sup>(tm)</sup> 元素被发现的位置。
+            At level 2 <span class="productname">mkvinfo</span>(1) will also print the seek head entries, the cue entries
+            and the file position at which each <span class="productname">Matroska</span><sup>(tm)</sup> element can be found at.
             
          </p>
          
          
          <p>
-            在 level 3 及更高层级 <span class="productname">mkvinfo</span>(1) 将输出一些与 <span class="productname">Matroska</span><sup>(tm)</sup>
-            元素不直接相连的信息。对于其他元素，将只输出发现的基本信息。Level 3 增加了元信息以便调试（换句话说：它是为开发人员设计的）。Level 3
-            输出的所有行都以方括号嵌套以便过滤。
+            At level 3 and above <span class="productname">mkvinfo</span>(1) will print some information that is not
+            directly connected to a <span class="productname">Matroska</span><sup>(tm)</sup> element. All other elements only print
+            stuff about the elements that were just found. Level 3 adds meta information
+            to ease debugging (read: it's intended for developers only). All lines
+            written by level 3 are enclosed in square brackets to make filtering them
+            out easy.
             
          </p>
          
-         <h1><a name="d4e593">4. 退出代码</a></h1>
+         <h1><a name="mkvinfo.text_files_and_charsets">4. Text files and character set conversions</a></h1>
          
          
          
          <p>
-            <span class="productname">mkvinfo</span>(1) 退出时会返回以下三个退出代码中的一个：
+            For an in-depth discussion about how all tools in the MKVToolNix suite
+            handle character set conversions, input/output encoding, command line
+            encoding and console encoding please see the identically-named section in
+            the <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> man page.
+            
+         </p>
+         
+         <h1><a name="d4e608">5. Exit codes</a></h1>
+         
+         
+         
+         <p>
+            <span class="productname">mkvinfo</span>(1) exits with one of three exit codes:
             
          </p>
          
@@ -370,7 +415,8 @@
             <li>
                
                <p>
-                  <span class="constant">0</span> -- 此退出代码说明已成功完成运行。
+                  <span class="constant">0</span> -- This exit codes means that the run has completed
+                  successfully.
                   
                </p>
                
@@ -380,8 +426,9 @@
             <li>
                
                <p>
-                  <span class="constant">1</span> -- 这种情况下 <span class="productname">mkvinfo</span>(1) 至少输出了一条警告信息，但运行并未因之中止。 警告信息以文字
-                  '<span class="literal">警告:</span>' 为前缀。
+                  <span class="constant">1</span> -- In this case <span class="productname">mkvinfo</span>(1) has output at least one
+                  warning, but the run did continue.  A warning is prefixed with the text
+                  '<span class="literal">Warning:</span>'.
                   
                </p>
                
@@ -391,8 +438,10 @@
             <li>
                
                <p>
-                  <span class="constant">2</span> -- 此退出代码用于错误发生之后。 <span class="productname">mkvinfo</span>(1)
-                  在输出错误信息后即中断运行。错误信息可能是错误的命令行参数，也可能是损坏文件的读取/写入错误。
+                  <span class="constant">2</span> -- This exit code is used after an error occurred.
+                  <span class="productname">mkvinfo</span>(1) aborts right after outputting the error message.  Error messages
+                  range from wrong command line arguments over read/write errors to broken
+                  files.
                   
                </p>
                
@@ -400,28 +449,32 @@
             
          </ul>
          
-         <h1><a name="mkvinfo.escaping">5. 文本中特殊字符的转义</a></h1>
+         <h1><a name="mkvinfo.escaping">6. Escaping special chars in text</a></h1>
          
          
          <p>
-            有时文本中的特殊字符必须或应该转义。转义规则很简单: 用反斜杠后接一字符替换需要转义的各字符。
+            There are a few places in which special characters in text must or should be
+            escaped. The rules for escaping are simple: each character that needs
+            escaping is replaced with a backslash followed by another character.
             
          </p>
          
          
          <p>
-            规则为: ' ' (空格) 变为 '\s'、'"' (双引号) 变为 '\2'、':' 变为 '\c'、'#' 变为 '\h'，而 '\'
-            (单个反斜杠) 自己则变为 '\\'。
+            The rules are: ' ' (a space) becomes '\s', '"' (double quotes) becomes
+            '\2', ':' becomes '\c', '#' becomes '\h' and '\' (a single backslash) itself
+            becomes '\\'.
             
          </p>
          
-         <h1><a name="mkvinfo.environment_variables">6. 环境变量</a></h1>
+         <h1><a name="mkvinfo.environment_variables">7. Environment variables</a></h1>
          
          
          
          <p>
-            <span class="productname">mkvinfo</span>(1) 会使用决定系统区域设置的默认变量 (如 <span class="varname">LANG</span> 与
-            <span class="varname">LC_*</span> 族)。其他变量包括:
+            <span class="productname">mkvinfo</span>(1) uses the default variables that determine the system's locale
+            (e.g. <span class="varname">LANG</span> and the <span class="varname">LC_*</span>
+            family). Additional variables:
             
          </p>
          
@@ -435,30 +488,36 @@
             </thead>
             <tbody>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_DEBUG</span> 及其缩写形式 <span class="varname">MTX_DEBUG</span></td>
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_DEBUG</span> and its short form
+                     <span class="varname">MTX_DEBUG</span></td>
                   <td>
                      
-                     <p>内容将被当作通过 <a href="#mkvinfo.description.debug">--debug</a>
-                        选项传递的参数对待。
+                     <p>The content is treated as if it had been passed via the <a href="#mkvinfo.description.debug">--debug</a> option.
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_ENGAGE</span> 及其缩写形式 <span class="varname">MTX_ENGAGE</span></td>
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_ENGAGE</span> and its short form
+                     <span class="varname">MTX_ENGAGE</span></td>
                   <td>
                      
-                     <p>内容将被当作通过 <a href="#mkvinfo.description.engage">--engage</a>
-                        选项传递的参数对待。
+                     <p>The content is treated as if it had been passed via the <a href="#mkvinfo.description.engage">--engage</a>
+                        option.
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_OPTIONS</span> 及其缩写形式 <span class="varname">MTX_OPTIONS</span></td>
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_OPTIONS</span> and its short form
+                     <span class="varname">MTX_OPTIONS</span></td>
                   <td>
                      
-                     <p>内容将在空白处切割。最终得到的字符串部分将按命令行选项的格式处理。如果您需要传递特殊字符 (如空白) 则需要转义 (参见<a href="#mkvinfo.escaping">关于转义文本中特殊字符的段落</a>)。
+                     <p>The content is split on white space. The resulting partial strings are
+                        treated as if it had been passed as command line options. If you need to
+                        pass special characters (e.g. spaces) then you have to escape them (see
+                        <a href="#mkvinfo.escaping">the section about escaping special
+                           characters in text</a>).
                      </p>
                      
                   </td>
@@ -466,7 +525,7 @@
             </tbody>
          </table>
          
-         <h1><a name="mkvinfo.seealso">7. 参阅</a></h1>
+         <h1><a name="mkvinfo.seealso">8. See also</a></h1>
          
          
          <p>
@@ -474,11 +533,12 @@
             
          </p>
          
-         <h1><a name="mkvinfo.www">8. 网络</a></h1>
+         <h1><a name="mkvinfo.www">9. WWW</a></h1>
          
          
          <p>
-            最新版本总可以在 <a href="http://www.bunkus.org/videotools/mkvtoolnix/">MKVToolNix 主页</a> 找到。
+            The latest version can always be found at <a href="http://www.bunkus.org/videotools/mkvtoolnix/">the MKVToolNix
+               homepage</a>.
             
          </p>
          

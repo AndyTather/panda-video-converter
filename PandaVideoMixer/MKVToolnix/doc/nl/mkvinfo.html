@@ -3,40 +3,41 @@
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>mkvinfo -- Informatie uitprinten over elementen in Matroska bestanden</title>
+      <title>mkvinfo -- Print information about elements in Matroska files</title>
       <link rel="stylesheet" type="text/css" href="mkvtoolnix-doc.css">
    </head>
    <body>
-      <div class="heading">mkvinfo -- Informatie uitprinten over elementen in <span class="productname">Matroska</span><sup>(tm)</sup> bestanden
+      <div class="heading">mkvinfo -- Print information about elements in <span class="productname">Matroska</span><sup>(tm)</sup> files
       </div>
       <hr>
       <div id="toc" class="toc">
          <h1>Table of contents</h1>
          <ul>
-            <li><a href="#mkvinfo.synopsis">1. Beknopte inhoudsbeschrijving</a></li>
-            <li><a href="#mkvinfo.description">2. Beschrijving</a></li>
-            <li><a href="#mkvinfo.verbosity_levels">3. Uitgebreide niveaus</a></li>
-            <li><a href="#d4e593">4. Verlaat codes</a></li>
-            <li><a href="#mkvinfo.escaping">5. Overslaan van speciale karakter(s) in tekst</a></li>
-            <li><a href="#mkvinfo.environment_variables">6. Omgevingsvariabelen</a></li>
-            <li><a href="#mkvinfo.seealso">7. Zie ook</a></li>
-            <li><a href="#mkvinfo.www">8. WWW</a></li>
+            <li><a href="#mkvinfo.synopsis">1. Synopsis</a></li>
+            <li><a href="#mkvinfo.description">2. Description</a></li>
+            <li><a href="#mkvinfo.verbosity_levels">3. Verbosity levels</a></li>
+            <li><a href="#mkvinfo.text_files_and_charsets">4. Text files and character set conversions</a></li>
+            <li><a href="#d4e608">5. Exit codes</a></li>
+            <li><a href="#mkvinfo.escaping">6. Escaping special chars in text</a></li>
+            <li><a href="#mkvinfo.environment_variables">7. Environment variables</a></li>
+            <li><a href="#mkvinfo.seealso">8. See also</a></li>
+            <li><a href="#mkvinfo.www">9. WWW</a></li>
          </ul>
       </div>
       <div class="content">
-         <h1><a name="mkvinfo.synopsis">1. Beknopte inhoudsbeschrijving</a></h1>
+         <h1><a name="mkvinfo.synopsis">1. Synopsis</a></h1>
          
          
          <div class="cmdsynopsis"><span class="commandname">mkvinfo</span> options {source-filename}
          </div>
          
-         <h1><a name="mkvinfo.description">2. Beschrijving</a></h1>
+         <h1><a name="mkvinfo.description">2. Description</a></h1>
          
          
          <p>
-            Dit programma lijst alle elementen die een <span class="productname">Matroska</span><sup>(tm)</sup> bestand bevat. De
-            uitvoer kan gelimiteerd worden naar een lijst van sporen inclusief de
-            informatie over de gebruikte codecs.
+            This program lists all elements contained in a <span class="productname">Matroska</span><sup>(tm)</sup>. The output can be
+            limited to a list of tracks in the file including information about the
+            codecs used.
             
          </p>
          
@@ -54,8 +55,8 @@
                   <td>
                      
                      <p>
-                        Start de <span class="abbrev">GUI</span>. Deze optie is alleen beschikbaar wanneer
-                        mkvinfo is gecompileerd met <span class="abbrev">GUI</span> ondersteuning.
+                        Start the <span class="abbrev">GUI</span>. This option is only available if mkvinfo was
+                        compiled with <span class="abbrev">GUI</span> support.
                         
                      </p>
                      
@@ -66,8 +67,8 @@
                   <td>
                      
                      <p>
-                        Berekent en toont de <span class="function">Adler32</span> controleer som. Alleen
-                        zinvol voor fout zoeken.
+                        Calculates and display the <span class="function">Adler32</span> checksum for each
+                        frame. Useful for debugging only.
                         
                      </p>
                      
@@ -78,8 +79,7 @@
                   <td>
                      
                      <p>
-                        Toon slechts een grove samenvatting van wat <span class="productname">mkvinfo</span>(1) vindt en niet elk
-                        element.
+                        Only show a terse summary of what <span class="productname">mkvinfo</span>(1) finds and not each element.
                         
                      </p>
                      
@@ -90,8 +90,8 @@
                   <td>
                      
                      <p>
-                        Toont statistieken voor elk spoor in 'stille' mode. Zet tevens 'stille mode'
-                        naar 1 als niveau daarvoor 0 was.
+                        Show statistics for each track in verbose mode. Also sets verbosity to 1 if
+                        it was at level 0 before.
                         
                      </p>
                      
@@ -102,7 +102,7 @@
                   <td>
                      
                      <p>
-                        Toont de eerste 16 bytes van elk beeld als een hex dump.
+                        Show the first 16 bytes of each frame as a hex dump.
                         
                      </p>
                      
@@ -113,7 +113,7 @@
                   <td>
                      
                      <p>
-                        Toont alle bytes van elk beeld als een hex dump.
+                        Show all bytes of each frame as a hex dump.
                         
                      </p>
                      
@@ -124,35 +124,31 @@
                   <td>
                      
                      <p>
-                        Toont de grootte van elk element inclusief kop hoofd.
+                        Show the size of each element including its header.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.command_line_charset"><span class="option">--command-line-charset</span> <span class="parameter">(karakterset)</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.command_line_charset"><span class="option">--command-line-charset</span> <span class="parameter">character-set</span></a></td>
                   <td>
                      
                      <p>
-                        Plaatst het karakter set om de reeksen om te zetten die vanaf de
-                        commandoregel worden opgegeven. Standaard wordt gebruikt het karakter set
-                        die afhankelijk is van wat er in uw besturingssysteem staat aangegeven
-                        (locatie).
+                        Sets the character set to convert strings given on the command line from. It
+                        defaults to the character set given by system's current locale.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.output_charset"><span class="option">--output-charset</span> <span class="parameter">(karakterset)</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.output_charset"><span class="option">--output-charset</span> <span class="parameter">character-set</span></a></td>
                   <td>
                      
                      <p>
-                        Stelt het karakter set in, waarnaar de reeksen naar de uitvoer dienen te
-                        worden geconverteerd. Standaard wordt gebruikt het karakter set die
-                        afhankelijk is van wat er in uw besturingssysteem staat aangegeven
-                        (locatie).
+                        Sets the character set to which strings are converted that are to be
+                        output.  It defaults to the character set given by system's current locale.
                         
                      </p>
                      
@@ -160,16 +156,15 @@
                </tr>
                <tr>
                   <td class="varlistoption"><a name="mkvinfo.description.redirect_output"><span class="option">-r</span>, <span class="option">--redirect-output</span>
-                        <span class="parameter">(bestandsnaam)</span></a></td>
+                        <span class="parameter">file-name</span></a></td>
                   <td>
                      
                      <p>
-                        Schrijft alle berichten naar een bestand <span class="parameter">file-name</span>
-                        i.p.v. naar de 'apparaat/houder'. Terwijl dit gemakkelijk met uitvoer
-                        omleiden kan worden gedaan er zijn gevallen waarin deze optie nodig is:
-                        wanneer de verwerker e.e.a. herinterpreteert voordat het geschreven wordt
-                        naar de uitvoer bestand. Het karakter set met <a href="#mkvinfo.description.output_charset">--output-charset</a>
-                        is toegewezen.
+                        Writes all messages to the file <span class="parameter">file-name</span> instead of
+                        to the console.  While this can be done easily with output redirection there
+                        are cases in which this option is needed: when the terminal reinterprets the
+                        output before writing it to a file.  The character set set with <a href="#mkvinfo.description.output_charset">--output-charset</a>
+                        is honored.
                         
                      </p>
                      
@@ -180,38 +175,38 @@
                   <td>
                      
                      <p>
-                        Forceert de vertaling voor de te gebruiken taal <span class="parameter">code</span>
-                        (b.v. '<span class="literal">de_DE</span>' voor de Duitse taal). Hoewel het de
-                        voorkeur heeft de 'omgevingsvariabelen' te gebruiken
-                        <span class="varname">LANG</span>, <span class="varname">LC_MESSAGES</span> en
-                        <span class="varname">LC_ALL</span>. Opvragen van een '<span class="literal">list</span>' als
-                        een <span class="parameter">code</span> zal er voor zorgen dat <a href="mkvextract.html"><span class="productname">mkvextract</span>(1)</a> een
-                        lijst zal uitvoeren van alle beschikbare vertalingen.
+                        Forces the translations for the language <span class="parameter">code</span> to be
+                        used (e.g.  '<span class="literal">de_DE</span>' for the German translations). It is
+                        preferable to use the environment variables <span class="varname">LANG</span>,
+                        <span class="varname">LC_MESSAGES</span> and <span class="varname">LC_ALL</span>
+                        though. Entering '<span class="literal">list</span>' as the
+                        <span class="parameter">code</span> will cause <span class="productname">mkvinfo</span>(1) to output a list of
+                        available translations.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.debug"><span class="option">--title</span> <span class="parameter">onderwerp</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.debug"><span class="option">--debug</span> <span class="parameter">topic</span></a></td>
                   <td>
                      
                      <p>
-                        Zet debuggen aan voor een specifieke mogelijkheid. Dit is alleen zinvol voor
-                        ontwikkelaars.
+                        Turn on debugging for a specific feature. This option is only useful for
+                        developers.
                         
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><a name="mkvinfo.description.engage"><span class="option">--tags</span> <span class="parameter">feature</span></a></td>
+                  <td class="varlistoption"><a name="mkvinfo.description.engage"><span class="option">--engage</span> <span class="parameter">feature</span></a></td>
                   <td>
                      
                      <p>
-                        Zet experimentele mogelijkheden aan. Een lijst van beschikbare mogelijkheden
-                        kan worden opgevraagd met <span class="command">mkvinfo --engage list</span>. Deze
-                        mogelijkheden zijn niet bedoeld in normale situaties.
+                        Turn on experimental features. A list of available features can be requested
+                        with <span class="command">mkvinfo --engage list</span>. These features are not meant
+                        to be used in normal situations.
                         
                      </p>
                      
@@ -243,8 +238,8 @@
                   <td>
                      
                      <p>
-                        Wees uitgebreider. Zie sectie over: <a href="#mkvinfo.verbosity_levels">Uitgebreide niveaus</a> voor een
-                        beschrijving welke informatie wordt uitgevoerd op welk niveau.
+                        Be more verbose. See the section about <a href="#mkvinfo.verbosity_levels">verbosity levels</a> for a description
+                        which information will be output at which level.
                         
                      </p>
                      
@@ -255,7 +250,7 @@
                   <td>
                      
                      <p>
-                        Toon gebruik informatie en sluit af.
+                        Show usage information and exit.
                         
                      </p>
                      
@@ -266,7 +261,7 @@
                   <td>
                      
                      <p>
-                        Toon versie informatie en sluit af.
+                        Show version information and exit.
                         
                      </p>
                      
@@ -277,29 +272,28 @@
                   <td>
                      
                      <p>
-                        Controleert online op nieuwere versies via ophalen op adres <a href="http://mkvtoolnix-releases.bunkus.org/latest-release.xml">http://mkvtoolnix-releases.bunkus.org/latest-release.xml</a>.
-                        Vier regels worden uitgevoerd  in <span class="literal">key=value</span> stijl: het
-                        adres van waar de informatie wordt verkregen (key
-                        <span class="literal">version_check_url</span>), de huidig uitgevoerde versie (key
-                        <span class="literal">running_version</span>), laatst uitgebrachte versie (key
-                        <span class="literal">available_version</span> en het ophaal adres (key
+                        Checks online for new releases by downloading the URL <a href="http://mkvtoolnix-releases.bunkus.org/latest-release.xml">http://mkvtoolnix-releases.bunkus.org/latest-release.xml</a>.
+                        Four lines will be output in <span class="literal">key=value</span> style: the URL
+                        from where the information was retrieved (key
+                        <span class="literal">version_check_url</span>), the currently running version (key
+                        <span class="literal">running_version</span>), the latest release's version (key
+                        <span class="literal">available_version</span>) and the download URL (key
                         <span class="literal">download_url</span>).
                         
                      </p>
                      
                      
                      <p>
-                        Nadien sluit het programma af met een afsluitwaarde van 0 als er geen
-                        nieuwere versie beschikbaar is, met een 1 als er een nieuwere beschikbaar is
-                        en 2 indien er een fout ontstond (b.v. als de opwaardeer informatie niet
-                        verkregen kon worden).
+                        Afterwards the program exists with an exit code of 0 if no newer release is
+                        available, with 1 if a newer release is available and with 2 if an error
+                        occured (e.g. if the update information could not be retrieved).
                         
                      </p>
                      
                      
                      <p>
-                        Deze optie is alleen beschikbaar indien het gebouwd is met ondersteuning
-                        voor libcurl.
+                        This option is only available if the program was built with support for
+                        libcurl.
                         
                      </p>
                      
@@ -310,29 +304,26 @@
                   <td>
                      
                      <p>
-                        Leest extra commandoregel argumenten in van een bestand
-                        <span class="parameter">options-file</span>. Regels met een spatie (lege ruimte) als
-                        eerste karakter, zijn  gemarkeerd als een hash (waarde)
-                        ('<span class="literal">#</span>')  worden behandeld als commentaar en  genegeerd. Een
-                        spatie aan het begin en einde van een regel worden verwijderd. Elke regel
-                        mag exact één waarde bevatten
+                        Reads additional command line arguments from the file
+                        <span class="parameter">options-file</span>.  Lines whose first non-whitespace
+                        character is a hash mark ('<span class="literal">#</span>') are treated as comments
+                        and ignored. White spaces at the start and end of a line will be
+                        stripped. Each line must contain exactly one option.
                         
                      </p>
                      
                      
                      <p>
-                        Verschillende karakters kunnen worden overgeslagen, b.v. als het nodig is
-                        een niet commentaar regel te starten met '#'. Deze regels worden beschreven
-                        in de sectie over: <a href="#mkvinfo.escaping">Overslaan van speciale
-                           karakter(s) in tekst</a>.
+                        Several chars can be escaped, e.g. if you need to start a non-comment line
+                        with '#'. The rules are described in <a href="#mkvinfo.escaping">the
+                           section about escaping text</a>.
                         
                      </p>
                      
                      
                      <p>
-                        De commandoregel '<span class="command">mkvinfo -v -v input.mkv --redirect-output
-                           info.txt</span>' kon worden geconverteerd naar het volgende optie
-                        bestand:
+                        The command line '<span class="command">mkvinfo -v -v input.mkv --redirect-output
+                           info.txt</span>' could be converted into the following option file:
                         
                      </p>
                      
@@ -349,62 +340,72 @@ info.txt</pre>
             </tbody>
          </table>
          
-         <h1><a name="mkvinfo.verbosity_levels">3. Uitgebreide niveaus</a></h1>
+         <h1><a name="mkvinfo.verbosity_levels">3. Verbosity levels</a></h1>
          
          
          
          <p>
-            De optie <a href="#mkvinfo.description.verbose">-v</a> kan worden
-            gebruikt om <span class="productname">mkvinfo</span>(1)'s uitgebreide niveau te verhogen en meer informatie te
-            printen over het huidige bestand.
+            The <a href="#mkvinfo.description.verbose">-v</a>
+            option can be used to increase <span class="productname">mkvinfo</span>(1)'s verbosity level and print more
+            information about the current file.
             
          </p>
          
          
          <p>
-            Op niveau 0 print <span class="productname">mkvinfo</span>(1) de spoor koppen die het vindt en hun
-            typen. <span class="productname">mkvinfo</span>(1) verlaat zo snel mogelijk wanneer de koppen volledig zijn
-            ontleed (meer technisch: zo snel mogelijk wanneer de eerste cluster wordt
-            tegengekomen). Op dit niveau worden de zoek kop ingangen en volg
-            document(en) (cue) niet getoond -- zelfs niet wanneer die aan het begin
-            bevinden van de spoor informatie.
+            At level 0 <span class="productname">mkvinfo</span>(1) will print only the track headers it finds and their
+            types. <span class="productname">mkvinfo</span>(1) will exit as soon as the headers are parsed completely
+            (more technical: as soon as the first cluster is encountered). In this level
+            the seek head entries and the cues will not be displayed -- even if they're
+            located in front of the track information.
             
          </p>
          
          
          <p>
-            Op niveau 1 print <span class="productname">mkvinfo</span>(1) ook alle <span class="productname">Matroska</span><sup>(tm)</sup> tegengekomen elementen van
-            het complete bestand elementen behalve de zoek koppen en de volg
-            document(en) (cue) ingangen. Als de samenvattingsmode aan is dan zal
-            <span class="productname">mkvinfo</span>(1) het beeld positie eveneens uitvoeren.
+            At level 1 <span class="productname">mkvinfo</span>(1) will also print all <span class="productname">Matroska</span><sup>(tm)</sup> elements encountered for
+            the complete file but the seek head entries and the cue entries. If the
+            summary mode is enabled then <span class="productname">mkvinfo</span>(1) will output the frame position as
+            well.
             
          </p>
          
          
          <p>
-            Op niveau 2 print <span class="productname">mkvinfo</span>(1) tevens de zoek kop ingangen, de volg
-            document(en) (cue)l ingangen en de bestandspositie waarbij elk <span class="productname">Matroska</span><sup>(tm)</sup>
-            element kan worden gevonden.
+            At level 2 <span class="productname">mkvinfo</span>(1) will also print the seek head entries, the cue entries
+            and the file position at which each <span class="productname">Matroska</span><sup>(tm)</sup> element can be found at.
             
          </p>
          
          
          <p>
-            Op niveau 3 en hoger zal <span class="productname">mkvinfo</span>(1) enige informatie printen welke niet
-            direct aan een <span class="productname">Matroska</span><sup>(tm)</sup> element is gekoppeld. Alle overige elementen
-            printen alleen info over de elementen die zojuist werden gevonden. Niveau 3
-            voegt meta informatie toe voor een makkelijkere fout opsporing (lees als:
-            bedoelt voor ontwikkelaars). Alle niveau 3 geschreven regels bevatten zich
-            tussen [ ] om ze makkelijker te herkennen.
+            At level 3 and above <span class="productname">mkvinfo</span>(1) will print some information that is not
+            directly connected to a <span class="productname">Matroska</span><sup>(tm)</sup> element. All other elements only print
+            stuff about the elements that were just found. Level 3 adds meta information
+            to ease debugging (read: it's intended for developers only). All lines
+            written by level 3 are enclosed in square brackets to make filtering them
+            out easy.
             
          </p>
          
-         <h1><a name="d4e593">4. Verlaat codes</a></h1>
+         <h1><a name="mkvinfo.text_files_and_charsets">4. Text files and character set conversions</a></h1>
          
          
          
          <p>
-            <span class="productname">mkvinfo</span>(1) verlaat met één van de drie afsluit codes:
+            For an in-depth discussion about how all tools in the MKVToolNix suite
+            handle character set conversions, input/output encoding, command line
+            encoding and console encoding please see the identically-named section in
+            the <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> man page.
+            
+         </p>
+         
+         <h1><a name="d4e608">5. Exit codes</a></h1>
+         
+         
+         
+         <p>
+            <span class="productname">mkvinfo</span>(1) exits with one of three exit codes:
             
          </p>
          
@@ -414,8 +415,8 @@ info.txt</pre>
             <li>
                
                <p>
-                  <span class="constant">0</span> -- Deze verlaat code betekend dat alles succesvol
-                  voltooid is.
+                  <span class="constant">0</span> -- This exit codes means that the run has completed
+                  successfully.
                   
                </p>
                
@@ -425,9 +426,9 @@ info.txt</pre>
             <li>
                
                <p>
-                  <span class="constant">1</span> -- In dit geval heeft <span class="productname">mkvinfo</span>(1) minimaal één
-                  waarschuwing doen uitgaan, maar ging door. Een waarschuwing wordt
-                  voorafgegaan met de tekst '<span class="literal">Waarschuwing:</span>'.
+                  <span class="constant">1</span> -- In this case <span class="productname">mkvinfo</span>(1) has output at least one
+                  warning, but the run did continue.  A warning is prefixed with the text
+                  '<span class="literal">Warning:</span>'.
                   
                </p>
                
@@ -437,10 +438,10 @@ info.txt</pre>
             <li>
                
                <p>
-                  <span class="constant">2</span> -- Deze fout code wordt gegeven nadat er een fout
-                  optrad. <span class="productname">mkvinfo</span>(1) breekt direct af na het geven van dit waarschuw
-                  bericht. Fout! bereik in berichten, van een verkeerd commandoregel argument
-                  over lees/schrijf fouten naar een 'gebroken' bestanden.
+                  <span class="constant">2</span> -- This exit code is used after an error occurred.
+                  <span class="productname">mkvinfo</span>(1) aborts right after outputting the error message.  Error messages
+                  range from wrong command line arguments over read/write errors to broken
+                  files.
                   
                </p>
                
@@ -448,33 +449,32 @@ info.txt</pre>
             
          </ul>
          
-         <h1><a name="mkvinfo.escaping">5. Overslaan van speciale karakter(s) in tekst</a></h1>
+         <h1><a name="mkvinfo.escaping">6. Escaping special chars in text</a></h1>
          
          
          <p>
-            Er zijn een paar plaatsen waar speciale karakters zouden of moeten worden
-            overgeslagen. De regels voor het overslaan zijn simpel: elk karakter dat
-            overgeslagen dient te worden wordt vervangen door een backslash "\" gevolgd
-            door een ander karakter.
+            There are a few places in which special characters in text must or should be
+            escaped. The rules for escaping are simple: each character that needs
+            escaping is replaced with a backslash followed by another character.
             
          </p>
          
          
          <p>
-            De regels zijn: ' ' (een spatie) wordt '\s', '"' (dubbele
-            aanhalingstekens) wordt '\2', ':' wordt '\c', '#' wordt '\h' en '\' (een
-            enkele (backslash) zelf wordt '\\'.
+            The rules are: ' ' (a space) becomes '\s', '"' (double quotes) becomes
+            '\2', ':' becomes '\c', '#' becomes '\h' and '\' (a single backslash) itself
+            becomes '\\'.
             
          </p>
          
-         <h1><a name="mkvinfo.environment_variables">6. Omgevingsvariabelen</a></h1>
+         <h1><a name="mkvinfo.environment_variables">7. Environment variables</a></h1>
          
          
          
          <p>
-            <span class="productname">mkvinfo</span>(1) gebruikt de standaard variabelen vanuit het systeem locatie
-            (b.v. <span class="varname">LANG</span> en de <span class="varname">LC_*</span> family). Extra
-            variabelen:
+            <span class="productname">mkvinfo</span>(1) uses the default variables that determine the system's locale
+            (e.g. <span class="varname">LANG</span> and the <span class="varname">LC_*</span>
+            family). Additional variables:
             
          </p>
          
@@ -488,37 +488,36 @@ info.txt</pre>
             </thead>
             <tbody>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_DEBUG</span> en de korte versie
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_DEBUG</span> and its short form
                      <span class="varname">MTX_DEBUG</span></td>
                   <td>
                      
-                     <p>De inhoud wordt behandeld alsof het via de <a href="#mkvinfo.description.debug">--debug</a> optie
-                        gepasseerd is.
+                     <p>The content is treated as if it had been passed via the <a href="#mkvinfo.description.debug">--debug</a> option.
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_ENGAGE</span> en de korte versie
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_ENGAGE</span> and its short form
                      <span class="varname">MTX_ENGAGE</span></td>
                   <td>
                      
-                     <p>De inhoud wordt behandeld alsof het via de <a href="#mkvinfo.description.engage">--engage</a> optie
-                        gepasseerd is.
+                     <p>The content is treated as if it had been passed via the <a href="#mkvinfo.description.engage">--engage</a>
+                        option.
                      </p>
                      
                   </td>
                </tr>
                <tr>
-                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_OPTIONS</span> en de korte versie
+                  <td class="varlistoption"><span class="varname">MKVTOOLNIX_OPTIONS</span> and its short form
                      <span class="varname">MTX_OPTIONS</span></td>
                   <td>
                      
-                     <p>De inhoud wordt gesplitst op een spatie. De gedeeltelijk resulterende reeks
-                        wordt behandeld alsof het gedaan is via de commandoregel. Indien het nodig
-                        is speciale karakters te gebruiken (b.v. spaties) dan moet je die
-                        "insluiten" (zie de sectie over: <a href="#mkvinfo.escaping">Overslaan
-                           van speciale karakter(s) in tekst</a>).
+                     <p>The content is split on white space. The resulting partial strings are
+                        treated as if it had been passed as command line options. If you need to
+                        pass special characters (e.g. spaces) then you have to escape them (see
+                        <a href="#mkvinfo.escaping">the section about escaping special
+                           characters in text</a>).
                      </p>
                      
                   </td>
@@ -526,7 +525,7 @@ info.txt</pre>
             </tbody>
          </table>
          
-         <h1><a name="mkvinfo.seealso">7. Zie ook</a></h1>
+         <h1><a name="mkvinfo.seealso">8. See also</a></h1>
          
          
          <p>
@@ -534,12 +533,12 @@ info.txt</pre>
             
          </p>
          
-         <h1><a name="mkvinfo.www">8. WWW</a></h1>
+         <h1><a name="mkvinfo.www">9. WWW</a></h1>
          
          
          <p>
-            De laatste versie kan altijd gevonden worden op de <a href="http://www.bunkus.org/videotools/mkvtoolnix/">MKVToolNix</a> thuis
-            basis.
+            The latest version can always be found at <a href="http://www.bunkus.org/videotools/mkvtoolnix/">the MKVToolNix
+               homepage</a>.
             
          </p>
          

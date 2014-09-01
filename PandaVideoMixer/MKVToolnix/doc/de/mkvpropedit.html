@@ -21,11 +21,12 @@
             <li><a href="#mkvpropedit.edit_selectors">3. Selektoren zur Bearbeitung</a></li>
             <li><a href="#mkvpropedit.attachment_selectors">4. Selektoren für Anhänge</a></li>
             <li><a href="#mkvpropedit.examples">5. Beispiele</a></li>
-            <li><a href="#d4e1347">6. Rückgabewerte</a></li>
-            <li><a href="#mkvpropedit.escaping">7. Sonderzeichen in Text maskieren</a></li>
-            <li><a href="#mkvpropedit.environment_variables">8. Umgebungsvariablen</a></li>
-            <li><a href="#mkvpropedit.seealso">9. Siehe auch</a></li>
-            <li><a href="#mkvpropedit.www">10. WWW</a></li>
+            <li><a href="#d4e1353">6. Rückgabewerte</a></li>
+            <li><a href="#mkvinfo.text_files_and_charsets">7. Umwandlungen von Textdateien und Zeichensätzen</a></li>
+            <li><a href="#mkvpropedit.escaping">8. Sonderzeichen in Text maskieren</a></li>
+            <li><a href="#mkvpropedit.environment_variables">9. Umgebungsvariablen</a></li>
+            <li><a href="#mkvpropedit.seealso">10. Siehe auch</a></li>
+            <li><a href="#mkvpropedit.www">11. WWW</a></li>
          </ul>
       </div>
       <div class="content">
@@ -542,12 +543,15 @@
                   <td>
                      
                      <p>
-                        Turns on GUI mode. In this mode specially-formatted lines may be output that
-                        can tell a controlling GUI what's happening. These messages follow the
-                        format '<span class="literal">#GUI#message</span>'. The message may be followed by
-                        key/value pairs as in
-                        '<span class="literal">#GUI#message#key1=value1#key2=value2…</span>'. Neither the
-                        messages nor the keys are ever translated and always output in English.
+                        Schaltet den Modus für graphische Benutzeroberflächen an. In diesem Modus
+                        können auf bestimmte Art formatierte Zeilen ausgegeben werden, die einem
+                        aufrufenden Programm mitteilen, was <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a> gerade tut. Diese Nachrichten
+                        haben das folgende Format: '<span class="literal">#GUI#Nachricht</span>'. Der
+                        Nachricht folgen potenziell Schlüssel/Wert-Paare wie
+                        z.B.
+                        '<span class="literal">#GUI#Nachricht#schluessel1=wert1#schluessel2=wert2…</span>'.
+                        Weder die Nachricht selber noch die Schlüssel werden jemals übersetzt
+                        sondern immer in Englisch ausgegeben.
                         
                      </p>
                      
@@ -969,7 +973,7 @@ name=Kommentare</pre>
          </p>
          
          <pre class="screen">$ mkvpropedit Film.mkv --delete-attachment mime-type:application/x-truetype-font</pre>
-         <h1><a name="d4e1347">6. Rückgabewerte</a></h1>
+         <h1><a name="d4e1353">6. Rückgabewerte</a></h1>
          
          
          
@@ -1022,7 +1026,21 @@ name=Kommentare</pre>
             
          </ul>
          
-         <h1><a name="mkvpropedit.escaping">7. Sonderzeichen in Text maskieren</a></h1>
+         <h1><a name="mkvinfo.text_files_and_charsets">7. Umwandlungen von Textdateien und Zeichensätzen</a></h1>
+         
+         
+         
+         <p>
+            Für eine tiefer gehende Diskussion darüber, wie die Programme in der
+            MKVToolNix-Sammlung die Umwandlung von Zeichensätzen,
+            Eingabe-/Ausgabecodierung, Kommandozeilenzeichensätze und
+            Konsolenzeichensätze handhaben, sei auf den Abschnitt »Umwandlungen von
+            Textdateien und Zeichensätzen« in der Handbuchseite von <a href="mkvmerge.html"><span class="productname">mkvmerge</span>(1)</a>
+            verwiesen.
+            
+         </p>
+         
+         <h1><a name="mkvpropedit.escaping">8. Sonderzeichen in Text maskieren</a></h1>
          
          
          <p>
@@ -1041,7 +1059,7 @@ name=Kommentare</pre>
             
          </p>
          
-         <h1><a name="mkvpropedit.environment_variables">8. Umgebungsvariablen</a></h1>
+         <h1><a name="mkvpropedit.environment_variables">9. Umgebungsvariablen</a></h1>
          
          
          
@@ -1100,7 +1118,7 @@ name=Kommentare</pre>
             </tbody>
          </table>
          
-         <h1><a name="mkvpropedit.seealso">9. Siehe auch</a></h1>
+         <h1><a name="mkvpropedit.seealso">10. Siehe auch</a></h1>
          
          
          <p>
@@ -1108,7 +1126,7 @@ name=Kommentare</pre>
             
          </p>
          
-         <h1><a name="mkvpropedit.www">10. WWW</a></h1>
+         <h1><a name="mkvpropedit.www">11. WWW</a></h1>
          
          
          <p>

@@ -110,9 +110,9 @@
                   <td>
                      
                      <p>Create a WebM compliant file. This is also turned on if the output file name's extension
-                        is "webm". This mode
-                        enforces several restrictions. The only allowed codecs are VP8 video and Vorbis audio
-                        tracks. Neither chapters nor tags are
+                        is "webm". This mode enforces
+                        several restrictions. The only allowed codecs are VP8, VP9 video and Opus, Vorbis
+                        audio tracks. Neither chapters nor tags are
                         allowed. The DocType header item is changed to "webm".
                         
                      </p>
@@ -470,6 +470,26 @@
                   </td>
                </tr>
                <tr>
+                  <td class="varlistoption"><span class="option">--disable-track-statistics-tags</span></td>
+                  <td>
+                     
+                     <p>
+                        Normally <span class="productname">mkvmerge</span>(1) will write certain tags with statistics for each track. If such tags are already
+                        present then they will be
+                        overwritten. The tags are <span class="constant">BPS</span>, <span class="constant">DURATION</span>, <span class="constant">NUMBER_OF_BYTES</span> and
+                        <span class="constant">NUMBER_OF_FRAMES</span>.
+                        
+                     </p>
+                     
+                     
+                     <p>
+                        Enabling this option prevents <span class="productname">mkvmerge</span>(1) from writing those tags and from touching any existing tags with same names.
+                        
+                     </p>
+                     
+                  </td>
+               </tr>
+               <tr>
                   <td class="varlistoption"><a name="mkvmerge.description.timecode_scale"><span class="option">--timecode-scale</span> <span class="parameter">factor</span></a></td>
                   <td>
                      
@@ -502,7 +522,7 @@
          
          
          
-         <h2><a name="d4e767">2.5. File splitting, linking, appending and concatenation (more global options)</a></h2>
+         <h2><a name="d4e807">2.5. File splitting, linking, appending and concatenation (more global options)</a></h2>
          
          
          
@@ -1259,7 +1279,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e1800">2.6. Attachment support (more global options)</a></h2>
+         <h2><a name="d4e1840">2.6. Attachment support (more global options)</a></h2>
          
          
          
@@ -1338,7 +1358,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e1941">2.7. Options that can be used for each input file</a></h2>
+         <h2><a name="d4e1981">2.7. Options that can be used for each input file</a></h2>
          
          
          
@@ -1910,7 +1930,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e3011">2.8. Options that only apply to video tracks</a></h2>
+         <h2><a name="d4e3051">2.8. Options that only apply to video tracks</a></h2>
          
          
          
@@ -2037,7 +2057,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e3256">2.9. Options that only apply to text subtitle tracks</a></h2>
+         <h2><a name="d4e3296">2.9. Options that only apply to text subtitle tracks</a></h2>
          
          
          
@@ -2077,7 +2097,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</pre>
          
          
          
-         <h2><a name="d4e3296">2.10. Other options</a></h2>
+         <h2><a name="d4e3336">2.10. Other options</a></h2>
          
          
          
@@ -2675,8 +2695,8 @@ $ mkvmerge -o MM-complete.mkv MyMovie-with-sound.mkv MyMovie-add-audio.ogg</pre>
          
          <pre class="screen">$ mkvmerge -i v.mkv
 File 'v.mkv': container: Matroska
-Track ID 1: video (V_MS/VFW/FOURCC, DIV3)
-Track ID 2: audio (A_MPEG/L3)</pre>
+Track ID 0: video (V_MS/VFW/FOURCC, DIV3)
+Track ID 1: audio (A_MPEG/L3)</pre>
          
          <p>
             Do not confuse the track IDs that are assigned to the tracks that are placed in the
@@ -2767,6 +2787,9 @@ Track ID 2: audio (A_MPEG/L3)</pre>
          </div>
          
          
+         <h2><a name="mkvmerge.text_files_and_charsets.introduction">7.1. Introduction</a></h2>
+         
+         
          <p>
             All text in a <span class="productname">Matroska</span><sup>(tm)</sup> file is encoded in UTF-8. This means that <span class="productname">mkvmerge</span>(1) has to convert every text file it reads as well as every
             text given on the command line from one character set into UTF-8. In return this also
@@ -2786,6 +2809,11 @@ Track ID 2: audio (A_MPEG/L3)</pre>
          </p>
          
          
+         
+         <h2><a name="mkvmerge.text_files_and_charsets.byte_order_markers">7.2. Byte order markers (BOM)</a></h2>
+         
+         
+         
          <p>
             Text files that start with a BOM are already encoded in one representation of UTF.
             <span class="productname">mkvmerge</span>(1) supports the following five modes: UTF-8,
@@ -2794,6 +2822,11 @@ Track ID 2: audio (A_MPEG/L3)</pre>
             parameters that would otherwise set the character set for such a file (e.g. <a href="#mkvmerge.description.sub_charset">--sub-charset</a>) is silently ignored.
             
          </p>
+         
+         
+         
+         <h2><a name="mkvmerge.text_files_and_charsets.unix">7.3. Linux and Unix-like systems including Mac OS</a></h2>
+         
          
          
          <p>
@@ -2806,24 +2839,67 @@ Track ID 2: audio (A_MPEG/L3)</pre>
          </p>
          
          
+         
+         <h2><a name="mkvmerge.text_files_and_charsets.windows">7.4. Windows</a></h2>
+         
+         
+         
          <p>
-            On Windows there are actually two different character sets that <span class="productname">mkvmerge</span>(1) uses due to the way the Windows shell program
-            <span class="command">cmd.exe</span> is implemented. The first character set is determined by a call to the <span class="function">GetACP()</span> system
-            call. This character set is used as the default for text file conversions and for
-            all elements displayed by the <span class="abbrev">GUI</span>
-            programs in the MKVToolNix package.
+            On Windows the default character set used for converting text files is determined
+            by a call to the <span class="function">GetACP()</span> system
+            call.
             
          </p>
          
          
          <p>
-            Another charset may be used if <span class="command">cmd.exe</span> is used. However, reading the command line is done with the
-            <span class="function">GetCommandLineW()</span> function which already returns a Unicode string. Therefore the option
-            <span class="option">--command-line-charset</span> is ignored on Windows.  Output to the console is done with the
-            <span class="function">WriteConsoleW()</span> function. Therefore the option <span class="option">--output-charset</span> is only used on Windows if the
-            output is redirected with <span class="option">--redirect-output</span>.
+            Reading the command line is done with the <span class="function">GetCommandLineW()</span> function which already returns a Unicode
+            string. Therefore the option <span class="option">--command-line-charset</span> is ignored on Windows.
             
          </p>
+         
+         
+         <p>
+            Output to the console consists of three scenarios:
+            
+         </p>
+         
+         
+         <ol>
+            
+            <li>
+               
+               <p>
+                  If the output is redirected with the option <a href="#mkvmerge.description.redirect_output">--redirect-output</a> then the default charset is UTF-8. This can
+                  be changed with <a href="#mkvmerge.description.output_charset">--output-charset</a>.
+                  
+               </p>
+               
+               
+               <p>
+                  If the output is redirected with <span class="command">cmd.exe</span> itself, e.g. with <span class="literal">mkvinfo file.mkv &gt; info.txt</span>, then
+                  the charset is always UTF-8 and cannot be changed.
+                  
+               </p>
+               
+               
+               <p>
+                  Otherwise (when writing directly to the console) the Windows function <span class="function">WriteConsoleW()</span> is used and the option
+                  <a href="#mkvmerge.description.output_charset">--output-charset</a> is ignored. The console should be able to
+                  output all Unicode characters for which the corresponding language support is installed
+                  (e.g. Chinese characters might not be
+                  displayed on English Windows versions).
+                  
+               </p>
+               
+            </li>
+            
+         </ol>
+         
+         
+         
+         <h2><a name="mkvmerge.text_files_and_charsets.options">7.5. Command line options</a></h2>
+         
          
          
          <p>
@@ -2874,13 +2950,17 @@ Track ID 2: audio (A_MPEG/L3)</pre>
                
                <p>
                   <a href="#mkvmerge.description.output_charset">--output-charset</a> for all strings written to the console or
-                  to a file if the output has been redirected with the <a href="#mkvmerge.description.redirect_output">--redirect-output</a> option.
+                  to a file if the output has been redirected with the <a href="#mkvmerge.description.redirect_output">--redirect-output</a> option. On non-Windows systems the default for
+                  the output charset is the system's current charset. On Windows it defaults to UTF-8
+                  both for redirecting with <a href="#mkvmerge.description.redirect_output">--redirect-output</a> and with <span class="command">cmd.exe</span> itself,
+                  e.g. <span class="literal">mkvinfo file.mkv &gt; info.txt</span>.
                   
                </p>
                
             </li>
             
          </ul>
+         
          
          <h1><a name="mkvmerge.option_files">8. Option files</a></h1>
          
@@ -3290,7 +3370,7 @@ CHAPTER03NAME=Baby rocks the house</pre>
           ChapterProcessData (binary)</pre>
          
          
-         <h2><a name="d4e4933">14.3. General notes</a></h2>
+         <h2><a name="d4e5027">14.3. General notes</a></h2>
          
          
          <p>
@@ -3318,7 +3398,7 @@ CHAPTER03NAME=Baby rocks the house</pre>
          
          
          
-         <h2><a name="d4e4999">15.1. Introduction</a></h2>
+         <h2><a name="d4e5093">15.1. Introduction</a></h2>
          
          
          
@@ -3628,7 +3708,7 @@ CHAPTER03NAME=Baby rocks the house</pre>
          </p>
          
          
-         <h2><a name="d4e5452">18.1. Timecode file format v1</a></h2>
+         <h2><a name="d4e5546">18.1. Timecode file format v1</a></h2>
          
          
          <p>
@@ -3646,7 +3726,7 @@ assume 27.930
 1500,1700,30</pre>
          
          
-         <h2><a name="d4e5476">18.2. Timecode file format v2</a></h2>
+         <h2><a name="d4e5570">18.2. Timecode file format v2</a></h2>
          
          
          
@@ -3665,7 +3745,7 @@ assume 27.930
 80</pre>
          
          
-         <h2><a name="d4e5491">18.3. Timecode file format v3</a></h2>
+         <h2><a name="d4e5585">18.3. Timecode file format v3</a></h2>
          
          
          <p>
@@ -3686,7 +3766,7 @@ gap, 10.050
 2.000,38.236</pre>
          
          
-         <h2><a name="d4e5509">18.4. Timecode file format v4</a></h2>
+         <h2><a name="d4e5603">18.4. Timecode file format v4</a></h2>
          
          
          <p>
