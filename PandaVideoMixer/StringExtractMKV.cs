@@ -4,7 +4,7 @@ namespace PandaVideoMixer
 {
     internal sealed class StringExtractMKV
     {
-        private const string mkvNewLine = "\r\r\n";
+        private const string mkvNewLine = "\r\n";
 
         public static int GetTrackNumber(string s)
         {
