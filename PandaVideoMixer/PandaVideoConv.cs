@@ -109,6 +109,7 @@ namespace PandaVideoMixer
 
         public bool EncodeSubtitles { get; set; }
         public bool ForceVideoRecode { get; set; }
+        public bool HEVCRecode { get; set; }
 
         private string appPath;
 
@@ -146,6 +147,7 @@ namespace PandaVideoMixer
             ForceVideoRecode = false;
 
             ConvertTrueHD = true;
+            HEVCRecode = false;
         }
 
         ~PandaVideoConv()
@@ -285,7 +287,10 @@ namespace PandaVideoMixer
                         if (at.CodecID != "A_AAC")
                             at.RequiresRecode = true;
                         break;
-
+                    case OutputDevice.SamsungUHDTV:
+                        if (at.CodecID == "A_WMA")
+                            at.RequiresRecode = true;
+                        break;
                     case OutputDevice.XBox360:
                         if (at.CodecID != "A_AAC")
                             at.RequiresRecode = true;
@@ -441,7 +446,7 @@ namespace PandaVideoMixer
                     // no video - means audio convert
                     if (vt != null)
                     {
-                        result = FFmpeg_x26x_process(_sourceFile, vt, false);
+                        result = FFmpeg_x26x_process(_sourceFile, vt, _selectedAudioTrack, false);
                     }
                     else
                         result = iPhone_audio_preprocess(_sourceFile, _selectedAudioTrack);
@@ -451,7 +456,7 @@ namespace PandaVideoMixer
                     // no video - means audio convert
                     if (vt != null)
                     {
-                        result = FFmpeg_x26x_process(_sourceFile, vt, true);
+                        result = FFmpeg_x26x_process(_sourceFile, vt, _selectedAudioTrack, false);
                     }
                     else
                         result = iPhone_audio_preprocess(_sourceFile, _selectedAudioTrack);
@@ -459,11 +464,7 @@ namespace PandaVideoMixer
                     break;
 
                 case OutputDevice.SamsungUHDTV:
-                    // no video - means audio convert
-                    if (vt != null)
-                    {
-                        result = FFmpeg_x26x_process(_sourceFile, vt, false);
-                    }
+                    result = FFmpeg_x26x_process(_sourceFile, vt, _selectedAudioTrack, HEVCRecode);
                     break;
 
                 case OutputDevice.iPhone3GS:
@@ -838,6 +839,8 @@ namespace PandaVideoMixer
                         vt.BitRate = StringExtract.GetBitRate(segment);
                         if (vt.BitRate == 0)
                             vt.BitRate = StringExtract.GetNominalBitRate(segment);
+                        if (vt.BitRate == 0)
+                            vt.BitRate = StringExtract.GetMaximumBitRate(segment);
                         vt.ActualRefFrames = StringExtract.GetReferenceFrames(segment);
                         vt.EncodingSettings = StringExtract.GetEncodingSettings(segment);
                         vt.Title = StringExtract.GetTitle(segment);
@@ -942,7 +945,9 @@ namespace PandaVideoMixer
 
                     try
                     {
-                        vt.BitRate = StringExtract.GetBitRate(segment);
+                        vt.BitRate = StringExtract.GetMaximumBitRate(segment);
+                        if (vt.BitRate==0)
+                            vt.BitRate = StringExtract.GetBitRate(segment);
                         vt.ActualRefFrames = StringExtract.GetReferenceFrames(segment);
                     }
                     finally
@@ -1864,11 +1869,11 @@ namespace PandaVideoMixer
             return result;
         }
 
-        private bool FFmpeg_x26x_process(string sourceFile, VideoTrack vt, bool useHevc)
+        private bool FFmpeg_x26x_process(string sourceFile, VideoTrack vt, AudioTrack at, bool useHevc)
         {
             string videofile = Path.GetFileNameWithoutExtension(sourceFile);
             string videofilePath = Path.Combine(OutputFolder, videofile);
-            string outputfile = String.Format("{0}.mp4", videofilePath);
+            string outputfile = String.Format("{0}.{1}", videofilePath, "mp4");  // SelectedDevice.MKV ? "mkv" :
 
             string preset = Path.Combine(appPath, @"ffmpeg\presets");
             var sb = new StringBuilder();
@@ -1879,7 +1884,7 @@ namespace PandaVideoMixer
             else
             {
                 sb.Append(" -vcodec libx264");
-                sb.Append(" -vprofile high "); //-vlevel 5.1 -pix_fmt yuv420p");
+                sb.Append(" -vprofile high "); 
             }
             sb.AppendFormat(" -r {0} ", vt.FPS);
 
@@ -1890,9 +1895,9 @@ namespace PandaVideoMixer
                 bitRate = 640;
             else if (vt.BitRate > SelectedDevice.VideoMaxBitRate)
                 bitRate = SelectedDevice.VideoMaxBitRate == -1 ? vt.BitRate : SelectedDevice.VideoMaxBitRate;
-            //else
-            //    bitRate = vt.BitRate;
-            sb.AppendFormat(" -b:v {0}k ", bitRate);
+            else
+                bitRate = vt.BitRate;
+            sb.AppendFormat(" -b:v {0}k -maxrate {0}k -bufsize 1835k", bitRate);
 
             // if height isn't division by 2 make it so
             // otherwise FFMpeg reports  'height not divisible by 2....'
@@ -1905,8 +1910,9 @@ namespace PandaVideoMixer
             if (height > SelectedDevice.VideoMaxHeight)
                 height = SelectedDevice.VideoMaxHeight;
 
-//            if (width > SelectedDevice.VideoMaxWidth)
-//                width = SelectedDevice.VideoMaxWidth;
+            // scale up to 720 for 3D that needs a minimum of 720
+            if (SelectedDevice.TV3D && height < 720)
+                height = 720;
 
 
             if (width != vt.Width || height != vt.Height)
@@ -1914,7 +1920,18 @@ namespace PandaVideoMixer
 
             sb.Append(" -threads 0 ");
 
-            sb.Append(" -acodec libvo_aacenc -ac 2 -ab 320000 ");
+            if (SelectedDevice.MaxAudioChannels == 2)
+            {
+                sb.Append(" -acodec libvo_aacenc -ac 2 -ab 320000 ");
+            }
+            else if (at.RequiresRecode)
+            {
+                sb.Append(" -acodec ac3 ");
+            }
+            else
+            {
+                sb.AppendFormat(" -acodec copy ");
+            }
 
             string ffmpegTemp = Path.Combine(WorkingFolder, Guid.NewGuid().ToString());
             sb.AppendFormat(" -passlogfile \"{0}\" ", ffmpegTemp);

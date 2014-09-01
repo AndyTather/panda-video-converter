@@ -21,6 +21,8 @@ namespace PandaVideoMixer
         bool Ringtone { get; }
         bool AudioOnly { get; }
         bool HEVC { get; }
+        bool TV3D { get; }
+        bool MKV { get; }
     }
 
 
@@ -81,6 +83,9 @@ namespace PandaVideoMixer
         public bool HEVC { get { return false; } }
 
         public int VideoMaxBitRate { get { return -1; } }
+
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
         #endregion
     }
 
@@ -141,6 +146,8 @@ namespace PandaVideoMixer
         public bool HEVC { get { return false; } }
 
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -201,6 +208,8 @@ namespace PandaVideoMixer
         public bool HEVC { get { return false; } }
 
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -264,6 +273,8 @@ namespace PandaVideoMixer
         public bool HEVC { get { return false; } }
 
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -324,6 +335,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -384,6 +397,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -444,6 +459,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -504,6 +521,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -564,6 +583,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -624,6 +645,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -684,6 +707,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return 2500; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -744,6 +769,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return 2500; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -804,6 +831,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return false; } }
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -864,6 +893,8 @@ namespace PandaVideoMixer
 
         public bool HEVC { get { return true; } }
         public int VideoMaxBitRate { get { return -1; } }
+        public bool TV3D { get { return false; } }
+        public bool MKV { get { return false; } }
 
         #endregion
     }
@@ -894,7 +925,7 @@ namespace PandaVideoMixer
 
         public int VideoMaxWidth
         {
-            get { return 3840; }
+            get { return 4096; }
         }
 
         public int VideoMaxHeight
@@ -923,7 +954,9 @@ namespace PandaVideoMixer
         }
 
         public bool HEVC { get { return true; } }
-        public int VideoMaxBitRate { get { return -1; } }
+        public int VideoMaxBitRate { get { return 50000; } }
+        public bool TV3D { get { return true; } }
+        public bool MKV { get { return true; } }
 
         #endregion
     }

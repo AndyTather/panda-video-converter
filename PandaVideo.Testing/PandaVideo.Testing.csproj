@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestBase.cs" />
+    <Compile Include="TestSUHD.cs" />
     <Compile Include="TestS3.cs" />
     <Compile Include="TestWD.cs" />
     <Compile Include="TestHTML5.cs" />

@@ -91,6 +91,11 @@
     <None Include="FFMpeg\presets\ffprobe.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="MKVToolnix\locale\lt\LC_MESSAGES\wxstd.mo" />
+    <None Include="MKVToolnix\locale\pt\LC_MESSAGES\mkvtoolnix.mo" />
+    <None Include="MKVToolnix\locale\pt\LC_MESSAGES\wxstd.mo" />
+    <None Include="MKVToolnix\locale\pt_BR\LC_MESSAGES\mkvtoolnix.mo" />
+    <None Include="MKVToolnix\locale\pt_BR\LC_MESSAGES\wxstd.mo" />
     <None Include="Tools.cs" />
     <Compile Include="Track.cs" />
     <Compile Include="VideoTrack.cs" />
@@ -111,6 +116,7 @@
     <Content Include="FFMpeg\licenses\fontconfig.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="FFMpeg\licenses\gme.txt" />
     <Content Include="FFMpeg\licenses\gnutls.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -120,6 +126,7 @@
     <Content Include="FFMpeg\licenses\libbluray.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="FFMpeg\licenses\libbs2b.txt" />
     <Content Include="FFMpeg\licenses\libcaca.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -139,6 +146,7 @@
     <Content Include="FFMpeg\licenses\libvorbis.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="FFMpeg\licenses\libwebp.txt" />
     <Content Include="FFMpeg\licenses\opus.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -162,6 +170,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="FFMpeg\licenses\wavpack.txt" />
+    <Content Include="FFMpeg\licenses\x265.txt" />
     <Content Include="FFMpeg\presets\libvpx-1080p.ffpreset">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -271,6 +280,7 @@
     <Content Include="MKVToolnix\doc\ChangeLog.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="MKVToolnix\doc\command_line_references_and_guide.html" />
     <Content Include="MKVToolnix\doc\COPYING.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -19,7 +19,8 @@
                         <Button Height="23" HorizontalAlignment="Right" Margin="0,0,23,41" ToolTip="Browse for a working folder" Name="buttonWorkFolderBrowse" VerticalAlignment="Bottom" Width="33" Click="ButtonWorkFolderBrowseClick">...</Button>
                         <Image x:Name="image1" Stretch="UniformToFill" Source="/PandaVideo;component/PS3Video.bmp" HorizontalAlignment="Left" Width="289"  Margin="317,7,0,81"  />
                         <CheckBox Height="23" HorizontalAlignment="Left" Margin="181,54,0,0" ToolTip="Creates a Ringtone file when converting just an Audio track" x:Name="checkBoxRingtone" VerticalAlignment="Top" Width="120" Content="{x:Static p:Resources.CheckBoxAudioRingtone}" />
-                        <CheckBox Content="{x:Static p:Resources.CheckBoxEncodeSubtitles}" Height="23" HorizontalAlignment="Left" Margin="186,138,0,0" x:Name="checkBoxEncodeSubs" VerticalAlignment="Top" Width="115" />
+                        <CheckBox Content="{x:Static p:Resources.CheckBoxEncodeSubtitles}" Height="23" HorizontalAlignment="Left" Margin="181,138,0,0" x:Name="checkBoxEncodeSubs" VerticalAlignment="Top" Width="115" />
+                        <CheckBox x:Name="checkBoxUseHEVC" Content="Use HEVC" HorizontalAlignment="Left" Margin="22,54,0,0" VerticalAlignment="Top" ToolTip="Encode to High Efficiency Video Coding" Width="91"/>
                     </Grid>
                     <ComboBox Height="23" Name="comboBoxDevice" Margin="106,16,0,0" VerticalAlignment="Top" SelectionChanged="ComboBoxDeviceSelectionChanged" DisplayMemberPath="Name" HorizontalAlignment="Left" Width="195.519"></ComboBox>
                     <Label Height="28" HorizontalAlignment="Left" Margin="13,16,0,0" Name="label9" VerticalAlignment="Top" Width="59" Content="{x:Static p:Resources.LabelDevice}"></Label>

@@ -115,8 +115,8 @@ namespace PandaVideo
 
 
                 checkBoxEncodeSubs.IsChecked = bool.Parse(Settings.Default.EncodeSubtitles);
-
                 checkBoxAutoCheckUpdate.IsChecked = bool.Parse(Settings.Default.AutoUpdateCheck);
+                checkBoxUseHEVC.IsChecked = bool.Parse(Settings.Default.UseHEVC);
 
                 // Get assembly details to extract built version numbers etc
                 Assembly oAssembly = Assembly.GetExecutingAssembly();
@@ -150,6 +150,7 @@ namespace PandaVideo
             Settings.Default.PrefAudioLanguage = (comboBoxPrefAudioLang.SelectedItem as AudioLanguage).DisplayName;
             Settings.Default.EncodeSubtitles = checkBoxEncodeSubs.IsChecked.ToString();
             Settings.Default.AutoUpdateCheck = checkBoxAutoCheckUpdate.IsChecked.ToString();
+            Settings.Default.UseHEVC = checkBoxUseHEVC.IsChecked.ToString();
             Settings.Default.Save();
         }
 
@@ -488,6 +489,21 @@ namespace PandaVideo
                 checkBoxRingtone.IsEnabled = false;
                 checkBoxRingtone.IsChecked = false;
             }
+
+            // HEVC
+            if (device.HEVC)
+            {
+                checkBoxUseHEVC.Visibility = Visibility.Visible;
+                checkBoxUseHEVC.IsEnabled = true;
+            }
+            else
+            {
+                checkBoxUseHEVC.Visibility = Visibility.Hidden;
+                checkBoxUseHEVC.IsEnabled = false;
+                checkBoxUseHEVC.IsChecked = false;
+            }
+
+
         }
 
 
@@ -636,6 +652,7 @@ namespace PandaVideo
 
                 // Encode subtitles 
                 convertFile.EncodeSubtitles = (bool)checkBoxEncodeSubs.IsChecked;
+                convertFile.HEVCRecode = (bool)checkBoxUseHEVC.IsChecked;
 
                 convertFile.PrefferedLanguage = (comboBoxPrefAudioLang.SelectedItem as AudioLanguage).Lang;
 
@@ -816,6 +833,11 @@ namespace PandaVideo
                     process.Start();
                 }
             }
+        }
+
+        private void checkBoxUseHEVC_Click(object sender, RoutedEventArgs e)
+        {
+            _convSelection.HEVCRecode = checkBoxUseHEVC.IsChecked.GetValueOrDefault(false);
         }
     }
 }
